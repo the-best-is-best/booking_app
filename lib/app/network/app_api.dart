@@ -1,5 +1,6 @@
 import 'package:booking_app/app/constants.dart';
-import 'package:booking_app/features/login/data/responses/login_response.dart';
+import 'package:booking_app/features/auth/login/data/responses/login_response.dart';
+import 'package:booking_app/features/auth/register/data/responses/register_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 part 'app_api.g.dart';
@@ -14,4 +15,12 @@ abstract class AppServicesClient {
   @POST(Constants.loginUrl)
   Future<LoginResponse> login(
       @Field("email") String email, @Field("password") String password);
+
+  // register
+  @POST(Constants.registerUrl)
+  Future<RegisterResponse> register(
+      {@Field("name") required String name,
+      @Field("email") required String email,
+      @Field("password") required String password,
+      @Field("password_confirmation") required String passwordConfirm});
 }
