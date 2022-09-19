@@ -1,7 +1,7 @@
 import 'package:booking_app/app/extensions.dart';
 import 'package:booking_app/features/auth/domain/user_model.dart';
 
-import '../data/responses/register_response.dart';
+import '../data/responses/response_register.dart';
 
 extension ExtensionToDomain on RegisterResponse? {
   UserModel toDomain() {

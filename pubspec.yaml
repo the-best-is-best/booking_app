@@ -41,9 +41,11 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_rating_bar: ^4.0.1
+  flutter_screenutil: ^5.5.4
   freezed: ^2.1.0+1
   freezed_annotation: ^2.0.3
   get_it: ^7.2.0
+  hexcolor: ^2.0.7
   internet_connection_checker: ^0.0.1+4
   json_annotation: ^4.6.0
   mit_x: ^0.0.7
