@@ -1,7 +1,7 @@
 import 'package:booking_app/app/constants.dart';
 import 'package:booking_app/features/auth/login/data/responses/login_response.dart';
 import 'package:booking_app/features/auth/profile/responses/response_profile.dart';
-import 'package:booking_app/features/auth/register/data/responses/register_response.dart';
+import 'package:booking_app/features/auth/register/data/responses/response_register.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 part 'app_api.g.dart';
