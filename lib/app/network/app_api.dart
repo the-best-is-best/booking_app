@@ -1,5 +1,6 @@
 import 'package:booking_app/app/constants.dart';
 import 'package:booking_app/features/auth/login/data/responses/login_response.dart';
+import 'package:booking_app/features/auth/profile/responses/response_profile.dart';
 import 'package:booking_app/features/auth/register/data/responses/register_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -23,4 +24,7 @@ abstract class AppServicesClient {
       @Field("email") required String email,
       @Field("password") required String password,
       @Field("password_confirmation") required String passwordConfirm});
+
+  @GET(Constants.profileInfoUrl)
+  Future<ProfileResponse> getProfileInfo(@Header("token") String token);
 }

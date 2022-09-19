@@ -10,6 +10,8 @@ class UserModel with _$UserModel {
     required String name,
     required String email,
     String? image,
+    String? password,
+    String? passwordConfirm,
     required final String apiToken,
   }) = _UserModel;
   factory UserModel.fromJson(Map<String, dynamic> json) =>
