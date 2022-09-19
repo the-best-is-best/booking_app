@@ -44,5 +44,5 @@ class LoginRequests {
   final String email;
   final String password;
 
-  LoginRequests(this.email, this.password);
+  LoginRequests({required this.email, required this.password});
 }

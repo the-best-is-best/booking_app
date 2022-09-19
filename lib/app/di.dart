@@ -1,3 +1,4 @@
+import 'package:booking_app/app/cubit/app_cubit.dart';
 import 'package:booking_app/app/network/app_api.dart';
 import 'package:booking_app/app/network/dio_manager.dart';
 import 'package:booking_app/app/network/network_info.dart';
@@ -17,4 +18,5 @@ Future initApp() async {
   di.registerLazySingleton<RepositoryLogin>(() => RepositoryLogin(di(), di()));
   di.registerLazySingleton<RepositoryRegister>(
       () => RepositoryRegister(di(), di()));
+  di.registerLazySingleton<AppCubit>(() => AppCubit(di(), di()));
 }
