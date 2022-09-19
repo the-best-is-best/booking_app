@@ -106,6 +106,39 @@ class _AppServicesClient implements AppServicesClient {
     return value;
   }
 
+  @override
+  Future<UpdateProfileResponse> updateProfile({
+    required token,
+    required name,
+    required email,
+    image,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'token': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'name': name,
+      'email': email,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UpdateProfileResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/auth/update-info',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UpdateProfileResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

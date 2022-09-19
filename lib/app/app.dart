@@ -1,6 +1,6 @@
-import 'package:booking_app/app/cubit/app_cubit.dart';
 import 'package:booking_app/app/di.dart';
 import 'package:booking_app/app/resources/routes_manager.dart';
+import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         designSize: const Size(375, 812),
         builder: (context, widget) {
           return BlocProvider(
-              create: (context) => di<AppCubit>(),
+              create: (context) => di<AuthCubit>()..updateProfile(),
               child: MitXMaterialApp(
                 title: 'Flutter Demo',
                 theme: ThemeData(

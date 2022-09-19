@@ -7,4 +7,5 @@ class Constants {
   static const String loginUrl = "auth/login";
   static const String registerUrl = "/auth/register";
   static const String profileInfoUrl = "/auth/profile-info";
+  static const String updateProfileInfoUrl = "/auth/update-info";
 }
