@@ -24,6 +24,8 @@ mixin _$UserModel {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
+  String? get password => throw _privateConstructorUsedError;
+  String? get passwordConfirm => throw _privateConstructorUsedError;
   String get apiToken => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +39,13 @@ abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
       _$UserModelCopyWithImpl<$Res>;
   $Res call(
-      {int? id, String name, String email, String? image, String apiToken});
+      {int? id,
+      String name,
+      String email,
+      String? image,
+      String? password,
+      String? passwordConfirm,
+      String apiToken});
 }
 
 /// @nodoc
@@ -54,6 +62,8 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
     Object? name = freezed,
     Object? email = freezed,
     Object? image = freezed,
+    Object? password = freezed,
+    Object? passwordConfirm = freezed,
     Object? apiToken = freezed,
   }) {
     return _then(_value.copyWith(
@@ -73,6 +83,14 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordConfirm: passwordConfirm == freezed
+          ? _value.passwordConfirm
+          : passwordConfirm // ignore: cast_nullable_to_non_nullable
+              as String?,
       apiToken: apiToken == freezed
           ? _value.apiToken
           : apiToken // ignore: cast_nullable_to_non_nullable
@@ -88,7 +106,13 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       __$$_UserModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int? id, String name, String email, String? image, String apiToken});
+      {int? id,
+      String name,
+      String email,
+      String? image,
+      String? password,
+      String? passwordConfirm,
+      String apiToken});
 }
 
 /// @nodoc
@@ -107,6 +131,8 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
     Object? name = freezed,
     Object? email = freezed,
     Object? image = freezed,
+    Object? password = freezed,
+    Object? passwordConfirm = freezed,
     Object? apiToken = freezed,
   }) {
     return _then(_$_UserModel(
@@ -126,6 +152,14 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordConfirm: passwordConfirm == freezed
+          ? _value.passwordConfirm
+          : passwordConfirm // ignore: cast_nullable_to_non_nullable
+              as String?,
       apiToken: apiToken == freezed
           ? _value.apiToken
           : apiToken // ignore: cast_nullable_to_non_nullable
@@ -142,6 +176,8 @@ class _$_UserModel implements _UserModel {
       required this.name,
       required this.email,
       this.image,
+      this.password,
+      this.passwordConfirm,
       required this.apiToken});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
@@ -156,11 +192,15 @@ class _$_UserModel implements _UserModel {
   @override
   final String? image;
   @override
+  final String? password;
+  @override
+  final String? passwordConfirm;
+  @override
   final String apiToken;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, email: $email, image: $image, apiToken: $apiToken)';
+    return 'UserModel(id: $id, name: $name, email: $email, image: $image, password: $password, passwordConfirm: $passwordConfirm, apiToken: $apiToken)';
   }
 
   @override
@@ -172,6 +212,9 @@ class _$_UserModel implements _UserModel {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.image, image) &&
+            const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality()
+                .equals(other.passwordConfirm, passwordConfirm) &&
             const DeepCollectionEquality().equals(other.apiToken, apiToken));
   }
 
@@ -183,6 +226,8 @@ class _$_UserModel implements _UserModel {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(image),
+      const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(passwordConfirm),
       const DeepCollectionEquality().hash(apiToken));
 
   @JsonKey(ignore: true)
@@ -204,6 +249,8 @@ abstract class _UserModel implements UserModel {
       required final String name,
       required final String email,
       final String? image,
+      final String? password,
+      final String? passwordConfirm,
       required final String apiToken}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
@@ -217,6 +264,10 @@ abstract class _UserModel implements UserModel {
   String get email;
   @override
   String? get image;
+  @override
+  String? get password;
+  @override
+  String? get passwordConfirm;
   @override
   String get apiToken;
   @override

@@ -3,19 +3,20 @@ import 'package:booking_app/app/network/error_handler.dart';
 import 'package:booking_app/app/network/failure.dart';
 import 'package:booking_app/app/network/network_info.dart';
 import 'package:booking_app/features/auth/domain/user_model.dart';
-import 'package:booking_app/features/auth/login/data/extension/to_domain.dart';
+import 'package:booking_app/features/auth/profile/extension/to_domain.dart';
 import 'package:dartz/dartz.dart';
 
-class RepositoryLogin {
+class RepositoryProfile {
   final AppServicesClient appServicesClient;
   final NetworkInfo networkInfo;
 
-  RepositoryLogin(this.appServicesClient, this.networkInfo);
-  Future<Either<Failure, UserModel>> login(LoginRequests loginRequests) async {
+  RepositoryProfile(this.appServicesClient, this.networkInfo);
+  Future<Either<Failure, UserModel>> getProfileData(
+      ProfileRequests profileRequests) async {
     if (await networkInfo.isConnected) {
       try {
-        var response = await appServicesClient.login(
-            loginRequests.email, loginRequests.password);
+        var response =
+            await appServicesClient.getProfileInfo(profileRequests.token);
         if (response.status.type == "1") {
           //success
           // return either right
@@ -40,9 +41,10 @@ class RepositoryLogin {
   }
 }
 
-class LoginRequests {
-  final String email;
-  final String password;
+class ProfileRequests {
+  final String token;
 
-  LoginRequests({required this.email, required this.password});
+  ProfileRequests(
+    this.token,
+  );
 }
