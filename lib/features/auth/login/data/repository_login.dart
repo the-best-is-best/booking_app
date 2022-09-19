@@ -2,8 +2,8 @@ import 'package:booking_app/app/network/app_api.dart';
 import 'package:booking_app/app/network/error_handler.dart';
 import 'package:booking_app/app/network/failure.dart';
 import 'package:booking_app/app/network/network_info.dart';
-import 'package:booking_app/features/login/data/extension/to_domain.dart';
-import 'package:booking_app/features/login/domain/user_model.dart';
+import 'package:booking_app/features/auth/domain/user_model.dart';
+import 'package:booking_app/features/auth/login/data/extension/to_domain.dart';
 import 'package:dartz/dartz.dart';
 
 class RepositoryLogin {

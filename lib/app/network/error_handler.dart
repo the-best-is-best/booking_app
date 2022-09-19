@@ -54,7 +54,6 @@ enum DataRes {
 
 extension DataResExtension on DataRes {
   Failure getFailure() {
-    print(this);
     return Failure(
         status: ResponseCode.getCode(this),
         messages: ResponseMessage.getMessage(this));

@@ -5,4 +5,5 @@ class Constants {
   static const String contentType = "application/json";
   static const String baseUrl = "http://api.mahmoudtaha.com/api/";
   static const String loginUrl = "auth/login";
+  static const String registerUrl = "/auth/register";
 }
