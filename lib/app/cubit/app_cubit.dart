@@ -22,8 +22,6 @@ class AppCubit extends Cubit<AppState> {
 
   UserModel userModel = UserModel(name: "", email: "", apiToken: "");
   Future<void> login() async {
-    print("object");
-
     Either<Failure, UserModel> response =
         await repositoryLogin.login(LoginRequests(
       email: userModel.email,
