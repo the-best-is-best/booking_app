@@ -29,7 +29,7 @@ class AppCubit extends Cubit<AppState> {
     ));
     response.fold(
       (l) {
-        print(l.messages);
+        debugPrint(l.messages);
       },
       (r) {
         return userModel = r;
@@ -46,7 +46,7 @@ class AppCubit extends Cubit<AppState> {
             passwordConfirm: userModel.passwordConfirm!));
     response.fold(
       (l) {
-        print(l.messages);
+        debugPrint(l.messages);
       },
       (r) {
         return userModel = r;
@@ -59,7 +59,7 @@ class AppCubit extends Cubit<AppState> {
         await repositoryProfile.getProfileData(ProfileRequests(""));
     response.fold(
       (l) {
-        print(l.messages);
+        debugPrint(l.messages);
       },
       (r) {
         return userModel = r;
