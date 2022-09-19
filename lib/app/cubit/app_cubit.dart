@@ -5,6 +5,8 @@ import 'package:booking_app/features/auth/login/data/repository_login.dart';
 import 'package:booking_app/features/auth/profile/repository_profile.dart';
 import 'package:booking_app/features/auth/register/repository_register.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'app_state.dart';
 
@@ -15,8 +17,13 @@ class AppCubit extends Cubit<AppState> {
   AppCubit(
       this.repositoryLogin, this.repositoryRegister, this.repositoryProfile)
       : super(AppInitial());
+
+  static AppCubit get(BuildContext context) => BlocProvider.of(context);
+
   UserModel userModel = UserModel(name: "", email: "", apiToken: "");
   Future<void> login() async {
+    print("object");
+
     Either<Failure, UserModel> response =
         await repositoryLogin.login(LoginRequests(
       email: userModel.email,
@@ -50,8 +57,8 @@ class AppCubit extends Cubit<AppState> {
   }
 
   Future<void> getProfileInfo() async {
-    Either<Failure, UserModel> response = await repositoryProfile
-        .getProfileData(ProfileRequests(userModel.apiToken));
+    Either<Failure, UserModel> response =
+        await repositoryProfile.getProfileData(ProfileRequests(""));
     response.fold(
       (l) {
         print(l.messages);
