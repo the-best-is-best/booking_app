@@ -9,6 +9,7 @@ import 'package:booking_app/features/auth/update_profile/repository_profile_upda
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mit_x/mit_x.dart';
 
 part 'auth_state.dart';
 
@@ -33,11 +34,11 @@ class AuthCubit extends Cubit<AuthState> {
     userImage = null;
   }
 
-  Future<void> login() async {
+  Future<void> login({required String email, required String password}) async {
     Either<Failure, UserModel> response =
         await _repositoryLogin.login(LoginRequests(
-      email: userFreezed.email,
-      password: userFreezed.password!,
+      email: email,
+      password: password,
     ));
     response.fold(
       (l) {
@@ -50,13 +51,21 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  Future<void> register() async {
+  Future<void> register(
+    {
+     required String email,
+     required String password,
+     required String passwordConfirm,
+     required String firstName,
+     required String lastName,
+    }
+  ) async {
     Either<Failure, UserModel> response = await _repositoryRegister.register(
         ResterRequests(
-            email: userFreezed.email,
-            name: userFreezed.name,
-            password: userFreezed.password!,
-            passwordConfirm: userFreezed.passwordConfirm!));
+            email: email,
+            name: '$firstName $lastName',
+            password: password,
+            passwordConfirm: passwordConfirm));
     response.fold(
       (l) {
         debugPrint(l.messages);
