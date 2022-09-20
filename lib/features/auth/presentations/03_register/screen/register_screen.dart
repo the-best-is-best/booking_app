@@ -2,8 +2,8 @@ import 'package:booking_app/core/utils/assets_manager.dart';
 import 'package:booking_app/core/utils/color_manager.dart';
 import 'package:booking_app/core/utils/routes_manager.dart';
 import 'package:booking_app/core/utils/values_manager.dart';
-import 'package:booking_app/features/auth/presentations/02_login/widget/input_field.dart';
-import 'package:booking_app/features/auth/presentations/02_login/widget/input_field_label.dart';
+import 'package:booking_app/core/widgets/input_field.dart';
+import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,7 +18,9 @@ class RegisterScreen extends StatelessWidget {
     TextEditingController lastNameController = TextEditingController();
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    TextEditingController passwordConfirmController = TextEditingController();
     var loginFromKey = GlobalKey<FormState>();
+    AuthCubit authCubit = AuthCubit.get(context);
     return Scaffold(
       body: SafeArea(
         child: Form(
@@ -88,10 +90,36 @@ class RegisterScreen extends StatelessWidget {
                     return null;
                   },
                 ),
+                const SizedBox(height: AppSize.s14),
+                InputField(
+                  textController: passwordConfirmController,
+                  label: "password Confirm",
+                  hint: "Enter password Confirm",
+                  isPassword: true,
+                  prefix: Icons.lock,
+                  suffix: Icons.remove_red_eye,
+                  suffixPressed: () {},
+                  validate: (value) {
+                    if (value!.isEmpty) {
+                      return 'password Confirm must be filled';
+                    } else if (passwordConfirmController.text !=
+                        passwordController.text) {
+                      return ' password don\'t  the same ';
+                    }
+                    return null;
+                  },
+                ),
                 const SizedBox(height: AppSize.s20),
                 MainButton(
                   onTap: () {
-                    if (loginFromKey.currentState!.validate()) {}
+                    if (loginFromKey.currentState!.validate()) {
+                      authCubit.register(
+                          email: emailController.text,
+                          password: passwordController.text,
+                          passwordConfirm: passwordConfirmController.text,
+                          firstName: firstNameController.text,
+                          lastName: lastNameController.text,);
+                    }
                   },
                   title: 'Sign Up',
                 ),

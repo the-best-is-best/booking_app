@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         designSize: const Size(375, 812),
         builder: (context, widget) {
           return BlocProvider(
-              create: (context) => di<AuthCubit>()..updateProfile(),
+              create: (context) => di<AuthCubit>(),
               child: MitXMaterialApp(
                 title: 'Flutter Demo',
                 theme: getApplicationTheme(),
