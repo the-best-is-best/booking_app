@@ -1,8 +1,9 @@
 import 'package:booking_app/features/auth/login/data/presentation/screen/login_screen.dart';
-import 'package:booking_app/features/auth/presentations/00_splash/screen/splash_screen.dart';
-import 'package:booking_app/features/auth/presentations/01_onboarding/screen/onboarding_screen.dart';
-import 'package:booking_app/features/auth/presentations/03_register/screen/register_screen.dart';
-import 'package:booking_app/features/auth/presentations/05_home/screen/home_screen.dart';
+import 'package:booking_app/features/auth/register/presentaion/screen/register_screen.dart';
+import 'package:booking_app/features/home/presentation/screen/home_screen.dart';
+import 'package:booking_app/features/intro/presentations/00_splash/screen/splash_screen.dart';
+import 'package:booking_app/features/intro/presentations/01_onboarding/screen/onboarding_screen.dart';
+
 import 'package:flutter/material.dart';
 
 import 'strings_manager.dart';
