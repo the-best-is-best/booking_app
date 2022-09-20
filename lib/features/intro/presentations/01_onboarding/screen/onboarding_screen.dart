@@ -1,7 +1,7 @@
 import 'package:booking_app/core/utils/color_manager.dart';
 import 'package:booking_app/core/utils/routes_manager.dart';
 import 'package:booking_app/core/widgets/main_button.dart';
-import 'package:booking_app/features/auth/presentations/01_onboarding/widget/onboardind_data.dart';
+import 'package:booking_app/features/intro/presentations/01_onboarding/widget/onboardind_data.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

@@ -67,12 +67,27 @@ class SplashScreen extends StatelessWidget {
               const SizedBox(
                 height: AppSize.s12,
               ),
-              Text(
-                'Already have account ? Login',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(color: ColorManager.white),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Already have account ?   ',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium!
+                          .copyWith(color: ColorManager.white)),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacementNamed(
+                            context, Routes.loginRoute);
+                      },
+                      child: Text(
+                        'Login',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayMedium!
+                            .copyWith(color: ColorManager.primary),
+                      )),
+                ],
               ),
             ],
           ),
