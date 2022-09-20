@@ -1,5 +1,5 @@
 import 'package:booking_app/app/di.dart';
-import 'package:booking_app/app/resources/routes_manager.dart';
+import 'package:booking_app/core/utils/routes_manager.dart';
 import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
                 ),
-                initialRoute: Routes.main,
-                onGenerateRoute: RoutesManager.getRoutes,
+                initialRoute: Routes.splashRoute,
+                onGenerateRoute: RouteGenerator.getRoute,
               ));
         });
   }
