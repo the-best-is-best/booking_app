@@ -1,5 +1,6 @@
 import 'package:booking_app/app/di.dart';
 import 'package:booking_app/core/utils/routes_manager.dart';
+import 'package:booking_app/core/utils/theme_manager.dart';
 import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,9 +30,7 @@ class MyApp extends StatelessWidget {
               create: (context) => di<AuthCubit>()..updateProfile(),
               child: MitXMaterialApp(
                 title: 'Flutter Demo',
-                theme: ThemeData(
-                  primarySwatch: Colors.blue,
-                ),
+                theme: getApplicationTheme(),
                 initialRoute: Routes.splashRoute,
                 onGenerateRoute: RouteGenerator.getRoute,
               ));
