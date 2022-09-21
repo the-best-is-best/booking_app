@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // use MitX Like GetX
-    /* MitX.toNamed();
+    /* MitX.offNamed();
     MitX.back();
     MitX.showSnackbar();
     MitX.defaultDialog();

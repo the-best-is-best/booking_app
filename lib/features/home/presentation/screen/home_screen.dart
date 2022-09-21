@@ -20,7 +20,6 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          
           SliverAppBar(
             automaticallyImplyLeading: false,
             leadingWidth: double.infinity,

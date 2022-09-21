@@ -1,9 +1,12 @@
+import 'package:booking_app/app/di.dart';
 import 'package:booking_app/features/auth/login/presentation/screen/login_screen.dart';
 import 'package:booking_app/features/auth/register/presentaion/screen/register_screen.dart';
+import 'package:booking_app/features/home/presentation/home_view.dart';
 import 'package:booking_app/features/home/presentation/screen/home_screen.dart';
 import 'package:booking_app/features/intro/presentations/00_splash/screen/splash_screen.dart';
 import 'package:booking_app/features/intro/presentations/01_onboarding/screen/onboarding_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'strings_manager.dart';
 
 class Routes {
@@ -21,7 +24,9 @@ class RouteGenerator {
     switch (settings.name) {
       case Routes.splashRoute:
         return MaterialPageRoute(
-          builder: (_) => const SplashScreen(),
+          builder: (_) => di<GetStorage>().read("userToken") != null
+              ? const LoginScreen()
+              : const SplashScreen(),
         );
       case Routes.onboardingRoute:
         return MaterialPageRoute(

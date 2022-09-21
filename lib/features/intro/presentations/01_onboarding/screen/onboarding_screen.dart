@@ -3,6 +3,7 @@ import 'package:booking_app/core/utils/routes_manager.dart';
 import 'package:booking_app/core/widgets/main_button.dart';
 import 'package:booking_app/features/intro/presentations/01_onboarding/widget/onboardind_data.dart';
 import 'package:flutter/material.dart';
+import 'package:mit_x/mit_x.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -61,7 +62,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             MainButton(
               onTap: () {
                 if (isLast) {
-                  Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                  MitX.toNamed(Routes.loginRoute);
                 } else {
                   onboardController.nextPage(
                     duration: const Duration(seconds: 1),
@@ -74,7 +75,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             const SizedBox(height: 15),
             MainButton(
               onTap: () {
-                Navigator.pushReplacementNamed(context, Routes.registerRoute);
+                MitX.toNamed(Routes.registerRoute);
               },
               title: 'Create account',
               color: ColorManager.grey,
