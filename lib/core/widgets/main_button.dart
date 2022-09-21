@@ -9,6 +9,7 @@ class MainButton extends StatelessWidget {
   final double width;
   final double borderRadius;
   final VoidCallback onTap;
+  final TextStyle? textStyle;
 
   // ignore: use_key_in_widget_constructors
   const MainButton({
@@ -19,6 +20,7 @@ class MainButton extends StatelessWidget {
     this.width = double.infinity,
     this.borderRadius = 30,
     required this.onTap,
+    this.textStyle,
   });
 
   @override
@@ -36,7 +38,7 @@ class MainButton extends StatelessWidget {
             border: Border.all(color: colorBorder, width: 1)),
         child: Text(
           title,
-          style: Theme.of(context).textTheme.displayMedium,
+          style: textStyle ?? Theme.of(context).textTheme.displayMedium,
         ),
       ),
     );
