@@ -8,4 +8,5 @@ class Constants {
   static const String registerUrl = "/auth/register";
   static const String profileInfoUrl = "/auth/profile-info";
   static const String updateProfileInfoUrl = "/auth/update-info";
+  static const String hotelsUrl = "/hotels";
 }

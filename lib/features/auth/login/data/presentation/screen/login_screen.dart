@@ -79,6 +79,7 @@ class LoginScreen extends StatelessWidget {
                           email: emailController.text,
                           password: passwordController.text);
                     }
+                    Navigator.pushNamed(context, Routes.exploreRoute);
                   },
                   title: 'Login',
                 ),

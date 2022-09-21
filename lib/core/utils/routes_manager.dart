@@ -1,5 +1,6 @@
 import 'package:booking_app/features/auth/login/data/presentation/screen/login_screen.dart';
 import 'package:booking_app/features/auth/register/presentaion/screen/register_screen.dart';
+import 'package:booking_app/features/explore/presentation/explore_view.dart';
 import 'package:booking_app/features/home/presentation/screen/home_screen.dart';
 import 'package:booking_app/features/intro/presentations/00_splash/screen/splash_screen.dart';
 import 'package:booking_app/features/intro/presentations/01_onboarding/screen/onboarding_screen.dart';
@@ -16,6 +17,7 @@ class Routes {
   static const String forgotPasswordRoute = '/forgotPassword';
   static const String homeRoute = '/main';
   static const String storeDetailsRoute = '/storeDetails';
+  static const String exploreRoute = '/exploreDetails';
 }
 
 class RouteGenerator {
@@ -37,10 +39,14 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => const RegisterScreen(),
         );
-      
-        case Routes.homeRoute:
+
+      case Routes.homeRoute:
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),
+        );
+      case Routes.exploreRoute:
+        return MaterialPageRoute(
+          builder: (_) => const ExploreView(),
         );
       default:
         return unDefinedRoute();

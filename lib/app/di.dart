@@ -6,6 +6,8 @@ import 'package:booking_app/features/auth/login/data/repository_login.dart';
 import 'package:booking_app/features/auth/profile/repository_profile.dart';
 import 'package:booking_app/features/auth/register/repository_register.dart';
 import 'package:booking_app/features/auth/update_profile/repository_profile_update.dart';
+import 'package:booking_app/features/explore/presentation/cubit/explore_cubit.dart';
+import 'package:booking_app/features/explore/repository_explor.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -18,10 +20,14 @@ Future initApp() async {
   di.registerFactory<AppServicesClient>(
       () => AppServicesClient(DioManger.dioApi));
   di.registerFactory<RepositoryLogin>(() => RepositoryLogin(di(), di()));
+  di.registerFactory<RepositoryExplor>(() => RepositoryExplor(di(), di()));
   di.registerFactory<RepositoryRegister>(() => RepositoryRegister(di(), di()));
   di.registerFactory<RepositoryProfile>(() => RepositoryProfile(di(), di()));
   di.registerFactory<RepositoryProfileUpdate>(
       () => RepositoryProfileUpdate(di(), di()));
 
   di.registerFactory<AuthCubit>(() => AuthCubit(di(), di(), di(), di()));
+  di.registerFactory<ExploreCubit>(() => ExploreCubit(
+        di(),
+      ));
 }

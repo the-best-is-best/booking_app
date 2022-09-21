@@ -45,21 +45,19 @@ class AuthCubit extends Cubit<AuthState> {
         debugPrint(l.messages);
       },
       (r) {
-        userModel = r;
+        UserModel userModel = r;
         clearUserFreezed();
       },
     );
   }
 
-  Future<void> register(
-    {
-     required String email,
-     required String password,
-     required String passwordConfirm,
-     required String firstName,
-     required String lastName,
-    }
-  ) async {
+  Future<void> register({
+    required String email,
+    required String password,
+    required String passwordConfirm,
+    required String firstName,
+    required String lastName,
+  }) async {
     Either<Failure, UserModel> response = await _repositoryRegister.register(
         ResterRequests(
             email: email,
