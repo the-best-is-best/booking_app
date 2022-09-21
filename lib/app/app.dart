@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         minTextAdapt: true,
         splitScreenMode: true,
-        designSize: const Size(375, 812),
+        designSize: const Size(480, 360),
         builder: (context, widget) {
           return MultiBlocProvider(
               providers: [

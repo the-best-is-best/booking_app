@@ -193,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // image section
             Container(
-              width: .35.sw,
+              width: 150,
               height: AppSize.s150,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
