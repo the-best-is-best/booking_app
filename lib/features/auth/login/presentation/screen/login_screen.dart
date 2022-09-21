@@ -69,6 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
                 ),
+<<<<<<< HEAD
                 Form(
                   key: loginFromKey,
                   child: Padding(
@@ -161,6 +162,29 @@ class _LoginScreenState extends State<LoginScreen> {
                       ]),
                     ),
                   ),
+=======
+                const SizedBox(height: AppSize.s20),
+                Align(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacementNamed(
+                              context, Routes.forgotPasswordRoute);
+                        },
+                        child:
+                            const InputFieldLabel('Forget your Password ?'))),
+                const SizedBox(height: AppSize.s20),
+                MainButton(
+                  onTap: () {
+                    if (loginFromKey.currentState!.validate()) {
+                      authCubit.login(
+                        context: context,
+                          email: emailController.text,
+                          password: passwordController.text);
+                    }
+                  },
+                  title: 'Login',
+>>>>>>> master
                 ),
               ],
             ),

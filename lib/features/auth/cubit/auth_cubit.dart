@@ -9,7 +9,12 @@ import 'package:booking_app/features/auth/update_profile/repository_profile_upda
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+<<<<<<< HEAD
 import 'package:get_storage/get_storage.dart';
+=======
+
+import '../../../core/utils/routes_manager.dart';
+>>>>>>> master
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -50,8 +55,15 @@ class AuthCubit extends Cubit<AuthState> {
     userImage = null;
   }
 
+<<<<<<< HEAD
   Future<void> login({required String email, required String password}) async {
     emit(AuthLoadingState());
+=======
+  Future<void> login(
+      {required context,
+      required String email,
+      required String password}) async {
+>>>>>>> master
     Either<Failure, UserModel> response =
         await _repositoryLogin.login(LoginRequests(
       email: email,
@@ -64,8 +76,13 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (r) {
         userModel = r;
+<<<<<<< HEAD
         successAuth();
         emit(AuthSuccessState());
+=======
+        Navigator.pushReplacementNamed(context, Routes.homeRoute);
+        clearUserFreezed();
+>>>>>>> master
       },
     );
   }
