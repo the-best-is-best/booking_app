@@ -1,11 +1,35 @@
 import 'package:booking_app/core/utils/assets_manager.dart';
 import 'package:booking_app/core/utils/color_manager.dart';
 import 'package:booking_app/core/utils/values_manager.dart';
+import 'package:booking_app/core/widgets/main_button.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late ScrollController _scrollController;
+  bool _isScrll = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController()
+      ..addListener(() {
+        setState(() {
+          _isScrll = _isSliverAppBarEx;
+        });
+      });
+  }
+
+  bool get _isSliverAppBarEx {
+    return _scrollController.hasClients && _scrollController.offset > (250);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +43,7 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       body: CustomScrollView(
+        controller: _scrollController,
         slivers: [
           SliverAppBar(
             automaticallyImplyLeading: false,
@@ -26,47 +51,22 @@ class HomeScreen extends StatelessWidget {
             toolbarHeight: size.height * 0.1,
             collapsedHeight: size.height * 0.25,
             title: containerSearch(size, context),
-            bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(20),
-              child: Container(
-                width: double.maxFinite,
-                padding: const EdgeInsets.only(top: 5, bottom: 10),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(AppSize.s20),
-                    topRight: Radius.circular(AppSize.s20),
-                  ),
-                  color: Colors.teal,
-                ),
-                child: const Center(child: Text('Don\'t know ')),
-              ),
-            ),
+            stretch: false,
             pinned: true,
             expandedHeight: size.height * 0.6,
+            floating: false,
             flexibleSpace: FlexibleSpaceBar(
-                background: Stack(
-              children: [
-                carouselSliderImages(size, carouselController, imagesSlider),
-              ],
-            )),
+                titlePadding: EdgeInsets.zero,
+                title: carouselSliderImages(
+                    size, carouselController, imagesSlider)),
           ),
           SliverToBoxAdapter(
-            child: Container(
-              margin: const EdgeInsets.only(
-                  left: AppMargin.m20, right: AppMargin.m20),
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(
-                        left: AppMargin.m20, right: AppMargin.m20),
-                    child: const Text(
-                      ' Paragraphs are the building blocks of papers. Many students define paragraphs in terms of length: a paragraph is a group of at least five sentences, a paragraph is half a page long, etc. In reality, though, the unity and coherence of ideas among sentences is what constitutes a paragraph. A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long. Ultimately, a paragraph is a sentence or group of sentences that support one main idea. In this handout, we will refer to this as the “controlling idea,” because it controls what happens in the rest of the paragraph. Paragraphs are the building blocks of papers. Many students define paragraphs in terms of length: a paragraph is a group of at least five sentences, a paragraph is half a page long, etc. In reality, though, the unity and coherence of ideas among sentences is what constitutes a paragraph. A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long. Ultimately, a paragraph is a sentence or group of sentences that support one main idea. In this handout, we will refer to this as the “controlling idea,” because it controls what happens in the rest of the paragraph.Paragraphs are the building blocks of papers. Many students define paragraphs in terms of length: a paragraph is a group of at least five sentences, a paragraph is half a page long, etc. In reality, though, the unity and coherence of ideas among sentences is what constitutes a paragraph. A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long. Ultimately, a paragraph is a sentence or group of sentences that support one main idea. In this handout, we will refer to this as the “controlling idea,” because it controls what happens in the rest of the paragraph.Paragraphs are the building blocks of papers. Many students define paragraphs in terms of length: a paragraph is a group of at least five sentences, a paragraph is half a page long, etc. In reality, though, the unity and coherence of ideas among sentences is what constitutes a paragraph. A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long. Ultimately, a paragraph is a sentence or group of sentences that support one main idea. In this handout, we will refer to this as the “controlling idea,” because it controls what happens in the rest of the paragraph.',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+              child: ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemBuilder: (context, index) => _bulidListHotelItems(),
+            itemCount: 10,
+          )),
         ],
       ),
     );
@@ -91,12 +91,50 @@ class HomeScreen extends StatelessWidget {
       items: imagesSlider.map((i) {
         return Builder(
           builder: (BuildContext context) {
-            return Image.asset(
-              i,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: size.height * 0.6,
-            );
+            return Stack(alignment: Alignment.bottomLeft, children: [
+              Image.asset(
+                i,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: size.height * 0.6,
+              ),
+              _isScrll
+                  ? Container()
+                  : Container(
+                      width: AppSize.s100 * 2,
+                      height: AppSize.s100 * 1.5,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: AppPadding.p12, vertical: AppPadding.p30),
+                      // color: Colors.red,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            'Cape Town',
+                            style: Theme.of(context).textTheme.displayMedium,
+                          ),
+                          Text(
+                            'Extraordinary five-star outdoor actives',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(color: ColorManager.white),
+                          ),
+                          MainButton(
+                            onTap: () {},
+                            width: AppSize.s100,
+                            height: AppSize.s30,
+                            title: 'View hotel',
+                            textStyle: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(color: ColorManager.white),
+                          )
+                        ],
+                      ),
+                    ),
+            ]);
           },
         );
       }).toList(),
@@ -132,6 +170,128 @@ class HomeScreen extends StatelessWidget {
                   .textTheme
                   .displayMedium!
                   .copyWith(color: ColorManager.grey),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _bulidListHotelItems() {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        margin: const EdgeInsets.only(
+          right: AppMargin.m20,
+          left: AppMargin.m20,
+          bottom: AppSize.s20,
+        ),
+        child: Row(
+          children: [
+            // image section
+            Container(
+              width: AppSize.s150,
+              height: AppSize.s150,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(AppSize.s20),
+                  bottomLeft: Radius.circular(AppSize.s20),
+                ),
+                color: ColorManager.grey,
+                image: DecorationImage(
+                    image: AssetImage(ImageAssets.explore_1),
+                    fit: BoxFit.cover),
+              ),
+            ),
+            // text Container
+            Expanded(
+              child: Container(
+                height: AppSize.s150,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(AppSize.s20),
+                    bottomRight: Radius.circular(AppSize.s20),
+                  ),
+                  color: ColorManager.grey.withOpacity(0.3),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(
+                    AppPadding.p16,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Queen Hotel',
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                      const SizedBox(
+                        height: AppSize.s8,
+                      ),
+                      Text(
+                        'Wembley, London',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium!
+                            .copyWith(
+                              color: ColorManager.grey,
+                            ),
+                      ),
+                      const Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children:  [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                 const Icon(Icons.location_on_outlined , color: ColorManager.primary,size: AppSize.s16,),
+                                  Text(
+                                    ' 3.0 Km to city ',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium!
+                                        .copyWith(
+                                      color: ColorManager.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  for(int i = 0 ; i<5 ; i++)
+                                    const Icon(Icons.star , color: ColorManager.primary,size: AppSize.s16, ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                ' \$100',
+                                style: Theme.of(context).textTheme.displayMedium,
+                              ),
+
+                              Text(
+                                '/per night',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium!
+                                    .copyWith(
+                                  color: ColorManager.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),
