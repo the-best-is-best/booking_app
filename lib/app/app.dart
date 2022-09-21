@@ -2,6 +2,7 @@ import 'package:booking_app/app/di.dart';
 import 'package:booking_app/core/utils/routes_manager.dart';
 import 'package:booking_app/core/utils/theme_manager.dart';
 import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
+import 'package:booking_app/features/explore/presentation/cubit/explore_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,8 +27,15 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         designSize: const Size(375, 812),
         builder: (context, widget) {
-          return BlocProvider(
-              create: (context) => di<AuthCubit>(),
+          return MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => di<AuthCubit>(),
+                ),
+                BlocProvider(
+                  create: (context) => di<ExploreCubit>(),
+                )
+              ],
               child: MitXMaterialApp(
                 title: 'Flutter Demo',
                 theme: getApplicationTheme(),

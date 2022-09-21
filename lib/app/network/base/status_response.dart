@@ -12,16 +12,16 @@ class StatusResponse {
   }
 }
 
-class Status {
-  final String type;
-  final String title;
+// class Status {
+//   final String type;
+//   final String title;
 
-  Status(this.type, this.title);
-  factory Status.fromJson(Map<String, dynamic> json) {
-    return Status(
-        json['type'],
-        (json['title'] is Map)
-            ? json['title']['en'] ?? ""
-            : json['title'] ?? "");
-  }
-}
+//   Status(this.type, this.title);
+//   factory Status.fromJson(Map<String, dynamic> json) {
+//     return Status(
+//         json['type'],
+//         (json['title'] is Map)
+//             ? json['title']['en'] ?? ""
+//             : json['title'] ?? "");
+//   }
+// }

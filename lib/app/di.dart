@@ -6,6 +6,8 @@ import 'package:booking_app/features/auth/login/data/repository_login.dart';
 import 'package:booking_app/features/auth/profile/repository_profile.dart';
 import 'package:booking_app/features/auth/register/repository_register.dart';
 import 'package:booking_app/features/auth/update_profile/repository_profile_update.dart';
+import 'package:booking_app/features/explore/data/repository_explore.dart';
+import 'package:booking_app/features/explore/presentation/cubit/explore_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -13,15 +15,22 @@ GetIt di = GetIt.instance;
 
 Future initApp() async {
   await DioManger.init();
-  di.registerFactory<NetworkInfo>(
+  di.registerLazySingleton<NetworkInfo>(
       () => NetworkInfoImpl(InternetConnectionChecker()));
-  di.registerFactory<AppServicesClient>(
+  di.registerLazySingleton<AppServicesClient>(
       () => AppServicesClient(DioManger.dioApi));
-  di.registerFactory<RepositoryLogin>(() => RepositoryLogin(di(), di()));
-  di.registerFactory<RepositoryRegister>(() => RepositoryRegister(di(), di()));
-  di.registerFactory<RepositoryProfile>(() => RepositoryProfile(di(), di()));
-  di.registerFactory<RepositoryProfileUpdate>(
+  di.registerLazySingleton<RepositoryLogin>(() => RepositoryLogin(di(), di()));
+  di.registerLazySingleton<RepositoryRegister>(
+      () => RepositoryRegister(di(), di()));
+  di.registerLazySingleton<RepositoryProfile>(
+      () => RepositoryProfile(di(), di()));
+  di.registerLazySingleton<RepositoryProfileUpdate>(
       () => RepositoryProfileUpdate(di(), di()));
 
-  di.registerFactory<AuthCubit>(() => AuthCubit(di(), di(), di(), di()));
+  di.registerLazySingleton<AuthCubit>(() => AuthCubit(di(), di(), di(), di()));
+
+  di.registerLazySingleton<RepositoryExplore>(
+      () => RepositoryExplore(di(), di()));
+
+  di.registerLazySingleton<ExploreCubit>(() => ExploreCubit(di()));
 }

@@ -7,7 +7,7 @@ import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../../../core/widgets/input_field.dart';
+import '../../../../../core/widgets/input_field.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
