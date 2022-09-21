@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'font_manager.dart';
 import 'values_manager.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +37,7 @@ ThemeData getApplicationTheme() {
       elevation: AppSize.s4,
       shadowColor: ColorManager.lightPrimary,
       titleTextStyle: getRegularStyle(
-        fontSize: FontSize.s16,
+        fontSize: FontSize.s16.sp,
         color: ColorManager.white,
       ),
     ),
@@ -53,7 +55,7 @@ ThemeData getApplicationTheme() {
       style: ElevatedButton.styleFrom(
         textStyle: getRegularStyle(
           color: ColorManager.white,
-          fontSize: FontSize.s17,
+          fontSize: FontSize.s17.sp,
         ),
         backgroundColor: ColorManager.primary,
         shape: RoundedRectangleBorder(
@@ -64,16 +66,16 @@ ThemeData getApplicationTheme() {
 
     // text Theme
     textTheme: TextTheme(
-      displayLarge:
-          getSemBoldStyle(color: ColorManager.darkGrey, fontSize: FontSize.s22),
+      displayLarge: getSemBoldStyle(
+          color: ColorManager.darkGrey, fontSize: FontSize.s22.sp),
       displayMedium:
-          getSemBoldStyle(color: ColorManager.white, fontSize: FontSize.s18),
+          getSemBoldStyle(color: ColorManager.white, fontSize: FontSize.s18.sp),
       headlineLarge:
-          getSemBoldStyle(color: ColorManager.grey, fontSize: FontSize.s16),
-      headlineMedium:
-          getRegularStyle(color: ColorManager.darkGrey, fontSize: FontSize.s14),
+          getSemBoldStyle(color: ColorManager.grey, fontSize: FontSize.s16.sp),
+      headlineMedium: getRegularStyle(
+          color: ColorManager.darkGrey, fontSize: FontSize.s14.sp),
       titleMedium:
-          getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s16),
+          getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s16.sp),
       bodySmall: getRegularStyle(color: ColorManager.grey),
       bodyLarge: getRegularStyle(color: ColorManager.grey1),
     ),
@@ -82,9 +84,9 @@ ThemeData getApplicationTheme() {
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.all(AppPadding.p8),
       hintStyle:
-          getRegularStyle(color: ColorManager.grey, fontSize: FontSize.s14),
+          getRegularStyle(color: ColorManager.grey, fontSize: FontSize.s14.sp),
       labelStyle:
-          getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s14),
+          getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s14.sp),
       errorStyle: getRegularStyle(color: ColorManager.error),
       fillColor: ColorManager.darkGrey,
       filled: true,

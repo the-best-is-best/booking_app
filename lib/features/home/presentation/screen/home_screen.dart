@@ -4,6 +4,7 @@ import 'package:booking_app/core/utils/values_manager.dart';
 import 'package:booking_app/core/widgets/main_button.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -104,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: AppSize.s100 * 2,
                       height: AppSize.s100 * 1.5,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: AppPadding.p12, vertical: AppPadding.p30),
+                          horizontal: AppPadding.p12, vertical: AppPadding.p20),
                       // color: Colors.red,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,6 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             'Cape Town',
                             style: Theme.of(context).textTheme.displayMedium,
                           ),
+                          const SizedBox(height: 5),
                           Text(
                             'Extraordinary five-star outdoor actives',
                             style: Theme.of(context)
@@ -121,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 .headlineMedium!
                                 .copyWith(color: ColorManager.white),
                           ),
+                          const SizedBox(height: 5),
                           MainButton(
                             onTap: () {},
                             width: AppSize.s100,
@@ -190,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // image section
             Container(
-              width: AppSize.s150,
+              width: .35.sw,
               height: AppSize.s150,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -241,28 +244,36 @@ class _HomeScreenState extends State<HomeScreen> {
                       const Spacer(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children:  [
+                        children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
                                 children: [
-                                 const Icon(Icons.location_on_outlined , color: ColorManager.primary,size: AppSize.s16,),
+                                  const Icon(
+                                    Icons.location_on_outlined,
+                                    color: ColorManager.primary,
+                                    size: AppSize.s16,
+                                  ),
                                   Text(
                                     ' 3.0 Km to city ',
                                     style: Theme.of(context)
                                         .textTheme
                                         .headlineMedium!
                                         .copyWith(
-                                      color: ColorManager.grey,
-                                    ),
+                                          color: ColorManager.grey,
+                                        ),
                                   ),
                                 ],
                               ),
                               Row(
                                 children: [
-                                  for(int i = 0 ; i<5 ; i++)
-                                    const Icon(Icons.star , color: ColorManager.primary,size: AppSize.s16, ),
+                                  for (int i = 0; i < 5; i++)
+                                    const Icon(
+                                      Icons.star,
+                                      color: ColorManager.primary,
+                                      size: AppSize.s16,
+                                    ),
                                 ],
                               ),
                             ],
@@ -272,17 +283,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Text(
                                 ' \$100',
-                                style: Theme.of(context).textTheme.displayMedium,
+                                style:
+                                    Theme.of(context).textTheme.displayMedium,
                               ),
-
                               Text(
                                 '/per night',
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineMedium!
                                     .copyWith(
-                                  color: ColorManager.grey,
-                                ),
+                                      color: ColorManager.grey,
+                                    ),
                               ),
                             ],
                           ),
