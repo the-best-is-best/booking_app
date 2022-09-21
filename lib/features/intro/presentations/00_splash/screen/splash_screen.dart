@@ -83,7 +83,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           .copyWith(color: ColorManager.white)),
                   GestureDetector(
                       onTap: () {
-                        MitX.offNamed(Routes.loginRoute);
+                        MitX.toNamed(Routes.loginRoute);
                       },
                       child: Text(
                         'Login',

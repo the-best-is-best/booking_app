@@ -27,6 +27,21 @@ class AuthCubit extends Cubit<AuthState> {
   bool isShowPassword = false;
   bool isShowPasswordAgin = false;
 
+  void showPassword() {
+    isShowPassword = !isShowPassword;
+    emit(AuthChangeShowPasswordState());
+  }
+
+  void showPasswordAgin() {
+    isShowPasswordAgin = !isShowPasswordAgin;
+    emit(AuthChangeShowPasswordState());
+  }
+
+  void resetShowPassword() {
+    isShowPassword = false;
+    isShowPasswordAgin = false;
+  }
+
   UserModel userModel = UserModel(name: "", email: "", apiToken: "");
   File? userImage;
 
@@ -83,9 +98,9 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> getProfileInfo() async {
     if (box.read("userToken") != null) {
-      emit(AuthLoadingState());
-      Either<Failure, UserModel> response =
-          await _repositoryProfile.getProfileData(box.read("userToken"));
+      emit(AuthGetLocalProfileState());
+      Either<Failure, UserModel> response = await _repositoryProfile
+          .getProfileData(ProfileRequests(box.read("userToken")));
       response.fold(
         (l) {
           emit(AuthErrorState(""));
@@ -93,7 +108,7 @@ class AuthCubit extends Cubit<AuthState> {
         (r) {
           userModel = r;
           successAuth();
-          emit(AuthSuccessState());
+          emit(AuthGetLocalProfileSuccessState());
         },
       );
     }

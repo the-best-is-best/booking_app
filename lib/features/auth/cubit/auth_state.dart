@@ -14,4 +14,10 @@ class AuthErrorState extends AuthState {
   AuthErrorState(this.message);
 }
 
+class AuthGetLocalProfileState extends AuthState {}
+
+class AuthGetLocalProfileSuccessState extends AuthState {}
+
 class AuthSuccessState extends AuthState {}
+
+class AuthChangeShowPasswordState extends AuthState {}
