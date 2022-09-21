@@ -5,11 +5,12 @@ import 'package:booking_app/features/auth/login/data/responses/login_response.da
 import 'package:booking_app/features/auth/profile/responses/response_profile.dart';
 import 'package:booking_app/features/auth/register/data/responses/response_register.dart';
 import 'package:booking_app/features/auth/update_profile/responses/response_update_profile.dart';
+import 'package:booking_app/features/explore/data/responses/hotel_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 part 'app_api.g.dart';
 
-@RestApi(baseUrl: Constants.baseUrl)
+@RestApi(baseUrl: Constants.baseUrl + Constants.apiPath)
 abstract class AppServicesClient {
   factory AppServicesClient(Dio dio, {String baseUrl}) =
       _AppServicesClient; // factory
@@ -37,4 +38,6 @@ abstract class AppServicesClient {
     @Field("email") required String email,
     @Part() File? image,
   });
+  @GET(Constants.hotelsUrl)
+  Future<HotelResponse> getHotels({required int count, required int page});
 }

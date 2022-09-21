@@ -1,10 +1,9 @@
+import 'package:booking_app/core/utils/assets_manager.dart';
 import 'package:booking_app/core/utils/color_manager.dart';
 import 'package:booking_app/core/utils/routes_manager.dart';
 import 'package:booking_app/core/utils/values_manager.dart';
 import 'package:booking_app/core/widgets/main_button.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../core/utils/assets_manager.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

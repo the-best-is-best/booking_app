@@ -1,11 +1,9 @@
-import 'package:booking_app/features/auth/login/data/presentation/screen/login_screen.dart';
+import 'package:booking_app/features/auth/login/presentation/screen/login_screen.dart';
 import 'package:booking_app/features/auth/register/presentaion/screen/register_screen.dart';
 import 'package:booking_app/features/home/presentation/screen/home_screen.dart';
 import 'package:booking_app/features/intro/presentations/00_splash/screen/splash_screen.dart';
 import 'package:booking_app/features/intro/presentations/01_onboarding/screen/onboarding_screen.dart';
-
 import 'package:flutter/material.dart';
-
 import 'strings_manager.dart';
 
 class Routes {
@@ -37,8 +35,8 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => const RegisterScreen(),
         );
-      
-        case Routes.homeRoute:
+
+      case Routes.homeRoute:
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),
         );
