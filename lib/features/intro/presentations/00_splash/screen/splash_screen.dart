@@ -1,18 +1,15 @@
+import 'package:booking_app/core/utils/assets_manager.dart';
 import 'package:booking_app/core/utils/color_manager.dart';
 import 'package:booking_app/core/utils/routes_manager.dart';
 import 'package:booking_app/core/utils/values_manager.dart';
 import 'package:booking_app/core/widgets/main_button.dart';
-import 'package:booking_app/features/explore/presentation/cubit/explore_cubit.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/utils/assets_manager.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ExploreCubit exploreCubit = ExploreCubit.get(context);
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -69,12 +66,27 @@ class SplashScreen extends StatelessWidget {
               const SizedBox(
                 height: AppSize.s12,
               ),
-              Text(
-                'Already have account ? Login',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(color: ColorManager.white),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Already have account ?   ',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium!
+                          .copyWith(color: ColorManager.white)),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacementNamed(
+                            context, Routes.loginRoute);
+                      },
+                      child: Text(
+                        'Login',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayMedium!
+                            .copyWith(color: ColorManager.primary),
+                      )),
+                ],
               ),
             ],
           ),

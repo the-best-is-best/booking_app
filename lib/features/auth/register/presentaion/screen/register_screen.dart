@@ -3,11 +3,10 @@ import 'package:booking_app/core/utils/color_manager.dart';
 import 'package:booking_app/core/utils/routes_manager.dart';
 import 'package:booking_app/core/utils/values_manager.dart';
 import 'package:booking_app/core/widgets/input_field.dart';
+import 'package:booking_app/core/widgets/main_button.dart';
 import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../../core/widgets/main_button.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
