@@ -76,6 +76,7 @@ class LoginScreen extends StatelessWidget {
                   onTap: () {
                     if (loginFromKey.currentState!.validate()) {
                       authCubit.login(
+                        context: context,
                           email: emailController.text,
                           password: passwordController.text);
                     }
