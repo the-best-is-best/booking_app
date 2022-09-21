@@ -29,6 +29,7 @@ ThemeData getApplicationTheme() {
         statusBarColor: ColorManager.white,
         statusBarBrightness: Brightness.dark,
       ),
+      iconTheme: const IconThemeData(color: Color.fromRGBO(255, 255, 255, 1)),
       color: ColorManager.primary,
       centerTitle: true,
       elevation: AppSize.s4,

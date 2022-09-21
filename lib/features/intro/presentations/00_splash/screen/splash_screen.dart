@@ -1,13 +1,21 @@
+import 'package:booking_app/app/di.dart';
 import 'package:booking_app/core/utils/assets_manager.dart';
 import 'package:booking_app/core/utils/color_manager.dart';
 import 'package:booking_app/core/utils/routes_manager.dart';
 import 'package:booking_app/core/utils/values_manager.dart';
 import 'package:booking_app/core/widgets/main_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:mit_x/mit_x.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,8 +66,7 @@ class SplashScreen extends StatelessWidget {
               const Spacer(),
               MainButton(
                 onTap: () {
-                  Navigator.pushReplacementNamed(
-                      context, Routes.onboardingRoute);
+                  MitX.offNamed(Routes.onboardingRoute);
                 },
                 title: 'Get Started',
               ),
@@ -76,8 +83,7 @@ class SplashScreen extends StatelessWidget {
                           .copyWith(color: ColorManager.white)),
                   GestureDetector(
                       onTap: () {
-                        Navigator.pushReplacementNamed(
-                            context, Routes.loginRoute);
+                        MitX.toNamed(Routes.loginRoute);
                       },
                       child: Text(
                         'Login',

@@ -9,8 +9,7 @@ import 'package:booking_app/features/auth/update_profile/repository_profile_upda
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../core/utils/routes_manager.dart';
+import 'package:get_storage/get_storage.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -18,24 +17,42 @@ class AuthCubit extends Cubit<AuthState> {
   final RepositoryRegister _repositoryRegister;
   final RepositoryProfile _repositoryProfile;
   final RepositoryProfileUpdate _repositoryProfileUpdate;
+  final GetStorage box;
 
   AuthCubit(this._repositoryLogin, this._repositoryRegister,
-      this._repositoryProfile, this._repositoryProfileUpdate)
-      : super(AppInitial());
+      this._repositoryProfile, this._repositoryProfileUpdate, this.box)
+      : super(AuthInitial());
 
   static AuthCubit get(BuildContext context) => BlocProvider.of(context);
+  bool isShowPassword = false;
+  bool isShowPasswordAgin = false;
+
+  void showPassword() {
+    isShowPassword = !isShowPassword;
+    emit(AuthChangeShowPasswordState());
+  }
+
+  void showPasswordAgin() {
+    isShowPasswordAgin = !isShowPasswordAgin;
+    emit(AuthChangeShowPasswordState());
+  }
+
+  void resetShowPassword() {
+    isShowPassword = false;
+    isShowPasswordAgin = false;
+  }
 
   UserModel userModel = UserModel(name: "", email: "", apiToken: "");
   File? userImage;
 
-  void clearUserFreezed() {
+  void successAuth() {
+    box.write('userToken', userModel.apiToken);
     userImage = null;
   }
 
-  Future<void> login(
-      {required context,
-      required String email,
-      required String password}) async {
+  Future<void> login({required String email, required String password}) async {
+    emit(AuthLoadingState());
+
     Either<Failure, UserModel> response =
         await _repositoryLogin.login(LoginRequests(
       email: email,
@@ -43,12 +60,13 @@ class AuthCubit extends Cubit<AuthState> {
     ));
     response.fold(
       (l) {
+        emit(AuthErrorState(l.messages));
         debugPrint(l.messages);
       },
       (r) {
         userModel = r;
-        Navigator.pushReplacementNamed(context, Routes.homeRoute);
-        clearUserFreezed();
+        successAuth();
+        emit(AuthSuccessState());
       },
     );
   }
@@ -60,6 +78,7 @@ class AuthCubit extends Cubit<AuthState> {
     required String firstName,
     required String lastName,
   }) async {
+    emit(AuthLoadingState());
     Either<Failure, UserModel> response = await _repositoryRegister.register(
         ResterRequests(
             email: email,
@@ -68,30 +87,36 @@ class AuthCubit extends Cubit<AuthState> {
             passwordConfirm: passwordConfirm));
     response.fold(
       (l) {
-        debugPrint(l.messages);
+        emit(AuthErrorState(l.messages));
       },
       (r) {
         userModel = r;
-        clearUserFreezed();
+        successAuth();
+        emit(AuthSuccessState());
       },
     );
   }
 
   Future<void> getProfileInfo() async {
-    Either<Failure, UserModel> response =
-        await _repositoryProfile.getProfileData(ProfileRequests(""));
-    response.fold(
-      (l) {
-        debugPrint(l.messages);
-      },
-      (r) {
-        userModel = r;
-        clearUserFreezed();
-      },
-    );
+    if (box.read("userToken") != null) {
+      emit(AuthGetLocalProfileState());
+      Either<Failure, UserModel> response = await _repositoryProfile
+          .getProfileData(ProfileRequests(box.read("userToken")));
+      response.fold(
+        (l) {
+          emit(AuthErrorState(""));
+        },
+        (r) {
+          userModel = r;
+          successAuth();
+          emit(AuthGetLocalProfileSuccessState());
+        },
+      );
+    }
   }
 
   Future<void> updateProfile() async {
+    emit(AuthLoadingState());
     Either<Failure, UserModel> response =
         await _repositoryProfileUpdate.updateProfile(UpdateProfileRequests(
             token: userModel.apiToken,
@@ -100,11 +125,12 @@ class AuthCubit extends Cubit<AuthState> {
             image: userImage));
     response.fold(
       (l) {
-        debugPrint(l.messages);
+        emit(AuthErrorState(l.messages));
       },
       (r) {
         userModel = r;
-        clearUserFreezed();
+        successAuth();
+        emit(AuthSuccessState());
       },
     );
   }
