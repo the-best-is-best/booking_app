@@ -26,14 +26,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.didChangeDependencies();
   }
 
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordConfirmController = TextEditingController();
+  var loginFromKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    TextEditingController firstNameController = TextEditingController();
-    TextEditingController lastNameController = TextEditingController();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    TextEditingController passwordConfirmController = TextEditingController();
-    var loginFromKey = GlobalKey<FormState>();
     AuthCubit authCubit = AuthCubit.get(context);
     return Scaffold(
       body: BlocListener<AuthCubit, AuthState>(

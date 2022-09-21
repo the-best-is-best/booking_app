@@ -24,10 +24,12 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     AuthCubit authCubit = AuthCubit.get(context);
 
-    authCubit.getProfileInfo();
-    if (authCubit.userModel.apiToken.isNotEmpty) {
-      MitX.offNamed(Routes.homeRoute);
-    }
+    authCubit.getProfileInfo().then((value) {
+      if (authCubit.userModel.apiToken.isNotEmpty) {
+        MitX.offNamed(Routes.homeRoute);
+      }
+    });
+
     super.initState();
   }
 
@@ -54,141 +56,128 @@ class _LoginScreenState extends State<LoginScreen> {
             });
           }
         },
-        child: SingleChildScrollView(
-          child: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const BackButton(
-                  color: Colors.white,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Login',
-                    style: Theme.of(context).textTheme.displayMedium,
-                  ),
-                ),
-<<<<<<< HEAD
-                Form(
-                  key: loginFromKey,
-                  child: Padding(
-                    padding: const EdgeInsets.all(AppPadding.p20),
-                    child: SingleChildScrollView(
-                      child: Column(children: [
-                        const SizedBox(height: AppSize.s20),
-                        SvgPicture.asset(
-                          ImageAssets.welcome,
-                          height: AppSize.s100 * 1.5,
-                          width: double.infinity,
-                        ),
-                        const SizedBox(height: AppSize.s40),
-                        InputField(
-                          textController: emailController,
-                          label: "Your email",
-                          hint: "Enter your email",
-                          prefix: Icons.person,
-                          validate: (value) {
-                            if (value!.isEmpty) {
-                              return ' Email Address must be filled';
-                            }
-                            if (!MitXUtils.isEmail(value)) {
-                              return "email is not valid";
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: AppSize.s14),
-                        BlocBuilder<AuthCubit, AuthState>(
-                          buildWhen: (previous, current) =>
-                              current is AuthChangeShowPasswordState,
-                          builder: (context, state) => InputField(
-                            textController: passwordController,
-                            label: "Password",
-                            hint: "Enter password",
-                            isPassword: authCubit.isShowPassword ? false : true,
-                            prefix: Icons.lock,
-                            suffix: authCubit.isShowPassword
-                                ? Icons.visibility_off
-                                : Icons.remove_red_eye,
-                            suffixPressed: () {
-                              authCubit.showPassword();
-                            },
-                            validate: (value) {
-                              if (value!.isEmpty) {
-                                return 'Password must be filled';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(height: AppSize.s20),
-                        Align(
-                            alignment: AlignmentDirectional.bottomEnd,
-                            child: GestureDetector(
-                                onTap: () {
-                                  MitX.offNamed(Routes.forgotPasswordRoute);
-                                },
-                                child: const InputFieldLabel(
-                                    'Forget your Password ?'))),
-                        const SizedBox(height: AppSize.s20),
-                        BlocConsumer<AuthCubit, AuthState>(
-                          listener: (context, state) {
-                            if (state is AuthErrorState) {
-                              MitX.showSnackbar(MitXSnackBar(
-                                duration: const Duration(seconds: 2),
-                                title: "Alert",
-                                message: state.message ?? "",
-                              ));
-                            }
-                          },
-                          builder: (context, state) {
-                            if (state is! AuthLoadingState) {
-                              return MainButton(
-                                onTap: () {
-                                  if (loginFromKey.currentState!.validate()) {
-                                    authCubit.login(
-                                        email: emailController.text,
-                                        password: passwordController.text);
-                                  }
-                                },
-                                title: 'Login',
-                              );
-                            } else {
-                              return const MyCircularIndicator();
-                            }
-                          },
-                        ),
-                      ]),
+        child: BlocBuilder<AuthCubit, AuthState>(
+          buildWhen: (previous, current) =>
+              current is AuthErrorState || current is AuthInitial,
+          builder: (context, state) {
+            if (state is AuthGetLocalProfileState) {
+              return const SizedBox();
+            }
+            return SingleChildScrollView(
+              child: SafeArea(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const BackButton(
+                      color: Colors.white,
                     ),
-                  ),
-=======
-                const SizedBox(height: AppSize.s20),
-                Align(
-                    alignment: AlignmentDirectional.bottomEnd,
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacementNamed(
-                              context, Routes.forgotPasswordRoute);
-                        },
-                        child:
-                            const InputFieldLabel('Forget your Password ?'))),
-                const SizedBox(height: AppSize.s20),
-                MainButton(
-                  onTap: () {
-                    if (loginFromKey.currentState!.validate()) {
-                      authCubit.login(
-                        context: context,
-                          email: emailController.text,
-                          password: passwordController.text);
-                    }
-                  },
-                  title: 'Login',
->>>>>>> master
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Login',
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                    ),
+                    Form(
+                      key: loginFromKey,
+                      child: Padding(
+                        padding: const EdgeInsets.all(AppPadding.p20),
+                        child: SingleChildScrollView(
+                          child: Column(children: [
+                            const SizedBox(height: AppSize.s20),
+                            SvgPicture.asset(
+                              ImageAssets.welcome,
+                              height: AppSize.s100 * 1.5,
+                              width: double.infinity,
+                            ),
+                            const SizedBox(height: AppSize.s40),
+                            InputField(
+                              textController: emailController,
+                              label: "Your email",
+                              hint: "Enter your email",
+                              prefix: Icons.person,
+                              validate: (value) {
+                                if (value!.isEmpty) {
+                                  return ' Email Address must be filled';
+                                }
+                                if (!MitXUtils.isEmail(value)) {
+                                  return "email is not valid";
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: AppSize.s14),
+                            BlocBuilder<AuthCubit, AuthState>(
+                              buildWhen: (previous, current) =>
+                                  current is AuthChangeShowPasswordState,
+                              builder: (context, state) => InputField(
+                                textController: passwordController,
+                                label: "Password",
+                                hint: "Enter password",
+                                isPassword:
+                                    authCubit.isShowPassword ? false : true,
+                                prefix: Icons.lock,
+                                suffix: authCubit.isShowPassword
+                                    ? Icons.visibility_off
+                                    : Icons.remove_red_eye,
+                                suffixPressed: () {
+                                  authCubit.showPassword();
+                                },
+                                validate: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Password must be filled';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            const SizedBox(height: AppSize.s20),
+                            Align(
+                                alignment: AlignmentDirectional.bottomEnd,
+                                child: GestureDetector(
+                                    onTap: () {
+                                      MitX.offNamed(Routes.forgotPasswordRoute);
+                                    },
+                                    child: const InputFieldLabel(
+                                        'Forget your Password ?'))),
+                            const SizedBox(height: AppSize.s20),
+                            BlocConsumer<AuthCubit, AuthState>(
+                              listener: (context, state) {
+                                if (state is AuthErrorState) {
+                                  MitX.showSnackbar(MitXSnackBar(
+                                    duration: const Duration(seconds: 2),
+                                    title: "Alert",
+                                    message: state.message ?? "",
+                                  ));
+                                }
+                              },
+                              builder: (context, state) {
+                                if (state is! AuthLoadingState) {
+                                  return MainButton(
+                                    onTap: () {
+                                      if (loginFromKey.currentState!
+                                          .validate()) {
+                                        authCubit.login(
+                                            email: emailController.text,
+                                            password: passwordController.text);
+                                      }
+                                    },
+                                    title: 'Login',
+                                  );
+                                } else {
+                                  return const MyCircularIndicator();
+                                }
+                              },
+                            ),
+                          ]),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
