@@ -11,6 +11,7 @@ class TripsCubit extends Cubit<TripsState> {
   TripsCubit(this._repositoryTrips) : super(TripsInitial());
 
   static TripsCubit get(context) => BlocProvider.of(context);
+  TripsModel? tripsCompleted;
   TripsModel? tripsModel;
   int currentTap = 1;
 
@@ -46,6 +47,9 @@ class TripsCubit extends Cubit<TripsState> {
         emit(TripsLoadedState());
       },
       (r) {
+        if (typeTrip == TypeTrip.cancelled) {
+          tripsCompleted = r;
+        }
         tripsModel = r;
 
         emit(TripsLoadedState());
