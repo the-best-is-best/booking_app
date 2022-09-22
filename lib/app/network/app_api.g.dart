@@ -145,7 +145,10 @@ class _AppServicesClient implements AppServicesClient {
     required page,
   }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'count': count,
+      r'page': page,
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
@@ -162,6 +165,39 @@ class _AppServicesClient implements AppServicesClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = HotelResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ResponseTrips> getBooking({
+    required token,
+    required count,
+    required page,
+    required type,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'count': count,
+      r'page': page,
+      r'type': type,
+    };
+    final _headers = <String, dynamic>{r'token': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ResponseTrips>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/get-bookings',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseTrips.fromJson(_result.data!);
     return value;
   }
 

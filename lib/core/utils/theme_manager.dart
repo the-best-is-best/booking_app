@@ -32,12 +32,13 @@ ThemeData getApplicationTheme() {
         statusBarBrightness: Brightness.dark,
       ),
       iconTheme: const IconThemeData(color: Color.fromRGBO(255, 255, 255, 1)),
-      color: ColorManager.primary,
-      centerTitle: true,
-      elevation: AppSize.s4,
-      shadowColor: ColorManager.lightPrimary,
-      titleTextStyle: getRegularStyle(
-        fontSize: FontSize.s16.sp,
+      color: ColorManager.background,
+
+      centerTitle: false,
+      elevation: 0,
+      //  shadowColor: ColorManager.lightPrimary,
+      titleTextStyle: getSemBoldStyle(
+        fontSize: FontSize.s24.sp,
         color: ColorManager.white,
       ),
     ),

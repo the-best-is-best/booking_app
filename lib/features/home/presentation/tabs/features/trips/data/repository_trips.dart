@@ -2,21 +2,23 @@ import 'package:booking_app/app/network/app_api.dart';
 import 'package:booking_app/app/network/error_handler.dart';
 import 'package:booking_app/app/network/failure.dart';
 import 'package:booking_app/app/network/network_info.dart';
-import 'package:booking_app/features/explore/data/extension/to_domain.dart';
-import 'package:booking_app/features/explore/domain/hotel_model.dart';
+import 'package:booking_app/features/home/presentation/tabs/features/trips/domain/trips_model.dart';
+import 'package:booking_app/features/home/presentation/tabs/features/trips/extension/toDomain.dart';
 import 'package:dartz/dartz.dart';
 
-class RepositoryExplore {
+class RepositoryTrips {
   final AppServicesClient appServicesClient;
   final NetworkInfo networkInfo;
 
-  RepositoryExplore(this.appServicesClient, this.networkInfo);
-  Future<Either<Failure, HotelModel>> getHotel(
-      ExploreRequests exploreRequests) async {
+  RepositoryTrips(this.appServicesClient, this.networkInfo);
+  Future<Either<Failure, TripsModel>> getTrips(TripRequest tripRequest) async {
     if (await networkInfo.isConnected) {
       try {
-        var response = await appServicesClient.getHotels(
-            count: exploreRequests.count, page: exploreRequests.page);
+        var response = await appServicesClient.getBooking(
+            count: tripRequest.count,
+            page: tripRequest.page,
+            type: tripRequest.type,
+            token: tripRequest.token);
         if (response.status.type == "1") {
           //success
           // return either right
@@ -25,6 +27,7 @@ class RepositoryExplore {
         } else {
           //failure
           // return either left
+
           return left(Failure(
               messages: (response.status.title is Map)
                   ? response.status.title['en'] ?? ""
@@ -41,9 +44,16 @@ class RepositoryExplore {
   }
 }
 
-class ExploreRequests {
+class TripRequest {
   final int count;
   final int page;
+  final String type;
+  final String token;
 
-  ExploreRequests({required this.page, this.count = 10});
+  TripRequest({
+    required this.page,
+    this.count = 10,
+    required this.type,
+    required this.token,
+  });
 }
