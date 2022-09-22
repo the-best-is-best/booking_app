@@ -16,7 +16,8 @@ extension ExtensionTripsResponse on ResponseTrips? {
 
 extension on DataTripsResponse? {
   DataModelTrips toDomain() {
-    return DataModelTrips(dataHotel: this!.hotel!.toDomain());
+    return DataModelTrips(
+        id: this?.id?.orEmpty() ?? 0, dataHotel: this!.hotel!.toDomain());
   }
 }
 

@@ -13,8 +13,9 @@ class TripsModel with _$TripsModel {
 
 @freezed
 class DataModelTrips with _$DataModelTrips {
-  factory DataModelTrips({required DataHotelTripsModel dataHotel}) =
-      _DataModelTrips;
+  factory DataModelTrips(
+      {required int id,
+      required DataHotelTripsModel dataHotel}) = _DataModelTrips;
   factory DataModelTrips.fromJson(Map<String, dynamic> json) =>
       _$DataModelTripsFromJson(json);
 }

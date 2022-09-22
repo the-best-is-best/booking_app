@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:booking_app/app/constants.dart';
+import 'package:booking_app/app/data/requests/create_booking_request.dart';
+import 'package:booking_app/app/data/response/response_create_booking.dart';
+import 'package:booking_app/app/data/response/response_update_booking.dart';
 import 'package:booking_app/features/auth/login/data/responses/login_response.dart';
 import 'package:booking_app/features/auth/profile/responses/response_profile.dart';
 import 'package:booking_app/features/auth/register/data/responses/response_register.dart';
@@ -39,13 +42,27 @@ abstract class AppServicesClient {
     @Field("email") required String email,
     @Part() File? image,
   });
+
   @GET(Constants.hotelsUrl)
   Future<HotelResponse> getHotels(
       {@Query("count") required int count, @Query("page") required int page});
+
   @GET(Constants.getBookingUrl)
   Future<ResponseTrips> getBooking(
       {@Header("token") required String token,
       @Query("count") required int count,
       @Query("page") required int page,
       @Query("type") required String type});
+
+  @POST(Constants.createBookingUrl)
+  Future<ResponseCreateBooking> createBooking({
+    @Header("token") required String token,
+    @Query("hotel_id") required int hotelId,
+  });
+
+  @POST(Constants.updateBookingUrl)
+  Future<ResponseUpdateBooking> updateBooking({
+    @Query("booking_id") required int bookingId,
+    @Query("type") required String type,
+  });
 }

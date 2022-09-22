@@ -27,9 +27,10 @@ class DataTrips {
 
 @JsonSerializable()
 class DataTripsResponse {
+  final int? id;
   final DataHotelTripsResponse? hotel;
 
-  DataTripsResponse(this.hotel);
+  DataTripsResponse(this.hotel, this.id);
   factory DataTripsResponse.fromJson(Map<String, dynamic> json) {
     return _$DataTripsResponseFromJson(json);
   }

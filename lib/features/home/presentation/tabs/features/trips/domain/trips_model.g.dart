@@ -22,12 +22,14 @@ Map<String, dynamic> _$$_TripsModelToJson(_$_TripsModel instance) =>
 
 _$_DataModelTrips _$$_DataModelTripsFromJson(Map<String, dynamic> json) =>
     _$_DataModelTrips(
+      id: json['id'] as int,
       dataHotel: DataHotelTripsModel.fromJson(
           json['dataHotel'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_DataModelTripsToJson(_$_DataModelTrips instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'dataHotel': instance.dataHotel,
     };
 

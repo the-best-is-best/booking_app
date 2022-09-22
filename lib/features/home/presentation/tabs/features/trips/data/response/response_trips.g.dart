@@ -38,10 +38,12 @@ DataTripsResponse _$DataTripsResponseFromJson(Map<String, dynamic> json) =>
           ? null
           : DataHotelTripsResponse.fromJson(
               json['hotel'] as Map<String, dynamic>),
+      json['id'] as int?,
     );
 
 Map<String, dynamic> _$DataTripsResponseToJson(DataTripsResponse instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'hotel': instance.hotel,
     };
 

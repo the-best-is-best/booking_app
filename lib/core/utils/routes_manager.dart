@@ -1,5 +1,5 @@
 import 'package:booking_app/app/di.dart';
-import 'package:booking_app/features/auth/login/presentation/screen/login_screen.dart';
+import 'package:booking_app/features/auth/login/data/presentation/screen/login_screen.dart';
 import 'package:booking_app/features/auth/register/presentaion/screen/register_screen.dart';
 import 'package:booking_app/features/home/presentation/screen/home_screen.dart';
 import 'package:booking_app/features/home/presentation/tabs/features/trips/presentation/reips_tab.dart';

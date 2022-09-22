@@ -179,6 +179,7 @@ DataModelTrips _$DataModelTripsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DataModelTrips {
+  int get id => throw _privateConstructorUsedError;
   DataHotelTripsModel get dataHotel => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -192,7 +193,7 @@ abstract class $DataModelTripsCopyWith<$Res> {
   factory $DataModelTripsCopyWith(
           DataModelTrips value, $Res Function(DataModelTrips) then) =
       _$DataModelTripsCopyWithImpl<$Res>;
-  $Res call({DataHotelTripsModel dataHotel});
+  $Res call({int id, DataHotelTripsModel dataHotel});
 
   $DataHotelTripsModelCopyWith<$Res> get dataHotel;
 }
@@ -208,9 +209,14 @@ class _$DataModelTripsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? dataHotel = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       dataHotel: dataHotel == freezed
           ? _value.dataHotel
           : dataHotel // ignore: cast_nullable_to_non_nullable
@@ -233,7 +239,7 @@ abstract class _$$_DataModelTripsCopyWith<$Res>
           _$_DataModelTrips value, $Res Function(_$_DataModelTrips) then) =
       __$$_DataModelTripsCopyWithImpl<$Res>;
   @override
-  $Res call({DataHotelTripsModel dataHotel});
+  $Res call({int id, DataHotelTripsModel dataHotel});
 
   @override
   $DataHotelTripsModelCopyWith<$Res> get dataHotel;
@@ -252,9 +258,14 @@ class __$$_DataModelTripsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? dataHotel = freezed,
   }) {
     return _then(_$_DataModelTrips(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       dataHotel: dataHotel == freezed
           ? _value.dataHotel
           : dataHotel // ignore: cast_nullable_to_non_nullable
@@ -266,17 +277,19 @@ class __$$_DataModelTripsCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_DataModelTrips implements _DataModelTrips {
-  _$_DataModelTrips({required this.dataHotel});
+  _$_DataModelTrips({required this.id, required this.dataHotel});
 
   factory _$_DataModelTrips.fromJson(Map<String, dynamic> json) =>
       _$$_DataModelTripsFromJson(json);
 
   @override
+  final int id;
+  @override
   final DataHotelTripsModel dataHotel;
 
   @override
   String toString() {
-    return 'DataModelTrips(dataHotel: $dataHotel)';
+    return 'DataModelTrips(id: $id, dataHotel: $dataHotel)';
   }
 
   @override
@@ -284,13 +297,16 @@ class _$_DataModelTrips implements _DataModelTrips {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DataModelTrips &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.dataHotel, dataHotel));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(dataHotel));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(dataHotel));
 
   @JsonKey(ignore: true)
   @override
@@ -306,12 +322,15 @@ class _$_DataModelTrips implements _DataModelTrips {
 }
 
 abstract class _DataModelTrips implements DataModelTrips {
-  factory _DataModelTrips({required final DataHotelTripsModel dataHotel}) =
-      _$_DataModelTrips;
+  factory _DataModelTrips(
+      {required final int id,
+      required final DataHotelTripsModel dataHotel}) = _$_DataModelTrips;
 
   factory _DataModelTrips.fromJson(Map<String, dynamic> json) =
       _$_DataModelTrips.fromJson;
 
+  @override
+  int get id;
   @override
   DataHotelTripsModel get dataHotel;
   @override
