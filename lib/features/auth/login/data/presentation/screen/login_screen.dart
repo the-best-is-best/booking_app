@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mit_x/mit_x.dart';
 
-import '../../../../../core/widgets/input_field.dart';
+import '../../../../../../core/widgets/input_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

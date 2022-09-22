@@ -10,4 +10,7 @@ class Constants {
   static const String profileInfoUrl = "/auth/profile-info";
   static const String updateProfileInfoUrl = "/auth/update-info";
   static const String hotelsUrl = "/hotels";
+  static const String getBookingUrl = "/get-bookings";
+  static const String createBookingUrl = "/create-booking";
+  static const String updateBookingUrl = "/update-booking-status";
 }

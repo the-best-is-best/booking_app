@@ -3,6 +3,7 @@ import 'package:booking_app/core/utils/routes_manager.dart';
 import 'package:booking_app/core/utils/theme_manager.dart';
 import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
 import 'package:booking_app/features/explore/presentation/cubit/explore_cubit.dart';
+import 'package:booking_app/features/home/presentation/tabs/features/trips/presentation/cubit/trips_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
               providers: [
                 BlocProvider(
                   create: (context) => di<AuthCubit>(),
+                ),
+                BlocProvider(
+                  create: (context) => di<TripsCubit>(),
                 ),
                 BlocProvider(
                   create: (context) => di<ExploreCubit>(),
