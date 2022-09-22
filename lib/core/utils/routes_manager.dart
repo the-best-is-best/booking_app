@@ -2,7 +2,7 @@ import 'package:booking_app/app/di.dart';
 import 'package:booking_app/features/auth/login/presentation/screen/login_screen.dart';
 import 'package:booking_app/features/auth/register/presentaion/screen/register_screen.dart';
 import 'package:booking_app/features/home/presentation/screen/home_screen.dart';
-import 'package:booking_app/features/home/presentation/tabs/reips_tab.dart';
+import 'package:booking_app/features/home/presentation/tabs/features/trips/presentation/reips_tab.dart';
 import 'package:booking_app/features/intro/presentations/00_splash/screen/splash_screen.dart';
 import 'package:booking_app/features/intro/presentations/01_onboarding/screen/onboarding_screen.dart';
 import 'package:flutter/material.dart';

@@ -6,6 +6,7 @@ import 'package:booking_app/features/auth/profile/responses/response_profile.dar
 import 'package:booking_app/features/auth/register/data/responses/response_register.dart';
 import 'package:booking_app/features/auth/update_profile/responses/response_update_profile.dart';
 import 'package:booking_app/features/explore/data/responses/hotel_response.dart';
+import 'package:booking_app/features/home/presentation/tabs/features/trips/data/response/response_trips.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 part 'app_api.g.dart';
@@ -39,5 +40,12 @@ abstract class AppServicesClient {
     @Part() File? image,
   });
   @GET(Constants.hotelsUrl)
-  Future<HotelResponse> getHotels({required int count, required int page});
+  Future<HotelResponse> getHotels(
+      {@Query("count") required int count, @Query("page") required int page});
+  @GET(Constants.getBookingUrl)
+  Future<ResponseTrips> getBooking(
+      {@Header("token") required String token,
+      @Query("count") required int count,
+      @Query("page") required int page,
+      @Query("type") required String type});
 }
