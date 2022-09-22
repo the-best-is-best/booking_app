@@ -2,6 +2,8 @@ import 'package:booking_app/core/utils/assets_manager.dart';
 import 'package:booking_app/core/utils/color_manager.dart';
 import 'package:booking_app/core/utils/values_manager.dart';
 import 'package:booking_app/core/widgets/main_button.dart';
+import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
+import 'package:booking_app/features/home/presentation/tabs/features/trips/presentation/cubit/trips_cubit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    AuthCubit authCubit = AuthCubit.get(context);
+    TripsCubit tripsCubit = TripsCubit.get(context);
+    tripsCubit.getTrips(tokenUser: authCubit.userModel.apiToken);
     super.initState();
     _scrollController = ScrollController()
       ..addListener(() {
