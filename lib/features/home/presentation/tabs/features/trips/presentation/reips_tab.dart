@@ -185,11 +185,19 @@ class _TripsTabState extends State<TripsTab> {
                               SizedBox(
                                   width: double.infinity,
                                   height: .6.sw,
-                                  child: CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      width: double.infinity,
-                                      imageUrl:
-                                          data.dataHotel.images[0].image)),
+                                  child: Builder(builder: (context) {
+                                    if (data.dataHotel.images.isEmpty) {
+                                      return Icon(Icons.error);
+                                    }
+                                    return CachedNetworkImage(
+                                        errorWidget: (context, url, error) {
+                                          return Icon(Icons.error);
+                                        },
+                                        fit: BoxFit.cover,
+                                        width: double.infinity,
+                                        imageUrl:
+                                            data.dataHotel.images[0].image);
+                                  })),
                               Positioned(
                                 bottom: 0,
                                 child: Container(
