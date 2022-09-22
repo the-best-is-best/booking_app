@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:booking_app/app/constants.dart';
-import 'package:booking_app/app/data/requests/create_booking_request.dart';
 import 'package:booking_app/app/data/response/response_create_booking.dart';
 import 'package:booking_app/app/data/response/response_update_booking.dart';
 import 'package:booking_app/features/auth/login/data/responses/login_response.dart';
