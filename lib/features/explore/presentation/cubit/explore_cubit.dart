@@ -19,6 +19,7 @@ class ExploreCubit extends Cubit<ExploreState> {
       count: count,
       page: page,
     ));
+
     HotelsModel? res;
     response.fold(
       (l) {
