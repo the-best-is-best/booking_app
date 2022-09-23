@@ -111,17 +111,14 @@ class _AppServicesClient implements AppServicesClient {
     required token,
     required name,
     required email,
-    image,
+    File? image,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'token': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = {
-      'name': name,
-      'email': email,
-    };
+    final _data = {'name': name, 'email': email, 'image': image};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<UpdateProfileResponse>(Options(
       method: 'POST',

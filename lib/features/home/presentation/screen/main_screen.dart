@@ -1,6 +1,7 @@
 import 'package:booking_app/core/utils/color_manager.dart';
-import 'package:booking_app/features/home/presentation/screen/home_screen.dart';
-import 'package:booking_app/features/settings/presentation/screen/setting.dart';
+import 'package:booking_app/features/home/presentation/tabs/home/home_screen.dart';
+import 'package:booking_app/features/home/presentation/tabs/settings/presentation/screen/setting.dart';
+import 'package:booking_app/features/home/presentation/tabs/trips/presentation/reips_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -35,7 +36,7 @@ class _MainScreenState extends State<MainScreen>
         physics: const NeverScrollableScrollPhysics(),
         children: const [
           HomeScreen(),
-          HomeScreen(),
+          TripsScreen(),
           SettingScreen(),
         ],
       ),
@@ -60,7 +61,6 @@ class _MainScreenState extends State<MainScreen>
         unselectedItemColor: ColorManager.grey1,
         type: BottomNavigationBarType.fixed,
         backgroundColor: ColorManager.darkGrey,
-
       ),
     );
   }

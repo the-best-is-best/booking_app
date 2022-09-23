@@ -39,7 +39,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccessState) {
-            MitX.offNamed(Routes.homeRoute);
+            MitX.offAndToNamed(Routes.homeRoute);
+          } else if (state is AuthErrorState) {
+            MitX.showSnackbar(MitXSnackBar(
+              duration: const Duration(seconds: 2),
+              title: "Alert",
+              message: state.message ?? "",
+            ));
           }
         },
         child: SingleChildScrollView(
@@ -165,16 +171,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           },
                         ),
                         const SizedBox(height: AppSize.s20),
-                        BlocConsumer<AuthCubit, AuthState>(
-                          listener: (context, state) {
-                            if (state is AuthErrorState) {
-                              MitX.showSnackbar(MitXSnackBar(
-                                duration: const Duration(seconds: 2),
-                                title: "Alert",
-                                message: state.message ?? "",
-                              ));
-                            }
-                          },
+                        BlocBuilder<AuthCubit, AuthState>(
                           builder: (context, state) {
                             if (state is! AuthLoadingState) {
                               return MainButton(

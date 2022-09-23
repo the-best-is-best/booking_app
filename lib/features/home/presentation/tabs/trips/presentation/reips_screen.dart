@@ -1,27 +1,25 @@
-import 'package:booking_app/app/resources/font_manager.dart';
-import 'package:booking_app/core/utils/assets_manager.dart';
 import 'package:booking_app/core/utils/color_manager.dart';
+import 'package:booking_app/core/utils/font_manager.dart';
 import 'package:booking_app/core/utils/styles_manager.dart';
-import 'package:booking_app/core/utils/values_manager.dart';
 import 'package:booking_app/core/widgets/main_button.dart';
 import 'package:booking_app/core/widgets/my_circular_indicator.dart';
 import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
-import 'package:booking_app/features/home/presentation/tabs/features/trips/domain/trips_model.dart';
-import 'package:booking_app/features/home/presentation/tabs/features/trips/presentation/cubit/trips_cubit.dart';
+import 'package:booking_app/features/home/presentation/tabs/trips/domain/trips_model.dart';
+import 'package:booking_app/features/home/presentation/tabs/trips/presentation/cubit/trips_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mit_x/mit_x.dart';
 
-class TripsTab extends StatefulWidget {
-  const TripsTab({Key? key}) : super(key: key);
+class TripsScreen extends StatefulWidget {
+  const TripsScreen({Key? key}) : super(key: key);
 
   @override
-  State<TripsTab> createState() => _TripsTabState();
+  State<TripsScreen> createState() => _TripsScreenState();
 }
 
-class _TripsTabState extends State<TripsTab> {
+class _TripsScreenState extends State<TripsScreen> {
   @override
   void initState() {
     TripsCubit tripsCubit = TripsCubit.get(context);
@@ -71,7 +69,7 @@ class _TripsTabState extends State<TripsTab> {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                          fontSize: FontSize.s24.sp,
+                                          fontSize: FontSize.s20.sp,
                                           color: tripsCubit.currentTap == 1
                                               ? ColorManager.primary
                                               : ColorManager.white
@@ -91,7 +89,7 @@ class _TripsTabState extends State<TripsTab> {
                                     .textTheme
                                     .titleMedium!
                                     .copyWith(
-                                        fontSize: FontSize.s24.sp,
+                                        fontSize: FontSize.s20.sp,
                                         color: tripsCubit.currentTap == 2
                                             ? ColorManager.primary
                                             : ColorManager.white
@@ -112,7 +110,7 @@ class _TripsTabState extends State<TripsTab> {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                          fontSize: FontSize.s24.sp,
+                                          fontSize: FontSize.s20.sp,
                                           color: tripsCubit.currentTap == 3
                                               ? ColorManager.primary
                                               : ColorManager.white
@@ -140,7 +138,7 @@ class _TripsTabState extends State<TripsTab> {
                               state.title!,
                               style: getRegularStyle(
                                   color: Colors.black,
-                                  fontSize: FontSize.s24.sp),
+                                  fontSize: FontSize.s20.sp),
                             ),
                             const SizedBox(height: 10),
                             MainButton(
@@ -164,7 +162,7 @@ class _TripsTabState extends State<TripsTab> {
                       child: Text(
                         "No Booking Available",
                         style: getRegularStyle(
-                            color: Colors.white, fontSize: FontSize.s24.sp),
+                            color: Colors.white, fontSize: FontSize.s20.sp),
                       ),
                     ));
                   }
@@ -217,13 +215,13 @@ class _TripsTabState extends State<TripsTab> {
                                             Text(
                                               data.dataHotel.name,
                                               style: getBoldStyle(
-                                                  fontSize: FontSize.s32.sp,
+                                                  fontSize: FontSize.s24.sp,
                                                   color: ColorManager.white),
                                             ),
                                             Text(
                                               "\$ ${data.dataHotel.price}",
                                               style: getBoldStyle(
-                                                  fontSize: FontSize.s32.sp,
+                                                  fontSize: FontSize.s24.sp,
                                                   color: ColorManager.white),
                                             ),
                                           ],
@@ -236,11 +234,13 @@ class _TripsTabState extends State<TripsTab> {
                                             Text(
                                               data.dataHotel.address,
                                               style: getLightStyle(
+                                                  fontSize: FontSize.s17.sp,
                                                   color: ColorManager.grey),
                                             ),
                                             Text(
                                               "/per night",
                                               style: getLightStyle(
+                                                  fontSize: FontSize.s17.sp,
                                                   color: ColorManager.grey),
                                             )
                                           ],

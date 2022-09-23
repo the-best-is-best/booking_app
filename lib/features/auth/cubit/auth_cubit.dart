@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:booking_app/app/constants.dart';
 import 'package:booking_app/app/network/failure.dart';
 import 'package:booking_app/features/auth/domain/user_model.dart';
 import 'package:booking_app/features/auth/login/data/repository_login.dart';
@@ -10,6 +11,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:image_picker/image_picker.dart';
+
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -43,10 +46,10 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   UserModel userModel = UserModel(name: "", email: "", apiToken: "");
-  File? userImage;
+  XFile? userImage;
 
   void successAuth() {
-    box.write('userToken', userModel.apiToken);
+    box.write(Constants.userCache, userModel.apiToken);
     userImage = null;
   }
 
@@ -98,10 +101,10 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> getProfileInfo() async {
-    if (box.read("userToken") != null) {
+    if (box.read(Constants.userCache) != null) {
       emit(AuthGetLocalProfileState());
       Either<Failure, UserModel> response = await _repositoryProfile
-          .getProfileData(ProfileRequests(box.read("userToken")));
+          .getProfileData(ProfileRequests(box.read(Constants.userCache)));
       response.fold(
         (l) {
           emit(AuthErrorState(""));
@@ -115,14 +118,17 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> updateProfile() async {
+  Future<void> updateProfile({
+    required String userName,
+    required String email,
+  }) async {
     emit(AuthLoadingState());
     Either<Failure, UserModel> response =
         await _repositoryProfileUpdate.updateProfile(UpdateProfileRequests(
             token: userModel.apiToken,
-            email: userModel.email,
-            name: userModel.name,
-            image: userImage));
+            email: email,
+            name: userName,
+            image: userImage != null ? File(userImage!.path) : null));
     response.fold(
       (l) {
         emit(AuthErrorState(l.messages));
@@ -135,7 +141,14 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  void addImage(File image) {
+  void addImage(XFile? image) {
     userImage = image;
+    emit(AuthSelectedImageState());
+  }
+
+  Future logout() async {
+    userModel = UserModel(name: "", email: "", apiToken: "");
+    await box.remove(Constants.userCache);
+    emit(AuthLogoutState());
   }
 }
