@@ -69,7 +69,7 @@ class _TripsScreenState extends State<TripsScreen> {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                          fontSize: FontSize.s20.sp,
+                                          fontSize: FontSize.s18.sp,
                                           color: tripsCubit.currentTap == 1
                                               ? ColorManager.primary
                                               : ColorManager.white
@@ -89,7 +89,7 @@ class _TripsScreenState extends State<TripsScreen> {
                                     .textTheme
                                     .titleMedium!
                                     .copyWith(
-                                        fontSize: FontSize.s20.sp,
+                                        fontSize: FontSize.s18.sp,
                                         color: tripsCubit.currentTap == 2
                                             ? ColorManager.primary
                                             : ColorManager.white
@@ -110,7 +110,7 @@ class _TripsScreenState extends State<TripsScreen> {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                          fontSize: FontSize.s20.sp,
+                                          fontSize: FontSize.s18.sp,
                                           color: tripsCubit.currentTap == 3
                                               ? ColorManager.primary
                                               : ColorManager.white
@@ -202,7 +202,7 @@ class _TripsScreenState extends State<TripsScreen> {
                                   padding: const EdgeInsets.only(
                                       left: 20, right: 60),
                                   width: context.width,
-                                  color: ColorManager.background.withBlue(20),
+                                  color: ColorManager.darkGrey,
                                   child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,

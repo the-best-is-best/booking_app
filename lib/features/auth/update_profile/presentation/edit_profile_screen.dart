@@ -5,7 +5,7 @@ import 'package:booking_app/core/utils/assets_manager.dart';
 import 'package:booking_app/core/utils/values_manager.dart';
 import 'package:booking_app/core/widgets/main_button.dart';
 import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
-import 'package:booking_app/features/home/presentation/tabs/settings/presentation/widgets/input_field_widget.dart';
+import 'package:booking_app/features/home/presentation/tabs/settings/widgets/input_field_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

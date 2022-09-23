@@ -1,3 +1,4 @@
+import 'package:booking_app/app/constants.dart';
 import 'package:booking_app/app/extensions.dart';
 import 'package:booking_app/features/explore/data/responses/hotel_response.dart';
 import 'package:booking_app/features/explore/domain/hotel_model.dart';
@@ -41,7 +42,7 @@ extension ExtensionImageToDomain on ImagesResponse? {
     return ImagesHotelModel(
         id: this?.id?.orEmpty() ?? 0,
         hotelId: this?.hotelId?.orEmpty() ?? "0",
-        image: this?.image?.orEmpty() ?? "");
+        image: "${Constants.baseUrl}images/${this?.image?.orEmpty() ?? ""}");
   }
 }
 

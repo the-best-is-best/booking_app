@@ -15,15 +15,18 @@ class ExploreCubit extends Cubit<ExploreState> {
   static ExploreCubit get(BuildContext context) => BlocProvider.of(context);
 
   Future<void> getHotels() async {
+    emit(ExploreLoadState());
     Either<Failure, HotelModel> response =
         await _repositoryExplore.getHotel(ExploreRequests(page: 1));
     response.fold(
       (l) {
         debugPrint(l.messages);
+        emit(ExploreErrorState(l.messages));
       },
       (r) {
         hotelModel = r;
         debugPrint(r.toString());
+        emit(ExploreLoadedState());
       },
     );
   }
