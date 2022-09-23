@@ -69,7 +69,7 @@ class _TripsTabState extends State<TripsTab> {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                          fontSize: FontSize.s24.sp,
+                                          fontSize: FontSize.s20.sp,
                                           color: tripsCubit.currentTap == 1
                                               ? ColorManager.primary
                                               : ColorManager.white
@@ -89,7 +89,7 @@ class _TripsTabState extends State<TripsTab> {
                                     .textTheme
                                     .titleMedium!
                                     .copyWith(
-                                        fontSize: FontSize.s24.sp,
+                                        fontSize: FontSize.s20.sp,
                                         color: tripsCubit.currentTap == 2
                                             ? ColorManager.primary
                                             : ColorManager.white
@@ -110,7 +110,7 @@ class _TripsTabState extends State<TripsTab> {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                          fontSize: FontSize.s24.sp,
+                                          fontSize: FontSize.s20.sp,
                                           color: tripsCubit.currentTap == 3
                                               ? ColorManager.primary
                                               : ColorManager.white
