@@ -111,14 +111,17 @@ class _AppServicesClient implements AppServicesClient {
     required token,
     required name,
     required email,
-    File? image,
+    image,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'token': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = {'name': name, 'email': email, 'image': image};
+    final _data = {
+      'name': name,
+      'email': email,
+    };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<UpdateProfileResponse>(Options(
       method: 'POST',
@@ -137,7 +140,7 @@ class _AppServicesClient implements AppServicesClient {
   }
 
   @override
-  Future<HotelResponse> getHotels({
+  Future<dynamic> getHotels({
     required count,
     required page,
   }) async {
@@ -148,20 +151,19 @@ class _AppServicesClient implements AppServicesClient {
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<HotelResponse>(Options(
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/hotels',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = HotelResponse.fromJson(_result.data!);
+        .compose(
+          _dio.options,
+          '/hotels',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
     return value;
   }
 
