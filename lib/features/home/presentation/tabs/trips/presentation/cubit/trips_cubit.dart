@@ -1,6 +1,6 @@
 import 'package:booking_app/app/network/failure.dart';
-import 'package:booking_app/features/home/presentation/tabs/features/trips/data/repository_trips.dart';
-import 'package:booking_app/features/home/presentation/tabs/features/trips/domain/trips_model.dart';
+import 'package:booking_app/features/home/presentation/tabs/trips/data/repository_trips.dart';
+import 'package:booking_app/features/home/presentation/tabs/trips/domain/trips_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

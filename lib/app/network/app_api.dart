@@ -8,7 +8,7 @@ import 'package:booking_app/features/auth/profile/responses/response_profile.dar
 import 'package:booking_app/features/auth/register/data/responses/response_register.dart';
 import 'package:booking_app/features/auth/update_profile/responses/response_update_profile.dart';
 import 'package:booking_app/features/explore/data/responses/hotel_response.dart';
-import 'package:booking_app/features/home/presentation/tabs/features/trips/data/response/response_trips.dart';
+import 'package:booking_app/features/home/presentation/tabs/trips/data/response/response_trips.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 part 'app_api.g.dart';
@@ -34,12 +34,13 @@ abstract class AppServicesClient {
 
   @GET(Constants.profileInfoUrl)
   Future<ProfileResponse> getProfileInfo(@Header("token") String token);
+
   @POST(Constants.updateProfileInfoUrl)
   Future<UpdateProfileResponse> updateProfile({
     @Header("token") required String token,
     @Field("name") required String name,
     @Field("email") required String email,
-    @Part() File? image,
+    @Part() required File? image,
   });
 
   @GET(Constants.hotelsUrl)

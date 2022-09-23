@@ -1,7 +1,7 @@
 import 'package:booking_app/app/constants.dart';
 import 'package:booking_app/app/extensions.dart';
-import 'package:booking_app/features/home/presentation/tabs/features/trips/data/response/response_trips.dart';
-import 'package:booking_app/features/home/presentation/tabs/features/trips/domain/trips_model.dart';
+import 'package:booking_app/features/home/presentation/tabs/trips/data/response/response_trips.dart';
+import 'package:booking_app/features/home/presentation/tabs/trips/domain/trips_model.dart';
 
 extension ExtensionTripsResponse on ResponseTrips? {
   TripsModel toDomain() {

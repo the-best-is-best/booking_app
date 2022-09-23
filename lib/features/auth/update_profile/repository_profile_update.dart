@@ -6,6 +6,7 @@ import 'package:booking_app/app/network/network_info.dart';
 import 'package:booking_app/features/auth/domain/user_model.dart';
 import 'package:booking_app/features/auth/update_profile/extension/to_domain.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class RepositoryProfileUpdate {
   final AppServicesClient appServicesClient;

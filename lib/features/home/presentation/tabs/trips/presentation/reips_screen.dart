@@ -1,8 +1,8 @@
-
-
+import 'package:booking_app/app/resources/font_manager.dart';
+import 'package:booking_app/core/utils/assets_manager.dart';
 import 'package:booking_app/core/utils/color_manager.dart';
 import 'package:booking_app/core/utils/styles_manager.dart';
-
+import 'package:booking_app/core/utils/values_manager.dart';
 import 'package:booking_app/core/widgets/main_button.dart';
 import 'package:booking_app/core/widgets/my_circular_indicator.dart';
 import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
@@ -13,8 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mit_x/mit_x.dart';
-
-import '../../../../../../../core/utils/font_manager.dart';
 
 class TripsTab extends StatefulWidget {
   const TripsTab({Key? key}) : super(key: key);

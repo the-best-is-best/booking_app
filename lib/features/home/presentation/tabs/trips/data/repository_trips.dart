@@ -2,8 +2,8 @@ import 'package:booking_app/app/network/app_api.dart';
 import 'package:booking_app/app/network/error_handler.dart';
 import 'package:booking_app/app/network/failure.dart';
 import 'package:booking_app/app/network/network_info.dart';
-import 'package:booking_app/features/home/presentation/tabs/features/trips/domain/trips_model.dart';
-import 'package:booking_app/features/home/presentation/tabs/features/trips/extension/toDomain.dart';
+import 'package:booking_app/features/home/presentation/tabs/trips/domain/trips_model.dart';
+import 'package:booking_app/features/home/presentation/tabs/trips/extension/toDomain.dart';
 import 'package:dartz/dartz.dart';
 
 class RepositoryTrips {
