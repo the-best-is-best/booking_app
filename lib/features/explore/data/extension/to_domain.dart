@@ -10,7 +10,7 @@ extension ExtensionToDomain on HotelResponse? {
     return HotelModel(
         nextPageUrl: this?.nextPageUrl?.orEmpty() ?? "",
         total: this?.total?.orEmpty() ?? 0,
-        data: (this?.data?.data.map((e) => e.toDomain()) ??
+        data: (this?.data?.data?.map((e) => e.toDomain()) ??
                 const Iterable.empty())
             .cast<DataHotelModel>()
             .toList());

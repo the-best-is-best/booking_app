@@ -15,6 +15,9 @@ class InputField extends StatelessWidget {
   final dynamic suffixPressed;
   final String? Function(String?) validate;
   final String? Function(String?)? onFieldSubmitted;
+  final String? Function(String?)? onSave;
+  final String? Function(String?)? onChanged;
+
   final TextEditingController textController;
   final TextStyle? style;
 
@@ -32,6 +35,8 @@ class InputField extends StatelessWidget {
     required this.validate,
     this.onFieldSubmitted,
     this.style,
+    this.onSave,
+    this.onChanged,
   });
 
   @override
@@ -51,6 +56,8 @@ class InputField extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 5),
             child: TextFormField(
+              onChanged: onChanged,
+              onSaved: onSave,
               controller: textController,
               keyboardType: inputType,
               obscureText: isPassword,

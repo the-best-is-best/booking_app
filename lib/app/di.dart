@@ -8,6 +8,7 @@ import 'package:booking_app/features/auth/register/repository_register.dart';
 import 'package:booking_app/features/auth/update_profile/repository_profile_update.dart';
 import 'package:booking_app/features/explore/data/repository_explore.dart';
 import 'package:booking_app/features/explore/data/repository_facilities.dart';
+import 'package:booking_app/features/explore/data/repository_search.dart';
 import 'package:booking_app/features/explore/presentation/cubit/explore_cubit.dart';
 import 'package:booking_app/features/home/presentation/tabs/trips/data/repository_trips.dart';
 import 'package:booking_app/features/home/presentation/tabs/trips/presentation/cubit/trips_cubit.dart';
@@ -45,13 +46,16 @@ Future initApp() async {
   di.registerLazySingleton<RepositoryFacilities>(
       () => RepositoryFacilities(di(), di()));
 
+  di.registerLazySingleton<RepositorySearch>(
+      () => RepositorySearch(di(), di()));
+
   // get Storage
   di.registerLazySingleton<GetStorage>(() => GetStorage());
 
 //cubit
   di.registerLazySingleton<AuthCubit>(
       () => AuthCubit(di(), di(), di(), di(), di()));
-  di.registerLazySingleton<ExploreCubit>(() => ExploreCubit(di(), di()));
+  di.registerLazySingleton<ExploreCubit>(() => ExploreCubit(di(), di(), di()));
 
   di.registerLazySingleton<TripsCubit>(() => TripsCubit(di()));
 }

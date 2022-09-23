@@ -64,6 +64,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       validate: (String? val) {
                         return null;
                       },
+                      onFieldSubmitted: (value) {
+                        exploreCubit.searchHotelByName(name: value);
+                        return null;
+                      },
                     ),
                   ),
                   Padding(
