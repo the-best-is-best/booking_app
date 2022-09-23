@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(AppSize.s20),
+                padding:  const EdgeInsets.symmetric(horizontal:  AppSize.s20 ,vertical: AppSize.s12),
                 child: Text(
                   'Popular Destination ',
                   style: Theme.of(context).textTheme.displayMedium,
@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: PopularDestinationWidget(),
               ),
               Padding(
-                padding: const EdgeInsets.all(AppSize.s20),
+                padding:  const EdgeInsets.symmetric(horizontal:  AppSize.s20 ,vertical: AppSize.s12),
                 child: Row(
                   children: [
                     Text(
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const Spacer(),
                     Text(
                       'View all',
-                      style: Theme.of(context).textTheme.displayMedium,
+                      style: Theme.of(context).textTheme.displayMedium!.copyWith(color: ColorManager.primary,),
                     ),
                     const Icon(
                       Icons.arrow_forward,

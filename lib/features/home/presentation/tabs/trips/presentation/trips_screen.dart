@@ -32,6 +32,7 @@ class _TripsTabState extends State<TripsTab> {
   Widget build(BuildContext context) {
     TripsCubit tripsCubit = TripsCubit.get(context);
     AuthCubit authCubit = AuthCubit.get(context);
+    var size = MediaQuery.of(context).size;
 
     return Scaffold(
         appBar: AppBar(
@@ -45,7 +46,7 @@ class _TripsTabState extends State<TripsTab> {
           child: Column(
             children: [
               SizedBox(
-                height: 60,
+                height: size.height*0.08,
                 child: Card(
                   color: ColorManager.grey2,
                   shape: RoundedRectangleBorder(
@@ -69,7 +70,7 @@ class _TripsTabState extends State<TripsTab> {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                          fontSize: FontSize.s18.sp,
+                                          fontSize: FontSize.s20.sp,
                                           color: tripsCubit.currentTap == 1
                                               ? ColorManager.primary
                                               : ColorManager.white
@@ -89,7 +90,7 @@ class _TripsTabState extends State<TripsTab> {
                                     .textTheme
                                     .titleMedium!
                                     .copyWith(
-                                        fontSize: FontSize.s18.sp,
+                                        fontSize: FontSize.s20.sp,
                                         color: tripsCubit.currentTap == 2
                                             ? ColorManager.primary
                                             : ColorManager.white
@@ -110,7 +111,7 @@ class _TripsTabState extends State<TripsTab> {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                          fontSize: FontSize.s18.sp,
+                                          fontSize: FontSize.s20.sp,
                                           color: tripsCubit.currentTap == 3
                                               ? ColorManager.primary
                                               : ColorManager.white
@@ -194,7 +195,7 @@ class _TripsTabState extends State<TripsTab> {
                                   padding: const EdgeInsets.only(
                                       left: 20, right: 60),
                                   width: context.width,
-                                  color: ColorManager.darkGrey,
+                                  color: ColorManager.background.withBlue(20),
                                   child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
