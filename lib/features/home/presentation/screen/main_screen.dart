@@ -36,7 +36,7 @@ class _MainScreenState extends State<MainScreen>
         physics: const NeverScrollableScrollPhysics(),
         children: const [
           HomeScreen(),
-          TripsScreen(),
+          TripsTab(),
           SettingScreen(),
         ],
       ),
