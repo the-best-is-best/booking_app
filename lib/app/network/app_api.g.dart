@@ -140,7 +140,7 @@ class _AppServicesClient implements AppServicesClient {
   }
 
   @override
-  Future<dynamic> getHotels({
+  Future<HotelResponse> getHotels({
     required count,
     required page,
   }) async {
@@ -151,19 +151,20 @@ class _AppServicesClient implements AppServicesClient {
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<HotelResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/hotels',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+            .compose(
+              _dio.options,
+              '/hotels',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = HotelResponse.fromJson(_result.data!);
     return value;
   }
 
