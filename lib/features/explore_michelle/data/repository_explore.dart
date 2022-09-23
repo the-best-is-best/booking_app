@@ -2,8 +2,7 @@ import 'package:booking_app/app/network/app_api.dart';
 import 'package:booking_app/app/network/error_handler.dart';
 import 'package:booking_app/app/network/failure.dart';
 import 'package:booking_app/app/network/network_info.dart';
-import 'package:booking_app/features/explore/data/extension/to_domain.dart';
-import 'package:booking_app/features/explore/domain/hotel_model.dart';
+import 'package:booking_app/features/explore_michelle/domain/hotel_model.dart';
 import 'package:dartz/dartz.dart';
 
 class RepositoryExplore {

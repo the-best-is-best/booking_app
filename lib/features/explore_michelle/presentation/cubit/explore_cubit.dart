@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:booking_app/app/network/failure.dart';
-import 'package:booking_app/features/explore/data/repository_explore.dart';
-import 'package:booking_app/features/explore/domain/hotel_model.dart';
+import 'package:booking_app/features/explore_michelle/data/repository_explore.dart';
+import 'package:booking_app/features/explore_michelle/domain/hotel_model.dart';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
