@@ -21,3 +21,7 @@ class AuthGetLocalProfileSuccessState extends AuthState {}
 class AuthSuccessState extends AuthState {}
 
 class AuthChangeShowPasswordState extends AuthState {}
+
+class AuthSelectedImageState extends AuthState {}
+
+class AuthLogoutState extends AuthState {}

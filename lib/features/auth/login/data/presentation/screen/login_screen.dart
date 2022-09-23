@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     authCubit.getProfileInfo().then((value) {
       if (authCubit.userModel.apiToken.isNotEmpty) {
-        MitX.offNamed(Routes.homeRoute);
+        MitX.offAndToNamed(Routes.homeRoute);
       }
     });
 
@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           if (state is AuthSuccessState) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              MitX.offNamed(Routes.homeRoute);
+              MitX.offAndToNamed(Routes.homeRoute);
             });
           }
         },
@@ -136,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 alignment: AlignmentDirectional.bottomEnd,
                                 child: GestureDetector(
                                     onTap: () {
-                                      MitX.offNamed(Routes.forgotPasswordRoute);
+                                      MitX.toNamed(Routes.forgotPasswordRoute);
                                     },
                                     child: const InputFieldLabel(
                                         'Forget your Password ?'))),
