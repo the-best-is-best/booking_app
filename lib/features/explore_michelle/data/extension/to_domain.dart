@@ -1,6 +1,6 @@
 import 'package:booking_app/app/extensions.dart';
-import 'package:booking_app/features/explore/data/responses/hotel_response.dart';
-import 'package:booking_app/features/explore/domain/hotel_model.dart';
+import 'package:booking_app/features/explore_michelle/data/responses/hotel_response.dart';
+import 'package:booking_app/features/explore_michelle/domain/hotel_model.dart';
 
 extension ExtensionToDomain on HotelResponse? {
   HotelModel toDomain() {
