@@ -15,10 +15,14 @@ class InputField extends StatelessWidget {
   final dynamic suffixPressed;
   final String? Function(String?) validate;
   final String? Function(String?)? onFieldSubmitted;
-  TextEditingController textController = TextEditingController();
+  final String? Function(String?)? onSave;
+  final String? Function(String?)? onChanged;
+
+  final TextEditingController textController;
+  final TextStyle? style;
 
   // ignore: use_key_in_widget_constructors
-  InputField({
+  const InputField({
     required this.textController,
     required this.label,
     this.hint = "",
@@ -30,6 +34,9 @@ class InputField extends StatelessWidget {
     this.suffixPressed,
     required this.validate,
     this.onFieldSubmitted,
+    this.style,
+    this.onSave,
+    this.onChanged,
   });
 
   @override
@@ -39,13 +46,18 @@ class InputField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          InputFieldLabel(label),
+          InputFieldLabel(
+            label,
+            style: style,
+          ),
           const SizedBox(
             height: 5,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 5),
             child: TextFormField(
+              onChanged: onChanged,
+              onSaved: onSave,
               controller: textController,
               keyboardType: inputType,
               obscureText: isPassword,
@@ -54,6 +66,7 @@ class InputField extends StatelessWidget {
               onFieldSubmitted: onFieldSubmitted,
               decoration: InputDecoration(
                 hintText: hint,
+                hintStyle: style,
                 prefixIcon: Icon(
                   prefix,
                   size: AppSize.s14,

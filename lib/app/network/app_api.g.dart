@@ -207,10 +207,10 @@ class _AppServicesClient implements AppServicesClient {
     required hotelId,
   }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'hotel_id': hotelId};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'token': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    final _data = {'hotel_id': hotelId};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseCreateBooking>(Options(
       method: 'POST',
@@ -234,12 +234,12 @@ class _AppServicesClient implements AppServicesClient {
     required type,
   }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'booking_id': bookingId,
-      r'type': type,
-    };
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final _data = {
+      'booking_id': bookingId,
+      'type': type,
+    };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseUpdateBooking>(Options(
       method: 'POST',
@@ -254,6 +254,75 @@ class _AppServicesClient implements AppServicesClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ResponseUpdateBooking.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<FacilitiesResponse> getFacilities() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<FacilitiesResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/facilities',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = FacilitiesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<HotelResponse> searchHotel({
+    name,
+    address,
+    maxPrice,
+    minPrice,
+    facilities,
+    latitude,
+    longitude,
+    distance,
+    count,
+    page,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'name': name,
+      r'address': address,
+      r'max_price': maxPrice,
+      r'min_price': minPrice,
+      r'facilities': facilities,
+      r'latitude': latitude,
+      r'longitude': longitude,
+      r'distance': distance,
+      r'count': count,
+      r'page': page,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<HotelResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/search-hotels',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = HotelResponse.fromJson(_result.data!);
     return value;
   }
 

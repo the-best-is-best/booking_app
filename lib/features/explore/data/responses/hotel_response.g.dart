@@ -26,8 +26,8 @@ Map<String, dynamic> _$HotelResponseToJson(HotelResponse instance) =>
 
 DataHotelResponse1 _$DataHotelResponse1FromJson(Map<String, dynamic> json) =>
     DataHotelResponse1(
-      (json['data'] as List<dynamic>)
-          .map((e) => DataHotelResponse.fromJson(e as Map<String, dynamic>))
+      (json['data'] as List<dynamic>?)
+          ?.map((e) => DataHotelResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

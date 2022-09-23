@@ -19,7 +19,7 @@ class HotelResponse {
 
 @JsonSerializable()
 class DataHotelResponse1 {
-  final List<DataHotelResponse> data;
+  final List<DataHotelResponse>? data;
 
   factory DataHotelResponse1.fromJson(Map<String, dynamic> json) {
     return _$DataHotelResponse1FromJson(json);
