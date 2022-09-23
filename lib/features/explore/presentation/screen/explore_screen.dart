@@ -1,6 +1,7 @@
 import 'package:booking_app/core/utils/color_manager.dart';
 import 'package:booking_app/core/utils/font_manager.dart';
 import 'package:booking_app/core/utils/styles_manager.dart';
+import 'package:booking_app/core/utils/values_manager.dart';
 import 'package:booking_app/core/widgets/input_field.dart';
 import 'package:booking_app/core/widgets/my_circular_indicator.dart';
 import 'package:booking_app/features/explore/domain/hotel_model.dart';
@@ -47,14 +48,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(AppPadding.p20),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: context.width * .8,
+                  Expanded(
                     child: InputField(
                       style: getRegularStyle(
                           color: ColorManager.grey2, fontSize: FontSize.s20.sp),
@@ -127,15 +127,16 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       DataHotelModel data =
                           exploreCubit.hotelModel!.data[index];
                       return Card(
-                        elevation: 0,
+                        elevation: 1,
+                        color:ColorManager.darkGrey,
                         clipBehavior: Clip.hardEdge,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
+                            borderRadius: BorderRadius.circular(20)),
                         child: Stack(
                           children: [
                             SizedBox(
                                 width: double.infinity,
-                                height: .3.sh,
+                                height: .35.sh,
                                 child: Builder(builder: (context) {
                                   if (data.images.isEmpty) {
                                     return Icon(Icons.error);
@@ -159,6 +160,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
+                                      const Divider(
+                                        color: ColorManager.grey1,
+                                        height: 1,
+                                      ),
                                       const SizedBox(height: 5),
                                       Row(
                                         mainAxisAlignment:
@@ -197,7 +202,24 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                           )
                                         ],
                                       ),
-                                      const SizedBox(height: 10)
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        children: [
+                                          for (int i = 0; i < 5; i++)
+                                            const Icon(
+                                              Icons.star,
+                                              color: ColorManager.primary,
+                                              size: AppSize.s16,
+                                            ),
+                                          Text(
+                                            '  80 Reviews',
+                                            style: getLightStyle(
+                                                fontSize: FontSize.s17.sp,
+                                                color: ColorManager.grey),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 10),
                                     ]),
                               ),
                             )
