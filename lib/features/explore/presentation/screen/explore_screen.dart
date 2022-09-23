@@ -71,7 +71,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 15.0),
+                    padding: EdgeInsets.only(top: 15.0.h),
                     child: SizedBox(
                       width: context.width * .15,
                       child: CircleAvatar(

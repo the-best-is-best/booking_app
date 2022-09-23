@@ -69,11 +69,7 @@ class _TripsTabState extends State<TripsTab> {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-<<<<<<< HEAD:lib/features/home/presentation/tabs/trips/presentation/trips_screen.dart
                                           fontSize: FontSize.s18.sp,
-=======
-                                          fontSize: FontSize.s24.sp,
->>>>>>> master:lib/features/home/presentation/tabs/trips/presentation/reips_screen.dart
                                           color: tripsCubit.currentTap == 1
                                               ? ColorManager.primary
                                               : ColorManager.white
@@ -93,11 +89,7 @@ class _TripsTabState extends State<TripsTab> {
                                     .textTheme
                                     .titleMedium!
                                     .copyWith(
-<<<<<<< HEAD:lib/features/home/presentation/tabs/trips/presentation/trips_screen.dart
                                         fontSize: FontSize.s18.sp,
-=======
-                                        fontSize: FontSize.s24.sp,
->>>>>>> master:lib/features/home/presentation/tabs/trips/presentation/reips_screen.dart
                                         color: tripsCubit.currentTap == 2
                                             ? ColorManager.primary
                                             : ColorManager.white
@@ -118,11 +110,7 @@ class _TripsTabState extends State<TripsTab> {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-<<<<<<< HEAD:lib/features/home/presentation/tabs/trips/presentation/trips_screen.dart
                                           fontSize: FontSize.s18.sp,
-=======
-                                          fontSize: FontSize.s24.sp,
->>>>>>> master:lib/features/home/presentation/tabs/trips/presentation/reips_screen.dart
                                           color: tripsCubit.currentTap == 3
                                               ? ColorManager.primary
                                               : ColorManager.white
