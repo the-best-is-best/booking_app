@@ -1,7 +1,8 @@
 import 'package:booking_app/app/resources/images_manager.dart';
+import 'package:booking_app/core/utils/routes_manager.dart';
 import 'package:booking_app/features/explore/domain/hotels_model.dart';
-import 'package:booking_app/features/explore/presentation/cubit/explore_cubit.dart';
-import 'package:booking_app/features/explore/presentation/widgets/hotel_card.dart';
+import 'package:booking_app/features/explore/presentation/explore/cubit/explore_cubit.dart';
+import 'package:booking_app/features/explore/presentation/explore/widgets/hotel_card.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mit_x/mit_x.dart';
@@ -44,21 +45,33 @@ class _ExploreViewState extends State<ExploreView> {
                         image: AssetImage("assets/images/appIcon.png"),
                       ),
                     ),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                          borderSide: BorderSide(
-                            color: Colors.grey,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.filterRoute);
+                      },
+                      child: TextField(
+                        enabled: false,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                            ),
                           ),
+                          disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: Colors.green,
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          hintText: "Where are you going?",
                         ),
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Colors.green,
-                        ),
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintText: "Where are you going?",
                       ),
                     ),
                     // height: 200,

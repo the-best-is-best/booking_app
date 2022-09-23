@@ -1,6 +1,7 @@
 import 'package:booking_app/features/auth/login/data/presentation/screen/login_screen.dart';
 import 'package:booking_app/features/auth/register/presentaion/screen/register_screen.dart';
-import 'package:booking_app/features/explore/presentation/explore_view.dart';
+import 'package:booking_app/features/explore/presentation/explore/cubit/explore_view.dart';
+import 'package:booking_app/features/explore/presentation/filter/cubit/filter_view.dart';
 import 'package:booking_app/features/home/presentation/screen/home_screen.dart';
 import 'package:booking_app/features/intro/presentations/00_splash/screen/splash_screen.dart';
 import 'package:booking_app/features/intro/presentations/01_onboarding/screen/onboarding_screen.dart';
@@ -18,6 +19,7 @@ class Routes {
   static const String homeRoute = '/main';
   static const String storeDetailsRoute = '/storeDetails';
   static const String exploreRoute = '/exploreDetails';
+  static const String filterRoute = '/filterDetails';
 }
 
 class RouteGenerator {
@@ -47,6 +49,10 @@ class RouteGenerator {
       case Routes.exploreRoute:
         return MaterialPageRoute(
           builder: (_) => const ExploreView(),
+        );
+      case Routes.filterRoute:
+        return MaterialPageRoute(
+          builder: (_) => const FilterView(),
         );
       default:
         return unDefinedRoute();

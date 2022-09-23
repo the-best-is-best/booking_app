@@ -9,7 +9,7 @@ part of 'hotels_response.dart';
 HotelsResponse _$HotelsResponseFromJson(Map<String, dynamic> json) =>
     HotelsResponse(
       StatusResponse.fromJson(json['status'] as Map<String, dynamic>),
-      HotelsModel.fromJson(json),
+      HotelsModel.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$HotelsResponseToJson(HotelsResponse instance) =>

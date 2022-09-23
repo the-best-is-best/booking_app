@@ -41,5 +41,9 @@ abstract class AppServicesClient {
   });
   @GET(Constants.hotelsUrl)
   Future<HotelsResponse> getHotels(
-      @Query("token") int count, @Query("token") int page);
+      @Query("count") int count, @Query("page") int page);
+
+  @GET(Constants.searchHotelsUrl)
+  Future<HotelsResponse> getSearchHotels(@Query("name") String? name,
+      @Query("count") int count, @Query("page") int page);
 }

@@ -7,10 +7,12 @@ class HotelsModel {
   Status? status;
   Data data;
 
-  factory HotelsModel.fromJson(Map<String, dynamic> json) => HotelsModel(
-        status: json["status"] == null ? null : Status.fromJson(json["status"]),
-        data: Data.fromJson(json["data"]),
-      );
+  factory HotelsModel.fromJson(Map<String, dynamic> json) {
+    return HotelsModel(
+      status: json["status"] == null ? null : Status.fromJson(json["status"]),
+      data: Data.fromJson(json),
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "status": status?.toJson(),
@@ -59,7 +61,7 @@ class Data {
         links: List<Link>.from(json["links"].map((x) => Link.fromJson(x))),
         nextPageUrl: json["next_page_url"],
         path: json["path"],
-        perPage: json["per_page"],
+        perPage: int.tryParse(json["per_page"]) ?? 0,
         prevPageUrl: json["prev_page_url"],
         to: json["to"],
         total: json["total"],
@@ -109,7 +111,7 @@ class Datum {
   DateTime createdAt;
   DateTime updatedAt;
   List<Hotel> hotelImages;
-  List<Hotel> hotelFacilities;
+  List<Hotel>? hotelFacilities;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["id"],
@@ -124,8 +126,10 @@ class Datum {
         updatedAt: DateTime.parse(json["updated_at"]),
         hotelImages: List<Hotel>.from(
             json["hotel_images"].map((x) => Hotel.fromJson(x))),
-        hotelFacilities: List<Hotel>.from(
-            json["hotel_facilities"].map((x) => Hotel.fromJson(x))),
+        hotelFacilities: json["hotel_facilities"] == null
+            ? null
+            : List<Hotel>.from(
+                json["hotel_facilities"].map((x) => Hotel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -140,8 +144,9 @@ class Datum {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "hotel_images": List<dynamic>.from(hotelImages.map((x) => x.toJson())),
-        "hotel_facilities":
-            List<dynamic>.from(hotelFacilities.map((x) => x.toJson())),
+        "hotel_facilities": hotelFacilities == null
+            ? null
+            : List<dynamic>.from(hotelFacilities!.map((x) => x.toJson())),
       };
 }
 
