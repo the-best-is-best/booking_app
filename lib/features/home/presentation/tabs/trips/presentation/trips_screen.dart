@@ -12,14 +12,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mit_x/mit_x.dart';
 
-class TripsScreen extends StatefulWidget {
-  const TripsScreen({Key? key}) : super(key: key);
+class TripsTab extends StatefulWidget {
+  const TripsTab({Key? key}) : super(key: key);
 
   @override
-  State<TripsScreen> createState() => _TripsScreenState();
+  State<TripsTab> createState() => _TripsTabState();
 }
 
-class _TripsScreenState extends State<TripsScreen> {
+class _TripsTabState extends State<TripsTab> {
   @override
   void initState() {
     TripsCubit tripsCubit = TripsCubit.get(context);
@@ -69,7 +69,11 @@ class _TripsScreenState extends State<TripsScreen> {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
+<<<<<<< HEAD:lib/features/home/presentation/tabs/trips/presentation/trips_screen.dart
                                           fontSize: FontSize.s18.sp,
+=======
+                                          fontSize: FontSize.s24.sp,
+>>>>>>> master:lib/features/home/presentation/tabs/trips/presentation/reips_screen.dart
                                           color: tripsCubit.currentTap == 1
                                               ? ColorManager.primary
                                               : ColorManager.white
@@ -89,7 +93,11 @@ class _TripsScreenState extends State<TripsScreen> {
                                     .textTheme
                                     .titleMedium!
                                     .copyWith(
+<<<<<<< HEAD:lib/features/home/presentation/tabs/trips/presentation/trips_screen.dart
                                         fontSize: FontSize.s18.sp,
+=======
+                                        fontSize: FontSize.s24.sp,
+>>>>>>> master:lib/features/home/presentation/tabs/trips/presentation/reips_screen.dart
                                         color: tripsCubit.currentTap == 2
                                             ? ColorManager.primary
                                             : ColorManager.white
@@ -110,7 +118,11 @@ class _TripsScreenState extends State<TripsScreen> {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
+<<<<<<< HEAD:lib/features/home/presentation/tabs/trips/presentation/trips_screen.dart
                                           fontSize: FontSize.s18.sp,
+=======
+                                          fontSize: FontSize.s24.sp,
+>>>>>>> master:lib/features/home/presentation/tabs/trips/presentation/reips_screen.dart
                                           color: tripsCubit.currentTap == 3
                                               ? ColorManager.primary
                                               : ColorManager.white
@@ -138,7 +150,7 @@ class _TripsScreenState extends State<TripsScreen> {
                               state.title!,
                               style: getRegularStyle(
                                   color: Colors.black,
-                                  fontSize: FontSize.s20.sp),
+                                  fontSize: FontSize.s24.sp),
                             ),
                             const SizedBox(height: 10),
                             MainButton(
@@ -162,7 +174,7 @@ class _TripsScreenState extends State<TripsScreen> {
                       child: Text(
                         "No Booking Available",
                         style: getRegularStyle(
-                            color: Colors.white, fontSize: FontSize.s20.sp),
+                            color: Colors.white, fontSize: FontSize.s24.sp),
                       ),
                     ));
                   }
@@ -183,19 +195,11 @@ class _TripsScreenState extends State<TripsScreen> {
                               SizedBox(
                                   width: double.infinity,
                                   height: .6.sw,
-                                  child: Builder(builder: (context) {
-                                    if (data.dataHotel.images.isEmpty) {
-                                      return Icon(Icons.error);
-                                    }
-                                    return CachedNetworkImage(
-                                        errorWidget: (context, url, error) {
-                                          return Icon(Icons.error);
-                                        },
-                                        fit: BoxFit.cover,
-                                        width: double.infinity,
-                                        imageUrl:
-                                            data.dataHotel.images[0].image);
-                                  })),
+                                  child: CachedNetworkImage(
+                                      fit: BoxFit.cover,
+                                      width: double.infinity,
+                                      imageUrl:
+                                          data.dataHotel.images[0].image)),
                               Positioned(
                                 bottom: 0,
                                 child: Container(
@@ -215,13 +219,13 @@ class _TripsScreenState extends State<TripsScreen> {
                                             Text(
                                               data.dataHotel.name,
                                               style: getBoldStyle(
-                                                  fontSize: FontSize.s24.sp,
+                                                  fontSize: FontSize.s32.sp,
                                                   color: ColorManager.white),
                                             ),
                                             Text(
                                               "\$ ${data.dataHotel.price}",
                                               style: getBoldStyle(
-                                                  fontSize: FontSize.s24.sp,
+                                                  fontSize: FontSize.s32.sp,
                                                   color: ColorManager.white),
                                             ),
                                           ],
@@ -234,13 +238,11 @@ class _TripsScreenState extends State<TripsScreen> {
                                             Text(
                                               data.dataHotel.address,
                                               style: getLightStyle(
-                                                  fontSize: FontSize.s17.sp,
                                                   color: ColorManager.grey),
                                             ),
                                             Text(
                                               "/per night",
                                               style: getLightStyle(
-                                                  fontSize: FontSize.s17.sp,
                                                   color: ColorManager.grey),
                                             )
                                           ],
