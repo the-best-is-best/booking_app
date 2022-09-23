@@ -7,6 +7,7 @@ import 'package:booking_app/features/auth/login/data/responses/login_response.da
 import 'package:booking_app/features/auth/profile/responses/response_profile.dart';
 import 'package:booking_app/features/auth/register/data/responses/response_register.dart';
 import 'package:booking_app/features/auth/update_profile/responses/response_update_profile.dart';
+import 'package:booking_app/features/explore/data/responses/facilities_response.dart';
 import 'package:booking_app/features/explore/data/responses/hotel_response.dart';
 import 'package:booking_app/features/home/presentation/tabs/trips/data/response/response_trips.dart';
 import 'package:dio/dio.dart';
@@ -57,12 +58,26 @@ abstract class AppServicesClient {
   @POST(Constants.createBookingUrl)
   Future<ResponseCreateBooking> createBooking({
     @Header("token") required String token,
-    @Query("hotel_id") required int hotelId,
+    @Field("hotel_id") required int hotelId,
   });
 
   @POST(Constants.updateBookingUrl)
   Future<ResponseUpdateBooking> updateBooking({
-    @Query("booking_id") required int bookingId,
-    @Query("type") required String type,
+    @Field("booking_id") required int bookingId,
+    @Field("type") required String type,
   });
+  @GET(Constants.getFacilitiesUrl)
+  Future<FacilitiesResponse> getFacilities();
+  @GET(Constants.searchHotelsUrl)
+  Future<HotelResponse> searchHotel(
+      {@Query("name") String? name,
+      @Query("address") String? address,
+      @Query("max_price") double? maxPrice,
+      @Query("min_price") double? minPrice,
+      @Query("facilities") List<int>? facilities,
+      @Query("latitude") double? latitude,
+      @Query("longitude") double? longitude,
+      @Query("distance") int? distance,
+      @Query("count") int? count,
+      @Query("page") int? page});
 }

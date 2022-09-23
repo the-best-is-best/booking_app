@@ -13,6 +13,8 @@ class Constants {
   static const String getBookingUrl = "/get-bookings";
   static const String createBookingUrl = "/create-booking";
   static const String updateBookingUrl = "/update-booking-status";
+  static const String getFacilitiesUrl = "/facilities";
+  static const String searchHotelsUrl = "/search-hotels";
 
   // cache
   static const String userCache = "userToken";
