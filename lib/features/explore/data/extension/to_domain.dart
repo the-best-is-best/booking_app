@@ -1,6 +1,8 @@
 import 'package:booking_app/app/constants.dart';
 import 'package:booking_app/app/extensions.dart';
+import 'package:booking_app/features/explore/data/responses/facilities_response.dart';
 import 'package:booking_app/features/explore/data/responses/hotel_response.dart';
+import 'package:booking_app/features/explore/domain/facilities_models.dart';
 import 'package:booking_app/features/explore/domain/hotel_model.dart';
 
 extension ExtensionToDomain on HotelResponse? {
@@ -52,5 +54,23 @@ extension ExtensionFacilitiesToDomain on HotelFacilitiesResponse? {
         id: this?.id?.orEmpty() ?? 0,
         hotelId: this?.hotelId?.orEmpty() ?? "0",
         facilityId: this?.facilityId?.orEmpty() ?? 0);
+  }
+}
+
+extension ExtensionFacilitiesResponse on FacilitiesResponse? {
+  List<FacilitiesModels> toDomain() {
+    return (this?.data?.map((e) => e.toDomain()) ??
+            const Iterable.empty().cast<FacilitiesModels>())
+        .toList();
+  }
+}
+
+extension on FacilitiesDataResponse? {
+  FacilitiesModels toDomain() {
+    return FacilitiesModels(
+      id: this?.id?.orEmpty() ?? 0,
+      image: this?.image?.orEmpty() ?? "",
+      name: this?.name?.orEmpty() ?? "",
+    );
   }
 }

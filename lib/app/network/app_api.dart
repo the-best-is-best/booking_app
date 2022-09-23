@@ -7,6 +7,7 @@ import 'package:booking_app/features/auth/login/data/responses/login_response.da
 import 'package:booking_app/features/auth/profile/responses/response_profile.dart';
 import 'package:booking_app/features/auth/register/data/responses/response_register.dart';
 import 'package:booking_app/features/auth/update_profile/responses/response_update_profile.dart';
+import 'package:booking_app/features/explore/data/responses/facilities_response.dart';
 import 'package:booking_app/features/explore/data/responses/hotel_response.dart';
 import 'package:booking_app/features/home/presentation/tabs/trips/data/response/response_trips.dart';
 import 'package:dio/dio.dart';
@@ -65,4 +66,6 @@ abstract class AppServicesClient {
     @Query("booking_id") required int bookingId,
     @Query("type") required String type,
   });
+  @GET(Constants.getFacilitiesUrl)
+  Future<FacilitiesResponse> getFacilities();
 }

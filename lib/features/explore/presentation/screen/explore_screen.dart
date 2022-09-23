@@ -24,7 +24,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
   @override
   void initState() {
     ExploreCubit exploreCubit = ExploreCubit.get(context);
-    exploreCubit.getHotels();
+    Future.wait([exploreCubit.getFacilities(), exploreCubit.getHotels()]);
     super.initState();
   }
 
