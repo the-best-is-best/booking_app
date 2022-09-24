@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
     exploreCubit.getFacilities();
     authCubit.getProfileInfo().then((value) {
       if (authCubit.userModel.apiToken.isNotEmpty) {
-        MitX.offAndToNamed(Routes.homeRoute);
+        MitX.offAllNamed(Routes.homeRoute);
       }
     });
 
@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           if (state is AuthSuccessState) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              MitX.offAndToNamed(Routes.homeRoute);
+              MitX.offAllNamed(Routes.homeRoute);
             });
           }
         },
@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
               current is AuthErrorState || current is AuthInitial,
           builder: (context, state) {
             if (state is AuthGetLocalProfileState) {
-              return const SizedBox();
+              return const MyCircularIndicator();
             }
             return SingleChildScrollView(
               child: SafeArea(

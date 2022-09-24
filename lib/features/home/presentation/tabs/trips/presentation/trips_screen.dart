@@ -1,3 +1,4 @@
+import 'package:booking_app/core/utils/assets_manager.dart';
 import 'package:booking_app/core/utils/color_manager.dart';
 import 'package:booking_app/core/utils/font_manager.dart';
 import 'package:booking_app/core/utils/styles_manager.dart';
@@ -190,10 +191,10 @@ class _TripsTabState extends State<TripsTab> {
                                         fit: BoxFit.cover,
                                         width: double.infinity,
                                         errorWidget: (context, url, error) =>
-                                            const Icon(Icons.error),
+                                            Image.asset(ImageAssets.appLogo),
                                         imageUrl:
                                             data.dataHotel.images[0].image)
-                                    : const Icon(Icons.error),
+                                    : Image.asset(ImageAssets.appLogo),
                               ),
                               Positioned(
                                 bottom: 0,

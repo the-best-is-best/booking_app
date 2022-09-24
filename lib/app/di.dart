@@ -12,6 +12,7 @@ import 'package:booking_app/features/explore/data/repository_search.dart';
 import 'package:booking_app/features/explore/presentation/cubit/explore_cubit.dart';
 import 'package:booking_app/features/home/presentation/tabs/trips/data/repository_trips.dart';
 import 'package:booking_app/features/home/presentation/tabs/trips/presentation/cubit/trips_cubit.dart';
+import 'package:booking_app/features/map/presentation/cubit/map_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -58,4 +59,6 @@ Future initApp() async {
   di.registerLazySingleton<ExploreCubit>(() => ExploreCubit(di(), di(), di()));
 
   di.registerLazySingleton<TripsCubit>(() => TripsCubit(di()));
+
+  di.registerLazySingleton<MapCubit>(() => MapCubit());
 }

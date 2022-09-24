@@ -43,7 +43,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                   height: context.height * .85,
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(20.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -56,11 +56,23 @@ class _FilterDrawerState extends State<FilterDrawer> {
                               color: ColorManager.white,
                             ),
                           ),
-                          Text(
-                            "Filter",
-                            style: getBoldStyle(
-                                color: ColorManager.white,
-                                fontSize: FontSize.s28.sp),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Filter",
+                                style: getBoldStyle(
+                                    color: ColorManager.white,
+                                    fontSize: FontSize.s28.sp),
+                              ),
+                              CircleAvatar(
+                                  child: IconButton(
+                                      onPressed: () {
+                                        exploreCubit.clearFilter();
+                                        MitX.back();
+                                      },
+                                      icon: const Icon(Icons.filter_alt_off)))
+                            ],
                           ),
                           const SizedBox(height: 20),
                           InputField(

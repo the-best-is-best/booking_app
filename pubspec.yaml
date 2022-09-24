@@ -23,13 +23,17 @@ dependencies:
   flutter_bloc: ^8.1.1
   flutter_localizations:
     sdk: flutter
+  flutter_polyline_points: ^1.0.0
   flutter_rating_bar: ^4.0.1
   flutter_screenutil: ^5.5.4
   flutter_svg: ^1.1.5
   freezed: ^2.1.0+1
   freezed_annotation: ^2.0.3
+  geocoding: ^2.0.5
+  geolocator: ^9.0.2
   get_it: ^7.2.0
   get_storage: ^2.0.3
+  google_maps_flutter: ^2.2.0
   hexcolor: ^2.0.7
   image_picker: ^0.8.5+3
   internet_connection_checker: ^0.0.1+4

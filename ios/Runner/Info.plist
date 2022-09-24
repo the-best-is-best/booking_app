@@ -47,5 +47,10 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+    // location
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs access to location to open map.</string>
+
 </dict>
 </plist>
