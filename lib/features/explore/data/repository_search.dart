@@ -55,10 +55,10 @@ class SearchRequests {
   final String? address;
   final double? maxPrice;
   final double? minPrice;
-  final List<int>? facilities;
+  final Map<String, int>? facilities;
   final double? latitude;
   final double? longitude;
-  final int? distance;
+  final double? distance;
   final int count;
   final int page;
 

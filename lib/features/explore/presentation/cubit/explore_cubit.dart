@@ -8,7 +8,7 @@ import 'package:booking_app/features/explore/domain/hotel_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mit_x/mit_x.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 part 'explore_state.dart';
 
 class ExploreCubit extends Cubit<ExploreState> {
@@ -16,11 +16,33 @@ class ExploreCubit extends Cubit<ExploreState> {
       this._repositorySearch)
       : super(ExploreInitial());
   HotelModel? hotelModel;
-  List<FacilitiesModels>? facilitiesModel;
   final RepositoryExplore _repositoryExplore;
   final RepositoryFacilities _repositoryFacilities;
   final RepositorySearch _repositorySearch;
   static ExploreCubit get(BuildContext context) => BlocProvider.of(context);
+
+  SfRangeValues sfRangePrice = const SfRangeValues(100, 10000);
+  double sfRangeDistance = 5;
+  String nameTextController = "";
+  String addressTextController = "";
+
+  void changeSfRangePrice(SfRangeValues? sfRangeValues) {
+    sfRangePrice = sfRangeValues ?? const SfRangeValues(100, 10000);
+    emit(ChangePriceMainAndMaxState());
+  }
+
+  void changeSfSliderDistance(double? sfRangeValues) {
+    sfRangeDistance = sfRangeValues ?? 0;
+    emit(ChangeDistanceState());
+  }
+
+  List<FacilitiesModels>? facilitiesModel;
+  Map<int, bool> facilitiesActive = {};
+
+  void checkFacilities(int index) {
+    facilitiesActive[index] = !facilitiesActive[index]!;
+    emit(FacilitiesActiveState());
+  }
 
   Future<void> getFacilities() async {
     Either<Failure, List<FacilitiesModels>> response =
@@ -31,6 +53,11 @@ class ExploreCubit extends Cubit<ExploreState> {
       },
       (r) {
         facilitiesModel = r;
+        int index = 0;
+        for (var _ in r) {
+          facilitiesActive.addAll({index: false});
+          index++;
+        }
         debugPrint(r.toString());
       },
     );
@@ -53,10 +80,44 @@ class ExploreCubit extends Cubit<ExploreState> {
     );
   }
 
-  Future<void> searchHotelByName({int page = 1, String? name}) async {
+  Future<void> searchHotelByName({int page = 1, required String name}) async {
     emit(ExploreLoadState());
+    nameTextController = name;
     Either<Failure, HotelModel> response = await _repositorySearch
         .searchHotel(SearchRequests(page: page, name: name));
+    response.fold(
+      (l) {
+        debugPrint(l.messages);
+        emit(ExploreErrorState(l.messages));
+      },
+      (r) {
+        hotelModel = r;
+        debugPrint(r.toString());
+        emit(ExploreLoadedState());
+      },
+    );
+  }
+
+  Future<void> searchHotel({int page = 1, required String address}) async {
+    emit(ExploreLoadState());
+    addressTextController = address;
+    Map<String, int> selectedFacilities = {};
+    facilitiesActive.forEach((key, value) {
+      if (value) {
+        selectedFacilities.addAll({
+          MapEntry("id[${key - 1}]", key).key:
+              MapEntry("id[${key - 1}]", key).value
+        });
+      }
+    });
+    Either<Failure, HotelModel> response =
+        await _repositorySearch.searchHotel(SearchRequests(
+      page: page,
+      name: nameTextController,
+      facilities: selectedFacilities,
+      // distance: sfRangeDistance,
+      address: address,
+    ));
     response.fold(
       (l) {
         debugPrint(l.messages);

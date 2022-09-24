@@ -9,6 +9,7 @@ import 'package:booking_app/features/home/presentation/tabs/trips/presentation/c
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mit_x/mit_x.dart';
 
@@ -46,7 +47,7 @@ class _TripsTabState extends State<TripsTab> {
           child: Column(
             children: [
               SizedBox(
-                height: size.height*0.08,
+                height: size.height * 0.08,
                 child: Card(
                   color: ColorManager.grey2,
                   shape: RoundedRectangleBorder(
@@ -182,13 +183,18 @@ class _TripsTabState extends State<TripsTab> {
                           child: Stack(
                             children: [
                               SizedBox(
-                                  width: double.infinity,
-                                  height: .6.sw,
-                                  child: CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      width: double.infinity,
-                                      imageUrl:
-                                          data.dataHotel.images[0].image)),
+                                width: double.infinity,
+                                height: .6.sw,
+                                child: data.dataHotel.images.isNotEmpty
+                                    ? CachedNetworkImage(
+                                        fit: BoxFit.cover,
+                                        width: double.infinity,
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(Icons.error),
+                                        imageUrl:
+                                            data.dataHotel.images[0].image)
+                                    : const Icon(Icons.error),
+                              ),
                               Positioned(
                                 bottom: 0,
                                 child: Container(
@@ -208,13 +214,13 @@ class _TripsTabState extends State<TripsTab> {
                                             Text(
                                               data.dataHotel.name,
                                               style: getBoldStyle(
-                                                  fontSize: FontSize.s32.sp,
+                                                  fontSize: FontSize.s28.sp,
                                                   color: ColorManager.white),
                                             ),
                                             Text(
                                               "\$ ${data.dataHotel.price}",
                                               style: getBoldStyle(
-                                                  fontSize: FontSize.s32.sp,
+                                                  fontSize: FontSize.s30.sp,
                                                   color: ColorManager.white),
                                             ),
                                           ],
@@ -236,7 +242,38 @@ class _TripsTabState extends State<TripsTab> {
                                             )
                                           ],
                                         ),
-                                        const SizedBox(height: 10)
+                                        const SizedBox(height: 10),
+                                        Row(
+                                          children: [
+                                            RatingBar.builder(
+                                              ignoreGestures: true,
+                                              initialRating: (double.parse(
+                                                      data.dataHotel.rate) *
+                                                  5 /
+                                                  10),
+                                              minRating: 0,
+                                              direction: Axis.horizontal,
+                                              allowHalfRating: true,
+                                              itemCount: 5,
+                                              itemSize: FontSize.s20.sp,
+                                              itemBuilder: (context, _) =>
+                                                  const Icon(
+                                                Icons.star,
+                                                color: Colors.amber,
+                                              ),
+                                              onRatingUpdate: (rating) {
+                                                print(rating);
+                                              },
+                                            ),
+                                            Text(
+                                              '  80 Reviews',
+                                              style: getLightStyle(
+                                                  fontSize: FontSize.s17.sp,
+                                                  color: ColorManager.grey),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 10),
                                       ]),
                                 ),
                               )
