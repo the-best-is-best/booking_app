@@ -22,4 +22,10 @@ class ImageAssets {
   static const String explore_1 = '$IMAGE_PATH/explore_1.jpg';
   static const String explore_2 = '$IMAGE_PATH/explore_2.jpg';
   static const String explore_3 = '$IMAGE_PATH/explore_3.jpg';
+
+  // ---------------------- Map --------------------
+  static const String hotel_1 = '$IMAGE_PATH/hotel_1.jpg';
+  static const String hotel_2 = '$IMAGE_PATH/hotel_2.jpg';
+  static const String hotel_3 = '$IMAGE_PATH/hotel_3.jpg';
+  static const String hotel_4 = '$IMAGE_PATH/hotel_4.jpg';
 }

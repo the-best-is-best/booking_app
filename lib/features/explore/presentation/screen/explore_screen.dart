@@ -1,5 +1,7 @@
+import 'package:booking_app/core/utils/assets_manager.dart';
 import 'package:booking_app/core/utils/color_manager.dart';
 import 'package:booking_app/core/utils/font_manager.dart';
+import 'package:booking_app/core/utils/routes_manager.dart';
 import 'package:booking_app/core/utils/styles_manager.dart';
 import 'package:booking_app/core/utils/values_manager.dart';
 import 'package:booking_app/core/widgets/input_field.dart';
@@ -26,7 +28,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
   @override
   void initState() {
     ExploreCubit exploreCubit = ExploreCubit.get(context);
-    Future.wait([exploreCubit.getHotels()]);
+    exploreCubit.getHotels();
     super.initState();
   }
 
@@ -44,7 +46,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
           style: getBoldStyle(color: Colors.white, fontSize: FontSize.s22),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.map_rounded))
+          IconButton(
+              onPressed: () {
+                MitX.toNamed(Routes.mapScreen);
+              },
+              icon: const Icon(Icons.map_rounded))
         ],
       ),
       body: SingleChildScrollView(
@@ -142,11 +148,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                     height: .35.sh,
                                     child: Builder(builder: (context) {
                                       if (data.images.isEmpty) {
-                                        return const Icon(Icons.error);
+                                        return Image.asset(ImageAssets.appLogo);
                                       }
                                       return CachedNetworkImage(
                                           errorWidget: (context, url, error) {
-                                            return const Icon(Icons.error);
+                                            return Image.asset(
+                                                ImageAssets.appLogo);
                                           },
                                           fit: BoxFit.cover,
                                           width: double.infinity,

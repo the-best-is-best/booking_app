@@ -6,6 +6,7 @@ import 'package:booking_app/features/explore/presentation/screen/explore_screen.
 import 'package:booking_app/features/intro/presentations/00_splash/screen/splash_screen.dart';
 import 'package:booking_app/features/intro/presentations/01_onboarding/screen/onboarding_screen.dart';
 import 'package:booking_app/features/home/presentation/tabs/settings/screen/setting.dart';
+import 'package:booking_app/features/map/presentation/pages/map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../features/home/presentation/screen/main_screen.dart';
@@ -21,6 +22,7 @@ class Routes {
   static const String settings = '/settings';
   static const String editProfile = '/editProfile';
   static const String exploreScreen = '/exploreScreen';
+  static const String mapScreen = '/mapScreen';
 }
 
 class RouteGenerator {
@@ -60,6 +62,10 @@ class RouteGenerator {
       case Routes.exploreScreen:
         return MaterialPageRoute(
           builder: (_) => const ExploreScreen(),
+        );
+      case Routes.mapScreen:
+        return MaterialPageRoute(
+          builder: (_) => const MapScreen(),
         );
       default:
         return unDefinedRoute();

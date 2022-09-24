@@ -39,7 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccessState) {
-            MitX.offAndToNamed(Routes.homeRoute);
+            MitX.offAllNamed(Routes.homeRoute);
           } else if (state is AuthErrorState) {
             MitX.showSnackbar(MitXSnackBar(
               duration: const Duration(seconds: 2),

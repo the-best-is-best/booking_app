@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.booking_app">
+        <uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <application
         android:label="booking_app"
         android:name="${applicationName}"
@@ -30,5 +32,10 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+            <!--google maps-->
+             
+       <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyC552GGg5HkDJ5A4hUcQAh5hQvqx6UWhZ8"/>
     </application>
 </manifest>
