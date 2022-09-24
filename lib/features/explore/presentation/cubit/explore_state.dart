@@ -15,3 +15,9 @@ class ExploreErrorState extends ExploreState {
 
   ExploreErrorState(this.title);
 }
+
+class ChangePriceMainAndMaxState extends ExploreState {}
+
+class ChangeDistanceState extends ExploreState {}
+
+class FacilitiesActiveState extends ExploreState {}

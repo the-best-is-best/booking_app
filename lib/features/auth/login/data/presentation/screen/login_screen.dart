@@ -5,6 +5,7 @@ import 'package:booking_app/core/widgets/input_field_label.dart';
 import 'package:booking_app/core/widgets/main_button.dart';
 import 'package:booking_app/core/widgets/my_circular_indicator.dart';
 import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
+import 'package:booking_app/features/explore/presentation/cubit/explore_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,7 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     AuthCubit authCubit = AuthCubit.get(context);
-
+    ExploreCubit exploreCubit = ExploreCubit.get(context);
+    exploreCubit.getFacilities();
     authCubit.getProfileInfo().then((value) {
       if (authCubit.userModel.apiToken.isNotEmpty) {
         MitX.offAndToNamed(Routes.homeRoute);

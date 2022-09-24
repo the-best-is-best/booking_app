@@ -74,10 +74,10 @@ abstract class AppServicesClient {
       @Query("address") String? address,
       @Query("max_price") double? maxPrice,
       @Query("min_price") double? minPrice,
-      @Query("facilities") List<int>? facilities,
+      @Query("facilities") Map<String, int>? facilities,
       @Query("latitude") double? latitude,
       @Query("longitude") double? longitude,
-      @Query("distance") int? distance,
+      @Query("distance") double? distance,
       @Query("count") int? count,
       @Query("page") int? page});
 }
