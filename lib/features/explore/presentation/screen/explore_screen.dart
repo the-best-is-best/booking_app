@@ -230,7 +230,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                                 itemBuilder: (context, _) =>
                                                     const Icon(
                                                   Icons.star,
-                                                  color: Colors.amber,
+                                                  color: ColorManager.primary,
                                                 ),
                                                 onRatingUpdate: (rating) {
                                                   print(rating);
