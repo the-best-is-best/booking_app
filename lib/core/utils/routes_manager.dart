@@ -3,6 +3,7 @@ import 'package:booking_app/features/auth/login/data/presentation/screen/login_s
 import 'package:booking_app/features/auth/update_profile/presentation/edit_profile_screen.dart';
 import 'package:booking_app/features/auth/register/presentation/screen/register_screen.dart';
 import 'package:booking_app/features/explore/presentation/screen/explore_screen.dart';
+import 'package:booking_app/features/explore/presentation/screen/hotel_screen.dart';
 import 'package:booking_app/features/intro/presentations/00_splash/screen/splash_screen.dart';
 import 'package:booking_app/features/intro/presentations/01_onboarding/screen/onboarding_screen.dart';
 import 'package:booking_app/features/home/presentation/tabs/settings/screen/setting.dart';
@@ -23,6 +24,7 @@ class Routes {
   static const String editProfile = '/editProfile';
   static const String exploreScreen = '/exploreScreen';
   static const String mapScreen = '/mapScreen';
+  static const String hotelScreen = '/hotelScreen';
 }
 
 class RouteGenerator {
@@ -66,6 +68,10 @@ class RouteGenerator {
       case Routes.mapScreen:
         return MaterialPageRoute(
           builder: (_) => const MapScreen(),
+        );
+      case Routes.hotelScreen:
+        return MaterialPageRoute(
+          builder: (_) => const HotelScreen(),
         );
       default:
         return unDefinedRoute();
