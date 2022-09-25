@@ -60,6 +60,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Expanded(
                     child: InputField(
