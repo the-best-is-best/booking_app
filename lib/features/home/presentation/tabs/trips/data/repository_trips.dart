@@ -42,6 +42,36 @@ class RepositoryTrips {
       return Left(DataRes.NO_INTERNET_CONNECTION.getFailure());
     }
   }
+
+  Future<Either<Failure, bool>> createTrip(
+      CreateTripRequest createTripRequest) async {
+    if (await networkInfo.isConnected) {
+      try {
+        var response = await appServicesClient.createBooking(
+            hotelId: createTripRequest.hotelId, token: createTripRequest.token);
+        if (response.status.type == "1") {
+          //success
+          // return either right
+          // return data
+          return const Right(true);
+        } else {
+          //failure
+          // return either left
+
+          return left(Failure(
+              messages: (response.status.title is Map)
+                  ? response.status.title['en'] ?? ""
+                  : response.status.title ?? ""));
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      //failure
+      // return either left
+      return Left(DataRes.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }
 
 class TripRequest {
@@ -56,4 +86,12 @@ class TripRequest {
     required this.type,
     required this.token,
   });
+}
+
+class CreateTripRequest {
+  final int hotelId;
+
+  final String token;
+
+  CreateTripRequest({required this.hotelId, required this.token});
 }

@@ -69,10 +69,10 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => const MapScreen(),
         );
-      case Routes.hotelScreen:
-        return MaterialPageRoute(
-          builder: (_) => const HotelScreen(),
-        );
+      // case Routes.hotelScreen:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const HotelScreen(),
+      //   );
       default:
         return unDefinedRoute();
     }

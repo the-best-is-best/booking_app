@@ -1,17 +1,50 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:booking_app/core/utils/assets_manager.dart';
 import 'package:booking_app/core/utils/color_manager.dart';
 import 'package:booking_app/core/utils/font_manager.dart';
 import 'package:booking_app/core/utils/styles_manager.dart';
 import 'package:booking_app/core/utils/values_manager.dart';
 import 'package:booking_app/core/widgets/main_button.dart';
+import 'package:booking_app/core/widgets/my_circular_indicator.dart';
+import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
+import 'package:booking_app/features/explore/domain/hotel_model.dart';
 import 'package:booking_app/features/explore/presentation/widgets/expandable_text_widgets.dart';
+import 'package:booking_app/features/explore/presentation/widgets/facility_item.dart';
 import 'package:booking_app/features/explore/presentation/widgets/overall_ratting_widget.dart';
+import 'package:booking_app/features/explore/presentation/widgets/section_title.dart';
+import 'package:booking_app/features/home/presentation/tabs/trips/presentation/cubit/trips_cubit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mit_x/mit_x.dart';
 
-class HotelScreen extends StatelessWidget {
-  const HotelScreen({Key? key}) : super(key: key);
+class HotelScreen extends StatefulWidget {
+  final int id;
 
+  final List<ImagesHotelModel> images;
+  final String title;
+  final String desc;
+
+  final String rawRating;
+  final String price;
+  final String address;
+  const HotelScreen(
+      {Key? key,
+      required this.images,
+      required this.title,
+      required this.address,
+      required this.rawRating,
+      required this.price,
+      required this.desc,
+      required this.id})
+      : super(key: key);
+
+  @override
+  State<HotelScreen> createState() => _HotelScreenState();
+}
+
+class _HotelScreenState extends State<HotelScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -39,12 +72,19 @@ class HotelScreen extends StatelessWidget {
             ),
             flexibleSpace: FlexibleSpaceBar(
               titlePadding: EdgeInsets.zero,
-              title: Image.asset(
-                ImageAssets.hotel_1,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: size.height * 0.4,
-              ),
+              title: widget.images.isEmpty
+                  ? Image.asset(
+                      ImageAssets.hotel_1,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: size.height * 0.4,
+                    )
+                  : CachedNetworkImage(
+                      imageUrl: widget.images[0].image,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: size.height * 0.4,
+                    ),
             ),
           ),
           SliverToBoxAdapter(
@@ -63,7 +103,7 @@ class HotelScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Queen Hotel',
+                              widget.title,
                               style: getBoldStyle(
                                   fontSize: FontSize.s30.sp,
                                   color: ColorManager.white),
@@ -74,7 +114,7 @@ class HotelScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  'Wembley, London  ',
+                                  widget.address,
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineMedium!
@@ -106,7 +146,7 @@ class HotelScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              ' \$100',
+                              ' \$ ${widget.price}',
                               style: getBoldStyle(
                                   fontSize: FontSize.s30.sp,
                                   color: ColorManager.white),
@@ -148,14 +188,36 @@ class HotelScreen extends StatelessWidget {
                         const SizedBox(
                           height: AppSize.s4,
                         ),
-                        const ExpandableTextWidgets(
-                            text:
-                                '''Essay Soft Essay Generator takes an essay question and keywords as input, and generates creative high quality essay articles that are free of plagiarism, fully automatic in just a few seconds. No matter what essay topic you have been given, our essay generator will be able to complete your essay without any hassle. If you need instant help with any content writing tasks including essays, assignments, article, reports...etc. EssaySoft Essay Generator is the software you know you can trust, simply click your mouse button to produce work to amaze your teachers and professors.
-                    ''')
+                        ExpandableTextWidgets(text: widget.desc)
                       ],
                     ),
                   ),
-                  const OverallRattingWidget(),
+                  OverallRattingWidget(rate: widget.rawRating),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SectionTitle(title: 'Facilities'),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(25, 0, 25, 15),
+                        child: FadeInUp(
+                          duration: const Duration(milliseconds: 1100),
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 6,
+                              crossAxisSpacing: 5,
+                            ),
+                            itemCount: facilities.length,
+                            itemBuilder: (context, index) {
+                              return FacilityItem(svgPath: facilities[index]);
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: AppSize.s20, vertical: AppSize.s12),
@@ -184,12 +246,37 @@ class HotelScreen extends StatelessWidget {
                     ),
                   ),
                   getPhotos(size),
-                  Padding(
-                    padding: const EdgeInsets.all(AppPadding.p12),
-                    child: MainButton(
-                      onTap: () {},
-                      title: 'Book Now',
-                    ),
+                  BlocConsumer<TripsCubit, TripsState>(
+                    listener: (context, state) {
+                      if (state is CreateTripsState) {
+                        MitX.showSnackbar(const MitXSnackBar(
+                          duration: Duration(seconds: 2),
+                          title: "",
+                          message: "Booked",
+                        ));
+                      }
+                    },
+                    builder: (context, state) {
+                      if (state is! TripsLoadingState) {
+                        return Padding(
+                          padding: const EdgeInsets.all(AppPadding.p12),
+                          child: MainButton(
+                            onTap: () {
+                              TripsCubit tripsCubit = TripsCubit.get(context);
+                              tripsCubit.createTrip(
+                                  hotelId: widget.id,
+                                  apiToken: AuthCubit.get(context)
+                                      .userModel
+                                      .apiToken);
+                            },
+                            title: 'Book Now',
+                          ),
+                        );
+                      }
+                      return const Center(
+                        child: MyCircularIndicator(),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -227,4 +314,12 @@ class HotelScreen extends StatelessWidget {
       ),
     );
   }
+
+  List<String> facilities = [
+    "assets/icons/wifi.svg",
+    "assets/icons/weightlift.svg",
+    "assets/icons/drink.svg",
+    "assets/icons/park.svg",
+    "assets/icons/pool.svg"
+  ];
 }

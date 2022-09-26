@@ -52,22 +52,23 @@ class ContainerEditProfileWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                CircleAvatar(
-                  radius: 35,
-                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  child: userModel.image != null &&
-                          userModel.image!.isNotEmpty &&
-                          userModel.image != "${Constants.baseUrl}images"
-                      ? CachedNetworkImage(
-                          imageUrl: userModel.image!,
-                        )
-                      : const CircleAvatar(
-                          radius: 33,
-                          backgroundImage: AssetImage(
-                            ImageAssets.appLogo,
-                          ),
+                userModel.image != null &&
+                        userModel.image!.isNotEmpty &&
+                        userModel.image != "${Constants.baseUrl}images"
+                    ? CircleAvatar(
+                        radius: 35,
+                        backgroundImage: NetworkImage(
+                          userModel.image!,
                         ),
-                ),
+                      )
+                    : CircleAvatar(
+                        radius: 35,
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor,
+                        backgroundImage: const AssetImage(
+                          ImageAssets.appLogo,
+                        ),
+                      ),
               ],
             );
           },
