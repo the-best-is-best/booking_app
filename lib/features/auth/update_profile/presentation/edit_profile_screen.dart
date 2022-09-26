@@ -192,8 +192,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   // ),
                   BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) {
-                      MitX.back();
                       if (state is AuthSuccessState) {
+                        MitX.back();
                         MitX.showSnackbar(const MitXSnackBar(
                           duration: Duration(seconds: 2),
                           title: "",
