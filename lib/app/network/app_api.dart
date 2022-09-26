@@ -37,10 +37,11 @@ abstract class AppServicesClient {
   Future<ProfileResponse> getProfileInfo(@Header("token") String token);
 
   @POST(Constants.updateProfileInfoUrl)
+  @MultiPart()
   Future<UpdateProfileResponse> updateProfile({
     @Header("token") required String token,
-    @Field("name") required String name,
-    @Field("email") required String email,
+    @Part() required String name,
+    @Part() required String email,
     @Part() required File? image,
   });
 

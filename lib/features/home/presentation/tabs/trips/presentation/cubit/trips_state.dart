@@ -15,3 +15,5 @@ class TripsErrorState extends TripsState {
 }
 
 class TripsLoadedState extends TripsState {}
+
+class CreateTripsState extends TripsState {}
