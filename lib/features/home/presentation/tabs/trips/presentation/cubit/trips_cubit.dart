@@ -1,4 +1,5 @@
 import 'package:booking_app/app/network/failure.dart';
+import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
 import 'package:booking_app/features/home/presentation/tabs/trips/data/repository_trips.dart';
 import 'package:booking_app/features/home/presentation/tabs/trips/domain/trips_model.dart';
 import 'package:dartz/dartz.dart';
@@ -8,6 +9,7 @@ part 'trips_state.dart';
 
 class TripsCubit extends Cubit<TripsState> {
   final RepositoryTrips _repositoryTrips;
+
   TripsCubit(this._repositoryTrips) : super(TripsInitial());
 
   static TripsCubit get(context) => BlocProvider.of(context);
@@ -18,6 +20,23 @@ class TripsCubit extends Cubit<TripsState> {
   void changeCurrentPage({required int page, required String tokenUser}) {
     currentTap = page;
     getTrips(tokenUser: tokenUser);
+  }
+
+  Future<void> createTrip(
+      {required int hotelId, required String apiToken}) async {
+    emit(TripsLoadingState());
+    Either<Failure, bool> response = await _repositoryTrips
+        .createTrip(CreateTripRequest(hotelId: hotelId, token: apiToken));
+    response.fold(
+      (l) {
+        emit(TripsErrorState(l.messages));
+        debugPrint(l.messages);
+        tripsModel = null;
+      },
+      (r) {
+        emit(CreateTripsState());
+      },
+    );
   }
 
   Future<void> getTrips({int page = 1, required String tokenUser}) async {

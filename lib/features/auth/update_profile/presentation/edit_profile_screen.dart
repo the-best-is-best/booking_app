@@ -4,6 +4,7 @@ import 'package:booking_app/app/constants.dart';
 import 'package:booking_app/core/utils/assets_manager.dart';
 import 'package:booking_app/core/utils/values_manager.dart';
 import 'package:booking_app/core/widgets/main_button.dart';
+import 'package:booking_app/core/widgets/my_circular_indicator.dart';
 import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
 import 'package:booking_app/features/home/presentation/tabs/settings/widgets/input_field_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -90,7 +91,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   ? CircleAvatar(
                                       backgroundColor: Colors.transparent,
                                       radius: 60,
-                                      child: Image.file(
+                                      backgroundImage: FileImage(
                                           File(authCubit.userImage!.path)))
                                   : (authCubit.userModel.image != null ||
                                               authCubit.userModel.image!
@@ -100,13 +101,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       ? CircleAvatar(
                                           backgroundColor: Colors.transparent,
                                           radius: 60,
-                                          child: CachedNetworkImage(
-                                            imageUrl:
-                                                authCubit.userModel.image!,
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    Image.asset(
-                                                        ImageAssets.appLogo),
+                                          backgroundImage: NetworkImage(
+                                            authCubit.userModel.image!,
                                           ),
                                         )
                                       : const CircleAvatar(
@@ -194,13 +190,32 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   //     return null;
                   //   },
                   // ),
-                  MainButton(
-                    onTap: () {
-                      authCubit.updateProfile(
-                          email: emailController.text,
-                          userName: usernameController.text);
+                  BlocConsumer<AuthCubit, AuthState>(
+                    listener: (context, state) {
+                      MitX.back();
+                      if (state is AuthSuccessState) {
+                        MitX.showSnackbar(const MitXSnackBar(
+                          duration: Duration(seconds: 2),
+                          title: "",
+                          message: "Success",
+                        ));
+                      }
                     },
-                    title: "Update",
+                    builder: (context, state) {
+                      if (state is! AuthLoadingState) {
+                        return MainButton(
+                          onTap: () {
+                            authCubit.updateProfile(
+                                email: emailController.text,
+                                userName: usernameController.text);
+                          },
+                          title: "Update",
+                        );
+                      }
+                      return const Center(
+                        child: MyCircularIndicator(),
+                      );
+                    },
                   )
                 ],
               ),
