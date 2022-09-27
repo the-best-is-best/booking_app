@@ -109,7 +109,7 @@ class ExploreCubit extends Cubit<ExploreState> {
       if (value) {
         selectedFacilities.addAll({
           MapEntry("facilities[${key - 1}]", key).key:
-              MapEntry("id[${key - 1}]", key).value
+              MapEntry("facilities[${key - 1}]", key).value
         });
       }
     });
