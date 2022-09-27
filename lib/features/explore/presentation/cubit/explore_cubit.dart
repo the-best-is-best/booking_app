@@ -108,7 +108,7 @@ class ExploreCubit extends Cubit<ExploreState> {
     facilitiesActive.forEach((key, value) {
       if (value) {
         selectedFacilities.addAll({
-          MapEntry("id[${key - 1}]", key).key:
+          MapEntry("facilities[${key - 1}]", key).key:
               MapEntry("id[${key - 1}]", key).value
         });
       }
