@@ -40,6 +40,7 @@ class DataHotelResponse {
   final String? rate;
   @JsonKey(name: "hotel_images")
   final List<ImagesResponse>? images;
+  @JsonKey(name: "hotel_facilities")
   final List<HotelFacilitiesResponse>? hotelFacilities;
 
   DataHotelResponse(
@@ -77,7 +78,7 @@ class HotelFacilitiesResponse {
   @JsonKey(name: "hotel_id")
   final String? hotelId;
   @JsonKey(name: "facility_id")
-  final int? facilityId;
+  final String? facilityId;
 
   HotelFacilitiesResponse({this.id, this.hotelId, this.facilityId});
   factory HotelFacilitiesResponse.fromJson(Map<String, dynamic> json) {

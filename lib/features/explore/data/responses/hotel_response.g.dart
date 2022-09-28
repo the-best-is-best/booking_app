@@ -49,7 +49,7 @@ DataHotelResponse _$DataHotelResponseFromJson(Map<String, dynamic> json) =>
       images: (json['hotel_images'] as List<dynamic>?)
           ?.map((e) => ImagesResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
-      hotelFacilities: (json['hotelFacilities'] as List<dynamic>?)
+      hotelFacilities: (json['hotel_facilities'] as List<dynamic>?)
           ?.map((e) =>
               HotelFacilitiesResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -66,7 +66,7 @@ Map<String, dynamic> _$DataHotelResponseToJson(DataHotelResponse instance) =>
       'latitude': instance.latitude,
       'rate': instance.rate,
       'hotel_images': instance.images,
-      'hotelFacilities': instance.hotelFacilities,
+      'hotel_facilities': instance.hotelFacilities,
     };
 
 ImagesResponse _$ImagesResponseFromJson(Map<String, dynamic> json) =>
@@ -88,7 +88,7 @@ HotelFacilitiesResponse _$HotelFacilitiesResponseFromJson(
     HotelFacilitiesResponse(
       id: json['id'] as int?,
       hotelId: json['hotel_id'] as String?,
-      facilityId: json['facility_id'] as int?,
+      facilityId: json['facility_id'] as String?,
     );
 
 Map<String, dynamic> _$HotelFacilitiesResponseToJson(

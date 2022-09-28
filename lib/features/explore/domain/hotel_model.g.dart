@@ -73,7 +73,7 @@ _$_HotelFacilitiesModel _$$_HotelFacilitiesModelFromJson(
     _$_HotelFacilitiesModel(
       id: json['id'] as int,
       hotelId: json['hotelId'] as String,
-      facilityId: json['facilityId'] as int,
+      facilityId: json['facilityId'] as String,
     );
 
 Map<String, dynamic> _$$_HotelFacilitiesModelToJson(

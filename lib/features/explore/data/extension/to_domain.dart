@@ -53,7 +53,7 @@ extension ExtensionFacilitiesToDomain on HotelFacilitiesResponse? {
     return HotelFacilitiesModel(
         id: this?.id?.orEmpty() ?? 0,
         hotelId: this?.hotelId?.orEmpty() ?? "0",
-        facilityId: this?.facilityId?.orEmpty() ?? 0);
+        facilityId: this?.facilityId?.orEmpty() ?? "0");
   }
 }
 

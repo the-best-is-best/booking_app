@@ -8,6 +8,7 @@ import 'package:booking_app/core/widgets/main_button.dart';
 import 'package:booking_app/core/widgets/my_circular_indicator.dart';
 import 'package:booking_app/features/auth/cubit/auth_cubit.dart';
 import 'package:booking_app/features/explore/domain/hotel_model.dart';
+import 'package:booking_app/features/explore/presentation/cubit/explore_cubit.dart';
 import 'package:booking_app/features/explore/presentation/widgets/expandable_text_widgets.dart';
 import 'package:booking_app/features/explore/presentation/widgets/facility_item.dart';
 import 'package:booking_app/features/explore/presentation/widgets/overall_ratting_widget.dart';
@@ -25,7 +26,7 @@ class HotelScreen extends StatefulWidget {
   final List<ImagesHotelModel> images;
   final String title;
   final String desc;
-
+  final List<HotelFacilitiesModel> facilities;
   final String rawRating;
   final String price;
   final String address;
@@ -37,7 +38,8 @@ class HotelScreen extends StatefulWidget {
       required this.rawRating,
       required this.price,
       required this.desc,
-      required this.id})
+      required this.id,
+      required this.facilities})
       : super(key: key);
 
   @override
@@ -113,30 +115,19 @@ class _HotelScreenState extends State<HotelScreen> {
                             ),
                             Row(
                               children: [
-                                Text(
-                                  widget.address,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium!
-                                      .copyWith(
-                                        fontSize: FontSize.s20.sp,
-                                        color: ColorManager.grey,
-                                      ),
-                                ),
-                                const Icon(
-                                  Icons.location_on_outlined,
-                                  color: ColorManager.primary,
-                                  size: AppSize.s20,
-                                ),
-                                Text(
-                                  '3.0 Km to city ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium!
-                                      .copyWith(
-                                        fontSize: FontSize.s20.sp,
-                                        color: ColorManager.grey,
-                                      ),
+                                SizedBox(
+                                  width: context.width * .65,
+                                  child: Text(
+                                    widget.address,
+                                    maxLines: 2,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium!
+                                        .copyWith(
+                                          fontSize: FontSize.s16.sp,
+                                          color: ColorManager.grey,
+                                        ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -193,31 +184,44 @@ class _HotelScreenState extends State<HotelScreen> {
                     ),
                   ),
                   OverallRattingWidget(rate: widget.rawRating),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SectionTitle(title: 'Facilities'),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(25, 0, 25, 15),
-                        child: FadeInUp(
-                          duration: const Duration(milliseconds: 1100),
-                          child: GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 6,
-                              crossAxisSpacing: 5,
+                  Builder(builder: (context) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SectionTitle(title: 'Facilities'),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(25, 0, 25, 15),
+                          child: FadeInUp(
+                            duration: const Duration(milliseconds: 1100),
+                            child: GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 6,
+                                crossAxisSpacing: 5,
+                              ),
+                              itemCount: widget.facilities.length,
+                              itemBuilder: (context, index) {
+                                List<String> facilitesIamge = [];
+                                for (var element in widget.facilities) {
+                                  for (var e in ExploreCubit.get(context)
+                                      .facilitiesModel!) {
+                                    if (element.facilityId == e.id.toString()) {
+                                      facilitesIamge.add(e.image);
+                                    }
+                                  }
+                                }
+
+                                return FacilityItem(
+                                    imageUrl: facilitesIamge[index]);
+                              },
                             ),
-                            itemCount: facilities.length,
-                            itemBuilder: (context, index) {
-                              return FacilityItem(svgPath: facilities[index]);
-                            },
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    );
+                  }),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: AppSize.s20, vertical: AppSize.s12),
@@ -245,7 +249,7 @@ class _HotelScreenState extends State<HotelScreen> {
                       ],
                     ),
                   ),
-                  getPhotos(size),
+                  getPhotos(size: size, images: widget.images),
                   BlocConsumer<TripsCubit, TripsState>(
                     listener: (context, state) {
                       if (state is CreateTripsState) {
@@ -287,25 +291,25 @@ class _HotelScreenState extends State<HotelScreen> {
     );
   }
 
-  getPhotos(size) {
+  getPhotos({required Size size, required List<ImagesHotelModel> images}) {
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(15, 5, 0, 10),
       scrollDirection: Axis.horizontal,
       child: Row(
         children: List.generate(
-          5,
+          images.length,
           (index) => Padding(
             padding: const EdgeInsets.only(right: 8),
             child: Container(
               width: size.width * 0.3,
               height: AppSize.s150,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(AppSize.s20),
                 ),
                 color: ColorManager.grey,
                 image: DecorationImage(
-                    image: AssetImage(ImageAssets.explore_1),
+                    image: NetworkImage(images[index].image),
                     fit: BoxFit.cover),
               ),
             ),
@@ -315,11 +319,11 @@ class _HotelScreenState extends State<HotelScreen> {
     );
   }
 
-  List<String> facilities = [
-    "assets/icons/wifi.svg",
-    "assets/icons/weightlift.svg",
-    "assets/icons/drink.svg",
-    "assets/icons/park.svg",
-    "assets/icons/pool.svg"
-  ];
+  // List<String> facilities = [
+  //   "assets/icons/wifi.svg",
+  //   "assets/icons/weightlift.svg",
+  //   "assets/icons/drink.svg",
+  //   "assets/icons/park.svg",
+  //   "assets/icons/pool.svg"
+  // ];
 }

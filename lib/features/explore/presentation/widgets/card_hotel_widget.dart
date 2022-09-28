@@ -26,14 +26,14 @@ class CardHotelWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => HotelScreen(
-          id: data.id,
-          images: data.images,
-          title: data.name,
-          price: data.price,
-          rawRating: data.rate,
-          address: data.address,
-          desc: data.description,
-        ),
+            id: data.id,
+            images: data.images,
+            title: data.name,
+            price: data.price,
+            rawRating: data.rate,
+            address: data.address,
+            desc: data.description,
+            facilities: data.hotelFacilities),
       )),
       child: Card(
         elevation: 1,
@@ -74,11 +74,15 @@ class CardHotelWidget extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            data.name,
-                            style: getBoldStyle(
-                                fontSize: FontSize.s24.sp,
-                                color: ColorManager.white),
+                          SizedBox(
+                            width: context.width * .6,
+                            child: Text(
+                              data.name,
+                              maxLines: 2,
+                              style: getBoldStyle(
+                                  fontSize: FontSize.s20.sp,
+                                  color: ColorManager.white),
+                            ),
                           ),
                           Text(
                             "\$ ${data.price}",
@@ -92,11 +96,16 @@ class CardHotelWidget extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            data.address,
-                            style: getLightStyle(
-                                fontSize: FontSize.s17.sp,
-                                color: ColorManager.grey),
+                          SizedBox(
+                            width: context.width * .5,
+                            child: Text(
+                              data.address,
+                              maxLines: 2,
+                              style: TextStyle(
+                                  fontSize: 12.sp,
+                                  color: ColorManager.grey,
+                                  overflow: TextOverflow.ellipsis),
+                            ),
                           ),
                           Text(
                             "/per night",

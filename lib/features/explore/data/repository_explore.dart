@@ -14,25 +14,25 @@ class RepositoryExplore {
   Future<Either<Failure, HotelModel>> getHotel(
       ExploreRequests exploreRequests) async {
     if (await networkInfo.isConnected) {
-      try {
-        var response = await appServicesClient.getHotels(
-            count: exploreRequests.count, page: exploreRequests.page);
-        if (response.status.type == "1") {
-          //success
-          // return either right
-          // return data
-          return Right(response.toDomain());
-        } else {
-          //failure
-          // return either left
-          return left(Failure(
-              messages: (response.status.title is Map)
-                  ? response.status.title['en'] ?? ""
-                  : response.status.title ?? ""));
-        }
-      } catch (error) {
-        return Left(ErrorHandler.handle(error).failure);
+      //  try {
+      var response = await appServicesClient.getHotels(
+          count: exploreRequests.count, page: exploreRequests.page);
+      if (response.status.type == "1") {
+        //success
+        // return either right
+        // return data
+        return Right(response.toDomain());
+      } else {
+        //failure
+        // return either left
+        return left(Failure(
+            messages: (response.status.title is Map)
+                ? response.status.title['en'] ?? ""
+                : response.status.title ?? ""));
       }
+      //  } catch (error) {
+      //   return Left(ErrorHandler.handle(error).failure);
+      // }
     } else {
       //failure
       // return either left

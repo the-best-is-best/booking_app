@@ -42,7 +42,7 @@ abstract class AppServicesClient {
     @Header("token") required String token,
     @Part() required String name,
     @Part() required String email,
-    @Part() required File? image,
+    @Part() File? image,
   });
 
   @GET(Constants.hotelsUrl)

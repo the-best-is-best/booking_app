@@ -717,7 +717,7 @@ HotelFacilitiesModel _$HotelFacilitiesModelFromJson(Map<String, dynamic> json) {
 mixin _$HotelFacilitiesModel {
   int get id => throw _privateConstructorUsedError;
   String get hotelId => throw _privateConstructorUsedError;
-  int get facilityId => throw _privateConstructorUsedError;
+  String get facilityId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -730,7 +730,7 @@ abstract class $HotelFacilitiesModelCopyWith<$Res> {
   factory $HotelFacilitiesModelCopyWith(HotelFacilitiesModel value,
           $Res Function(HotelFacilitiesModel) then) =
       _$HotelFacilitiesModelCopyWithImpl<$Res>;
-  $Res call({int id, String hotelId, int facilityId});
+  $Res call({int id, String hotelId, String facilityId});
 }
 
 /// @nodoc
@@ -760,7 +760,7 @@ class _$HotelFacilitiesModelCopyWithImpl<$Res>
       facilityId: facilityId == freezed
           ? _value.facilityId
           : facilityId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ));
   }
 }
@@ -772,7 +772,7 @@ abstract class _$$_HotelFacilitiesModelCopyWith<$Res>
           $Res Function(_$_HotelFacilitiesModel) then) =
       __$$_HotelFacilitiesModelCopyWithImpl<$Res>;
   @override
-  $Res call({int id, String hotelId, int facilityId});
+  $Res call({int id, String hotelId, String facilityId});
 }
 
 /// @nodoc
@@ -804,7 +804,7 @@ class __$$_HotelFacilitiesModelCopyWithImpl<$Res>
       facilityId: facilityId == freezed
           ? _value.facilityId
           : facilityId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ));
   }
 }
@@ -823,7 +823,7 @@ class _$_HotelFacilitiesModel implements _HotelFacilitiesModel {
   @override
   final String hotelId;
   @override
-  final int facilityId;
+  final String facilityId;
 
   @override
   String toString() {
@@ -867,7 +867,7 @@ abstract class _HotelFacilitiesModel implements HotelFacilitiesModel {
   factory _HotelFacilitiesModel(
       {required final int id,
       required final String hotelId,
-      required final int facilityId}) = _$_HotelFacilitiesModel;
+      required final String facilityId}) = _$_HotelFacilitiesModel;
 
   factory _HotelFacilitiesModel.fromJson(Map<String, dynamic> json) =
       _$_HotelFacilitiesModel.fromJson;
@@ -877,7 +877,7 @@ abstract class _HotelFacilitiesModel implements HotelFacilitiesModel {
   @override
   String get hotelId;
   @override
-  int get facilityId;
+  String get facilityId;
   @override
   @JsonKey(ignore: true)
   _$$_HotelFacilitiesModelCopyWith<_$_HotelFacilitiesModel> get copyWith =>

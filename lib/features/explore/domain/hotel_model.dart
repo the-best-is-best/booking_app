@@ -1,3 +1,4 @@
+import 'package:booking_app/features/explore/domain/facilities_models.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'hotel_model.freezed.dart';
 part 'hotel_model.g.dart';
@@ -46,7 +47,7 @@ class HotelFacilitiesModel with _$HotelFacilitiesModel {
   factory HotelFacilitiesModel(
       {required int id,
       required String hotelId,
-      required int facilityId}) = _HotelFacilitiesModel;
+      required String facilityId}) = _HotelFacilitiesModel;
   factory HotelFacilitiesModel.fromJson(Map<String, dynamic> json) =>
       _$HotelFacilitiesModelFromJson(json);
 }
