@@ -1,16 +1,12 @@
-import 'package:booking_app/app/network/dio_manager.dart';
 import 'package:booking_app/app/network/failure.dart';
 import 'package:booking_app/features/explore/data/repository_explore.dart';
 import 'package:booking_app/features/explore/data/repository_facilities.dart';
 import 'package:booking_app/features/explore/data/repository_search.dart';
 import 'package:booking_app/features/explore/domain/facilities_models.dart';
 import 'package:booking_app/features/explore/domain/hotel_model.dart';
-
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mit_x/mit_x.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 part 'explore_state.dart';
 
