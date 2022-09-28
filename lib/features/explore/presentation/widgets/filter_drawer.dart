@@ -102,8 +102,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                 showTicks: true,
                                 showLabels: true,
                                 showDividers: true,
-                                min: 100,
-                                max: 10000,
+                                min: 0,
+                                max: 200,
                                 onChanged: (SfRangeValues value) {
                                   exploreCubit.changeSfRangePrice(value);
                                 },

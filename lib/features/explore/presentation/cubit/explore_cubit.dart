@@ -1,3 +1,4 @@
+import 'package:booking_app/app/network/dio_manager.dart';
 import 'package:booking_app/app/network/failure.dart';
 import 'package:booking_app/features/explore/data/repository_explore.dart';
 import 'package:booking_app/features/explore/data/repository_facilities.dart';
@@ -6,6 +7,7 @@ import 'package:booking_app/features/explore/domain/facilities_models.dart';
 import 'package:booking_app/features/explore/domain/hotel_model.dart';
 
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mit_x/mit_x.dart';
@@ -22,7 +24,7 @@ class ExploreCubit extends Cubit<ExploreState> {
   final RepositorySearch _repositorySearch;
   static ExploreCubit get(BuildContext context) => BlocProvider.of(context);
 
-  SfRangeValues sfRangePrice = const SfRangeValues(100, 10000);
+  SfRangeValues sfRangePrice = const SfRangeValues(0, 200);
   double sfRangeDistance = 5;
   String nameTextController = "";
   String addressTextController = "";
@@ -30,7 +32,7 @@ class ExploreCubit extends Cubit<ExploreState> {
   double? lat;
 
   void changeSfRangePrice(SfRangeValues? sfRangeValues) {
-    sfRangePrice = sfRangeValues ?? const SfRangeValues(100, 10000);
+    sfRangePrice = sfRangeValues ?? const SfRangeValues(0, 200);
     emit(ChangePriceMainAndMaxState());
   }
 
@@ -107,10 +109,7 @@ class ExploreCubit extends Cubit<ExploreState> {
     Map<String, int> selectedFacilities = {};
     facilitiesActive.forEach((key, value) {
       if (value) {
-        selectedFacilities.addAll({
-          MapEntry("id[${key - 1}]", key).key:
-              MapEntry("id[${key - 1}]", key).value
-        });
+        selectedFacilities.addAll({key.toString(): facilitiesModel![key].id});
       }
     });
     Either<Failure, HotelModel> response =
@@ -142,7 +141,8 @@ class ExploreCubit extends Cubit<ExploreState> {
     lat = null;
     long = null;
     sfRangeDistance = 5;
-    sfRangePrice = const SfRangeValues(100, 10000);
+    sfRangePrice = const SfRangeValues(0, 200);
+    facilitiesActive = {};
     searchHotel();
   }
 }
