@@ -45,5 +45,5 @@ class ExploreRequests {
   final int count;
   final int page;
 
-  ExploreRequests({required this.page, this.count = 10});
+  ExploreRequests({required this.page, this.count = 4});
 }

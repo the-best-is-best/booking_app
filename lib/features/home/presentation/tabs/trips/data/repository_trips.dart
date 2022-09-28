@@ -82,7 +82,7 @@ class TripRequest {
 
   TripRequest({
     required this.page,
-    this.count = 10,
+    this.count = 4,
     required this.type,
     required this.token,
   });

@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
                 )
               ],
               child: MitXMaterialApp(
+                debugShowCheckedModeBanner: false,
                 title: 'Flutter Demo',
                 theme: getApplicationTheme(),
                 initialRoute: Routes.splashRoute,

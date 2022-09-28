@@ -71,6 +71,6 @@ class SearchRequests {
       this.latitude,
       this.longitude,
       this.distance,
-      this.count = 10,
+      this.count = 4,
       this.page = 1});
 }

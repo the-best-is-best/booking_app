@@ -212,11 +212,15 @@ class _TripsTabState extends State<TripsTab> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              data.dataHotel.name,
-                                              style: getBoldStyle(
-                                                  fontSize: FontSize.s28.sp,
-                                                  color: ColorManager.white),
+                                            SizedBox(
+                                              width: context.width * .5,
+                                              child: Text(
+                                                data.dataHotel.name,
+                                                maxLines: 1,
+                                                style: getBoldStyle(
+                                                    fontSize: FontSize.s28.sp,
+                                                    color: ColorManager.white),
+                                              ),
                                             ),
                                             Text(
                                               "\$ ${data.dataHotel.price}",
@@ -231,10 +235,14 @@ class _TripsTabState extends State<TripsTab> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              data.dataHotel.address,
-                                              style: getLightStyle(
-                                                  color: ColorManager.grey),
+                                            SizedBox(
+                                              width: context.width * .6,
+                                              child: Text(
+                                                data.dataHotel.address,
+                                                maxLines: 2,
+                                                style: getLightStyle(
+                                                    color: ColorManager.grey),
+                                              ),
                                             ),
                                             Text(
                                               "/per night",
