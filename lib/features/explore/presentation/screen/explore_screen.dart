@@ -170,9 +170,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             Column(
                               children: const [
                                 SizedBox(
-                                  height: 10,
+                                  height: 20,
                                 ),
-                                MyCircularIndicator()
+                                MyCircularIndicator(),
+                                SizedBox(
+                                  height: 20,
+                                ),
                               ],
                             )
                         ],

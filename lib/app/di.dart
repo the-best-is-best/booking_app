@@ -60,5 +60,5 @@ Future initApp() async {
 
   di.registerLazySingleton<TripsCubit>(() => TripsCubit(di()));
 
-  di.registerLazySingleton<MapCubit>(() => MapCubit());
+  di.registerLazySingleton<MapCubit>(() => MapCubit(di()));
 }

@@ -1,5 +1,9 @@
+import 'package:booking_app/app/network/failure.dart';
 import 'package:booking_app/core/services/location_services.dart';
 import 'package:booking_app/core/utils/assets_manager.dart';
+import 'package:booking_app/features/explore/data/repository_explore.dart';
+import 'package:booking_app/features/explore/domain/hotel_model.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -8,49 +12,86 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 part 'map_state.dart';
 
 class MapCubit extends Cubit<MapState> {
-  MapCubit() : super(MapInitial());
+  final RepositoryExplore _repositoryMap;
+
+  MapCubit(this._repositoryMap) : super(MapInitial());
   static MapCubit get(BuildContext context) => BlocProvider.of(context);
 
   Position? yourLocation;
   Marker? yourPlace;
-  List<HotelMap> hotels = [
-    HotelMap(
-        id: 1,
-        name: "Grand Royal",
-        image: ImageAssets.hotel_1,
-        rate: 9.5,
-        address: "Wembley, London",
-        distance: "2.0km to city",
-        lat: 0,
-        long: 0),
-    HotelMap(
-        id: 2,
-        name: "Queen Royal",
-        image: ImageAssets.hotel_2,
-        rate: 7.5,
-        address: "Wembley, London",
-        lat: 0,
-        long: 0,
-        distance: "4.0km to city"),
-    HotelMap(
-        id: 3,
-        name: "Grand Royal 1",
-        image: ImageAssets.hotel_3,
-        rate: 5.5,
-        address: "Wembley, London",
-        lat: 0,
-        long: 0,
-        distance: "6.0km to city"),
-    HotelMap(
-        id: 4,
-        name: "Queen Royal 1",
-        image: ImageAssets.hotel_3,
-        rate: 10,
-        address: "Wembley, London",
-        lat: 0,
-        long: 0,
-        distance: "8.0km to city"),
-  ];
+  HotelModel? hotelModel;
+
+  bool inEndScroll = false;
+  Future<void> getHotels({int page = 1, bool force = false}) async {
+    if (force) {
+      hotelModel = null;
+    }
+    if (hotelModel != null) {
+      emit(MapSearchState());
+    } else {
+      emit(MapLoadState());
+    }
+    Either<Failure, HotelModel> response =
+        await _repositoryMap.getHotel(ExploreRequests(page: page));
+    response.fold(
+      (l) {
+        debugPrint(l.messages);
+        emit(MapErrorState(l.messages));
+      },
+      (r) {
+        if (hotelModel != null) {
+          hotelModel!.nextPageUrl = r.nextPageUrl;
+          for (var element in r.data) {
+            hotelModel!.data.add(element);
+          }
+        } else {
+          hotelModel = r;
+        }
+        debugPrint(r.toString());
+        inEndScroll = false;
+
+        emit(MapLoadedState());
+      },
+    );
+  }
+  // List<HotelMap> hotels = [
+  //   HotelMap(
+  //       id: 1,
+  //       name: "Grand Royal",
+  //       image: ImageAssets.hotel_1,
+  //       rate: 9.5,
+  //       address: "Wembley, London",
+  //       distance: "2.0km to city",
+  //       lat: 0,
+  //       long: 0),
+  //   HotelMap(
+  //       id: 2,
+  //       name: "Queen Royal",
+  //       image: ImageAssets.hotel_2,
+  //       rate: 7.5,
+  //       address: "Wembley, London",
+  //       lat: 0,
+  //       long: 0,
+  //       distance: "4.0km to city"),
+  //   HotelMap(
+  //       id: 3,
+  //       name: "Grand Royal 1",
+  //       image: ImageAssets.hotel_3,
+  //       rate: 5.5,
+  //       address: "Wembley, London",
+  //       lat: 0,
+  //       long: 0,
+  //       distance: "6.0km to city"),
+  //   HotelMap(
+  //       id: 4,
+  //       name: "Queen Royal 1",
+  //       image: ImageAssets.hotel_3,
+  //       rate: 10,
+  //       address: "Wembley, London",
+  //       lat: 0,
+  //       long: 0,
+  //       distance: "8.0km to city"),
+  // ];
 
   Future getYourLocation() async {
     emit(GetYourLocationState());
@@ -61,14 +102,14 @@ class MapCubit extends Cubit<MapState> {
     yourPlace = Marker(
         markerId: const MarkerId("yourPlace"),
         position: LatLng(yourLocation!.latitude, yourLocation!.longitude));
-    hotels[0].lat = yourLocation!.latitude + 0.015;
-    hotels[0].long = yourLocation!.longitude + 0.015;
-    hotels[1].lat = yourLocation!.latitude + 0.03;
-    hotels[1].long = yourLocation!.longitude - 0.05;
-    hotels[2].lat = yourLocation!.latitude - 0.03;
-    hotels[2].long = yourLocation!.longitude - 0.03;
-    hotels[3].lat = yourLocation!.latitude - 0.06;
-    hotels[3].long = yourLocation!.longitude - 0.03;
+    // hotels[0].lat = yourLocation!.latitude + 0.015;
+    // hotels[0].long = yourLocation!.longitude + 0.015;
+    // hotels[1].lat = yourLocation!.latitude + 0.03;
+    // hotels[1].long = yourLocation!.longitude - 0.05;
+    // hotels[2].lat = yourLocation!.latitude - 0.03;
+    // hotels[2].long = yourLocation!.longitude - 0.03;
+    // hotels[3].lat = yourLocation!.latitude - 0.06;
+    // hotels[3].long = yourLocation!.longitude - 0.03;
 
     emit(OpenMapState());
   }
