@@ -9,8 +9,6 @@ part of 'hotel_response.dart';
 HotelResponse _$HotelResponseFromJson(Map<String, dynamic> json) =>
     HotelResponse(
       status: StatusResponse.fromJson(json['status'] as Map<String, dynamic>),
-      total: json['total'] as int?,
-      nextPageUrl: json['next_page_url'] as String?,
       data: json['data'] == null
           ? null
           : DataHotelResponse1.fromJson(json['data'] as Map<String, dynamic>),
@@ -19,14 +17,14 @@ HotelResponse _$HotelResponseFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$HotelResponseToJson(HotelResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
-      'total': instance.total,
-      'next_page_url': instance.nextPageUrl,
       'data': instance.data,
     };
 
 DataHotelResponse1 _$DataHotelResponse1FromJson(Map<String, dynamic> json) =>
     DataHotelResponse1(
-      (json['data'] as List<dynamic>?)
+      total: json['total'] as int?,
+      nextPageUrl: json['next_page_url'] as String?,
+      data: (json['data'] as List<dynamic>?)
           ?.map((e) => DataHotelResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -34,6 +32,8 @@ DataHotelResponse1 _$DataHotelResponse1FromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$DataHotelResponse1ToJson(DataHotelResponse1 instance) =>
     <String, dynamic>{
       'data': instance.data,
+      'total': instance.total,
+      'next_page_url': instance.nextPageUrl,
     };
 
 DataHotelResponse _$DataHotelResponseFromJson(Map<String, dynamic> json) =>

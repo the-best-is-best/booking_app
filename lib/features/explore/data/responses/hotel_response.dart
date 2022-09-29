@@ -5,13 +5,10 @@ part 'hotel_response.g.dart';
 @JsonSerializable()
 class HotelResponse {
   final StatusResponse status;
-  final int? total;
-  @JsonKey(name: "next_page_url")
-  final String? nextPageUrl;
+
   final DataHotelResponse1? data;
 
-  HotelResponse(
-      {required this.status, this.total, this.nextPageUrl, this.data});
+  HotelResponse({required this.status, this.data});
   factory HotelResponse.fromJson(Map<String, dynamic> json) {
     return _$HotelResponseFromJson(json);
   }
@@ -20,12 +17,14 @@ class HotelResponse {
 @JsonSerializable()
 class DataHotelResponse1 {
   final List<DataHotelResponse>? data;
-
+  final int? total;
+  @JsonKey(name: "next_page_url")
+  final String? nextPageUrl;
   factory DataHotelResponse1.fromJson(Map<String, dynamic> json) {
     return _$DataHotelResponse1FromJson(json);
   }
 
-  DataHotelResponse1(this.data);
+  DataHotelResponse1({this.total, this.nextPageUrl, this.data});
 }
 
 @JsonSerializable()

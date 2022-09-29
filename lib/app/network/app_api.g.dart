@@ -127,13 +127,15 @@ class _AppServicesClient implements AppServicesClient {
       'email',
       email,
     ));
-    // _data.files.add(MapEntry(
-    //   'image',
-    //   MultipartFile.fromFileSync(
-    //     image.path,
-    //     filename: image.path.split(Platform.pathSeparator).last,
-    //   ),
-    // ));
+    if (image != null) {
+      _data.files.add(MapEntry(
+        'image',
+        MultipartFile.fromFileSync(
+          image.path,
+          filename: image.path.split(Platform.pathSeparator).last,
+        ),
+      ));
+    }
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<UpdateProfileResponse>(Options(
       method: 'POST',

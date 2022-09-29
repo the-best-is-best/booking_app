@@ -10,6 +10,8 @@ class ExploreLoadState extends ExploreState {}
 
 class ExploreLoadedState extends ExploreState {}
 
+class ExploreSearchState extends ExploreState {}
+
 class ExploreErrorState extends ExploreState {
   final String? title;
 

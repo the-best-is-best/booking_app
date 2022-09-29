@@ -23,11 +23,27 @@ class ExploreScreen extends StatefulWidget {
 
 class _ExploreScreenState extends State<ExploreScreen> {
   final TextEditingController nameTextController = TextEditingController();
-
+  final ScrollController scrollController = ScrollController();
+  int page = 2;
   @override
   void initState() {
     ExploreCubit exploreCubit = ExploreCubit.get(context);
-    exploreCubit.getHotels();
+    exploreCubit.getHotels(force: true);
+
+    scrollController.addListener(() async {
+      if (scrollController.position.pixels ==
+              scrollController.position.maxScrollExtent &&
+          !exploreCubit.inEndScroll) {
+        exploreCubit.inEndScroll = true;
+        if (exploreCubit.hotelModel!.nextPageUrl.isNotEmpty) {
+          exploreCubit.getHotels(page: page);
+          Future.delayed(const Duration(milliseconds: 250), () {
+            scrollController.jumpTo(scrollController.position.maxScrollExtent);
+          });
+          page++;
+        }
+      }
+    });
     super.initState();
   }
 
@@ -53,6 +69,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
         ],
       ),
       body: SingleChildScrollView(
+        controller: scrollController,
         child: Padding(
           padding: const EdgeInsets.all(AppPadding.p20),
           child: Column(
@@ -95,6 +112,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   buildWhen: (previous, current) =>
                       current is ExploreErrorState ||
                       current is ExploreLoadState ||
+                      current is ExploreSearchState ||
                       current is ExploreLoadedState,
                   listener: (context, state) {
                     if (state is ExploreErrorState) {
@@ -118,7 +136,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     }
                   },
                   builder: (context, state) {
-                    if (state is ExploreLoadedState) {
+                    if (state is ExploreLoadedState ||
+                        state is ExploreSearchState) {
                       if (exploreCubit.hotelModel?.data.isEmpty ?? true) {
                         return Center(
                           child: Text(
@@ -128,17 +147,35 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           ),
                         );
                       }
-                      return ListView.separated(
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: exploreCubit.hotelModel?.data.length ?? 0,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          DataHotelModel data =
-                              exploreCubit.hotelModel!.data[index];
-                          return CardHotelWidget(data: data);
-                        },
-                        separatorBuilder: (context, index) =>
-                            const SizedBox(height: 15),
+                      return Column(
+                        children: [
+                          ListView.separated(
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount:
+                                exploreCubit.hotelModel?.data.length ?? 0,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              DataHotelModel data =
+                                  exploreCubit.hotelModel!.data[index];
+                              return Column(
+                                children: [
+                                  CardHotelWidget(data: data),
+                                ],
+                              );
+                            },
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(height: 15),
+                          ),
+                          if (state is ExploreSearchState)
+                            Column(
+                              children: const [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                MyCircularIndicator()
+                              ],
+                            )
+                        ],
                       );
                     }
                     return SizedBox(
@@ -155,5 +192,3 @@ class _ExploreScreenState extends State<ExploreScreen> {
     );
   }
 }
-
-

@@ -64,8 +64,16 @@ class ExploreCubit extends Cubit<ExploreState> {
     );
   }
 
-  Future<void> getHotels({int page = 1}) async {
-    emit(ExploreLoadState());
+  bool inEndScroll = false;
+  Future<void> getHotels({int page = 1, bool force = false}) async {
+    if (force) {
+      hotelModel = null;
+    }
+    if (hotelModel != null) {
+      emit(ExploreSearchState());
+    } else {
+      emit(ExploreLoadState());
+    }
     Either<Failure, HotelModel> response =
         await _repositoryExplore.getHotel(ExploreRequests(page: page));
     response.fold(
@@ -74,8 +82,18 @@ class ExploreCubit extends Cubit<ExploreState> {
         emit(ExploreErrorState(l.messages));
       },
       (r) {
-        hotelModel = r;
+        if (hotelModel != null) {
+          hotelModel!.nextPageUrl = r.nextPageUrl;
+          for (var element in r.data) {
+            hotelModel!.data.add(element);
+          }
+        } else {
+          print("null null null");
+          hotelModel = r;
+        }
         debugPrint(r.toString());
+        inEndScroll = false;
+
         emit(ExploreLoadedState());
       },
     );

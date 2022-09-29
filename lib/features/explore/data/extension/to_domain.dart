@@ -8,8 +8,8 @@ import 'package:booking_app/features/explore/domain/hotel_model.dart';
 extension ExtensionToDomain on HotelResponse? {
   HotelModel toDomain() {
     return HotelModel(
-        nextPageUrl: this?.nextPageUrl?.orEmpty() ?? "",
-        total: this?.total?.orEmpty() ?? 0,
+        nextPageUrl: this?.data?.nextPageUrl?.orEmpty() ?? "",
+        total: this?.data?.total?.orEmpty() ?? 0,
         data: (this?.data?.data?.map((e) => e.toDomain()) ??
                 const Iterable.empty())
             .cast<DataHotelModel>()
